@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "verbatimModuleSyntax": false,
+    "esModuleInterop": true,
+    "noEmit": true, // 打包后，不额外对应新生成js文件
+    "allowSyntheticDefaultImports": true,
+    "module": "esnext",
+    "moduleResolution": "bundler", // 或 node16
+    "target": "esnext",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"] // important setting
+    }
+  }
+}

@@ -1,0 +1,199 @@
+1、npm create vite@latest my-vue-app -- --template vue-ts
+
+2、cd my-vue-app
+
+3、npm install
+
+4、npm run dev
+
+5、(可选) 添加 Pinia 状态管理： npm install pinia
+
+然后修改 src/main.ts：
+
+import { createApp } from 'vue'
+import { createPinia } from 'pinia'
+import App from './App.vue'
+
+const app = createApp(App)
+app.use(createPinia())
+app.mount('#app')
+
+
+6、‌安装ESLint‌：
+
+npm install eslint --save-dev
+
+本地根目录新建.eslintrc.js文件如下：
+
+module.exports = {
+  root: true,
+  env: {
+    browser: true,
+    es2021: true,
+  },
+  parserOptions: {
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+    ecmaFeatures: {
+      jsx: true, // 启用JSX支持
+    },
+  },
+  extends: [
+    'eslint:recommended', // 基本ESLint推荐配置
+  ],
+};
+
+
+
+7、安装prettier
+npm install --save-dev prettier
+8、（可选）安装与 ESLint 配合的插件（如果已使用 ESLint）：【目前没有安装这2个】
+npm install --save-dev eslint-config-prettier eslint-plugin-prettier
+
+9、配置prettier配置文件，在项目根目录创建 .prettierrc.js如下：
+
+// .prettierrc.js
+module.exports = {
+  semi: false,          // 不使用分号
+  singleQuote: true,    // 使用单引号
+  printWidth: 100,      // 每行代码最大长度
+  tabWidth: 2,          // 缩进空格数
+  useTabs: false,       // 使用空格缩进
+  trailingComma: 'none', // 无尾随逗号
+  bracketSpacing: true,  // 对象括号空格: { foo: bar }
+  arrowParens: 'avoid',  // 箭头函数单参数省略括号: x => x
+  endOfLine: 'auto'     // 自动识别换行符
+}
+
+10、添加格式化脚本
+
+"scripts": {
+  "format": "prettier --write .",
+  "format:check": "prettier --check ."
+}
+
+使用命令：
+npm run format      # 格式化所有文件
+npm run format:check # 检查格式问题
+
+
+11、配置忽略文件，创建 .prettierignore：
+
+/dist
+/node_modules
+*.md
+*.svg
+
+12、配置路由router
+npm install vue-router@4
+创建路由文件 src/router/index.ts 如下：
+
+import { createRouter, createWebHistory } from 'vue-router'
+import HomeView from '../views/HomeView.vue'
+
+const router = createRouter({
+  history: createWebHistory(import.meta.env.BASE_URL),
+  routes: [
+    {
+      path: '/',
+      name: 'home',
+      component: HomeView
+    },
+    {
+      path: '/about',
+      name: 'about',
+      // 路由级代码分割（懒加载）
+      component: () => import('../views/AboutView.vue')
+    }
+  ]
+})
+
+export default router
+
+修改 main.ts 启用路由，如下：
+import { createApp } from 'vue'
+import App from './App.vue'
+import router from './router'
+
+const app = createApp(App)
+app.use(router)
+app.mount('#app')
+
+创建路由视图组件：src/views/HomeView.vue
+
+<template>
+  <div class="home">
+    <h1>Home Page</h1>
+    <router-link to="/about">Go to About</router-link>
+  </div>
+</template>
+
+创建路由视图组件：src/views/AboutView.vue 如下：
+<template>
+  <div class="about">
+    <h1>About Page</h1>
+    <router-link to="/">Go to Home</router-link>
+  </div>
+</template>
+
+修改 App.vue 添加路由出口如下：
+<template>
+  <nav>
+    <router-link to="/">Home</router-link> |
+    <router-link to="/about">About</router-link>
+  </nav>
+  <router-view />
+</template>
+
+13、配置 @ 别名来引入图片等静态资源
+Vite 默认支持 @ 指向 /src 目录，可以直接使用： <img src="@/assets/logo.png" alt="logo">
+
+自定义别名，如果需要更多别名，修改 vite.config.ts：
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import path from 'path' // 需要安装 @types/node
+
+export default defineConfig({
+  plugins: [vue()],
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+      '@assets': path.resolve(__dirname, './src/assets') // 新增assets专用别名
+    }
+  }
+})
+
+安装依赖（如果提示 path 模块找不到）：
+npm install --save-dev @types/node
+
+
+
+
+
+遇到的报错处理：
+
+[Intervention] Unable to preventDefault inside passive event listener due to target being treated as passive.
+
+Css: 处理
+/* 禁用元素默认滚动行为 */
+.no-scroll {
+  touch-action: none;
+  overscroll-behavior: contain;
+}
+
+TS plugin报错：
+需要最终配置如下，才可以
+{
+  "compilerOptions": {
+    "verbatimModuleSyntax": false,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "module": "esnext",
+    "moduleResolution": "bundler", // 或 node16
+    "target": "esnext",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"] // important setting
+    }
+  }
+}

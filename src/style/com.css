@@ -1,0 +1,92 @@
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  /* color-scheme: light dark; */ /* light dark theam */
+}
+*{
+  margin:0;
+  padding: 0;
+}
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  width: 100%;
+  background: url('@assets/usedimg/mask@2x.png') no-repeat center / cover;
+  color: #fff;
+}
+
+.flex-center{
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.flex-between{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.flex-wrap{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* 禁用元素默认滚动行为 */
+.no-scroll {
+  touch-action: none;
+  overscroll-behavior: contain;
+}
+
+.set-center{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+ul,li,ol{
+  list-style: none;
+}
+#app{
+  width: 100%;
+  overflow: hidden;
+}
+
+.height100{
+  height:100vh!important;
+}
+
+/* 整个滚动条 */
+::-webkit-scrollbar {
+  width: 10px; /* 垂直滚动条宽度 */
+  height: 10px; /* 水平滚动条高度 */
+}
+
+/* 滚动条轨道（背景） */
+::-webkit-scrollbar-track {
+  background: #456c6e; 
+  border-radius: 5px;
+}
+
+/* 滚动条滑块（可拖动部分） */
+::-webkit-scrollbar-thumb {
+  background: #08b5bb; 
+  border-radius: 5px;
+}
+
+/* 鼠标悬停时滑块样式 */
+::-webkit-scrollbar-thumb:hover {
+  background: #23b79f; 
+}
+
+/* 滚动条角落（水平和垂直滚动条交汇处） */
+::-webkit-scrollbar-corner {
+  background: #f1f1f1;
+}
