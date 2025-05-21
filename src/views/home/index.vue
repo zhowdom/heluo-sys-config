@@ -23,7 +23,7 @@ function SwitchFoldOnlyTwoSide (state:boolean) {
       <card name="newwind" position="left"></card>
       <card name="ventilate" position="left"></card>
     </div>
-    <floor :class="bem('mrgl-auto')" />
+    <floor :class="[bem('mrgl-auto'), 'animate__animated', globalVisiblePool.home_two_pannel.state ? 'animate__backInRight' : 'animate__backOutRight']" />
     <div :class="[bem('r'), 'animate__animated', globalVisiblePool.home_two_pannel.state ? 'animate__backInRight' : 'animate__backOutRight']">
       <card name="devicesituation" position="right"></card>
       <card name="exhaust" position="right"></card>
