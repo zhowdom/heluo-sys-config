@@ -18,7 +18,7 @@ export enum CardTypeEnum {
   /**
    * 实验室余风监测
    */
-  remainwind = 'VOC',
+  remainwind = 'VTS',
 }
 
  export enum CardTypeNames {

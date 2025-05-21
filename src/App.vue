@@ -3,13 +3,17 @@ import Float from '@/components/float/index.vue'
 import Upheader from '@/components/upheader/index.vue'
 import {useGlobalVisibleControllerStore} from '@/stores'
 import { defineAsyncComponent } from 'vue';
-import 'animate.css';
 import { storeToRefs } from 'pinia'
+import { useLogin } from '@/hooks'
 const Warn = defineAsyncComponent(() => import('@/components/warn/index.vue'))
 import { createNamespace } from '@/utils'
+import 'animate.css';
+
+const { doLogin } = useLogin()
 const { bem } = createNamespace('heluo-sys-app-wrap')
 const globalVisibleControllerStore = useGlobalVisibleControllerStore()
 const {globalVisiblePool} = storeToRefs(globalVisibleControllerStore)
+doLogin()
 </script>
 
 <template>

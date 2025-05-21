@@ -4,7 +4,9 @@ import axios from 'axios';
 
 
 // const baseURL = 'https://api.helotus.cn/'
-const baseURL = import.meta.env.VITE_API_BASE_URL
+// const baseURL = import.meta.env.VITE_API_BASE_URL
+// @ts-ignore
+const baseURL = GLOBAL.Host
 export const service = axios.create({
   baseURL,
   timeout: 10000,
