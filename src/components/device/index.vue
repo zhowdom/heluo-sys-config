@@ -11,7 +11,7 @@ defineProps<{
 </script>
 
 <template>
-   <div :class="[bem()]">
+   <div :class="[bem(), 'card-bg-com']">
     <cardtitle name="设备" />
     <div :class="bem('main')">
       <!-- <Loading v-if="loading" /> -->
@@ -27,12 +27,11 @@ defineProps<{
 <style scoped lang="less">
 .heluo-sys-device{
   width:280px;
-  background: linear-gradient( 333deg, #00C2CE 0%, rgba(0,194,206,0) 100%), rgba(12,12,20,0.7);
   border-radius: 4px;
   &__main{
     padding: 10px 5px;
     overflow-y:scroll;
-    height:330px;
+    height:350px;
   }
   &__each{
     display: flex;

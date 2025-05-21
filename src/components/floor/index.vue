@@ -2,8 +2,9 @@
 import { createNamespace } from '@/utils'
 import {useFloor} from '@/hooks'
 const { bem } = createNamespace('heluo-sys-floor')
-import {onMounted} from 'vue'
-
+import {onMounted, computed} from 'vue'
+import { useRoute } from 'vue-router'
+const route = useRoute()
 import {UeReportType, IFloor} from '@/types'
 import {useUeConnect} from '@/hooks'
 const {ueConnect} = useUeConnect()
@@ -27,10 +28,11 @@ const clickWraper = (item:IFloor) => {
   getFloorlisttodevice(item.spaceId)
   ueConnect(UeReportType.FLOOR, {opt: item.spaceCode})
 }
+const isLayerPath = computed(() => route.path === '/layer')
 </script>
 
 <template>
-   <div :class="[bem()]">
+   <div :class="[bem(), isLayerPath ? 'wraper card-bg-com' : '']">
     <div :class="[bem('prev'), 'prev']"></div>
     <div class="scroll">
       <ul>
@@ -43,8 +45,10 @@ const clickWraper = (item:IFloor) => {
 
 <style scoped lang="less">
 .heluo-sys-floor{
-  width: 88px;
-  height: 380px;
+  // width: 88px;
+  width: 56px;
+  // height: 380px; +50
+  height: 400px;
   text-align:center;
   margin-right:10px;
   &__prev,&__next{
@@ -63,6 +67,8 @@ const clickWraper = (item:IFloor) => {
     background: url('@assets/usedimg/floor-next.png') no-repeat center / contain;
   }
   .scroll{
+    // height: 340px; +50
+    // height: 390px;
     height: 340px;
     overflow: hidden;
     margin: 10px 0;
@@ -78,9 +84,11 @@ const clickWraper = (item:IFloor) => {
       transition: transform 0.3s ease-in-out;
     }
     li{
-      height: 60px;
+      // height: 60px;
+      height: 40px;
       margin-bottom:10px;
-      line-height:60px;
+      // line-height:60px;
+      line-height:40px;
       box-sizing: border-box;
       background: url('@assets/usedimg/floor.png') no-repeat center / contain;
       cursor: pointer;
@@ -88,6 +96,9 @@ const clickWraper = (item:IFloor) => {
         background: url('@assets/usedimg/floor-cur.png') no-repeat center / contain;
       }
     }
+  }
+  &.wraper{
+    padding: 10px 10px 10px 8px;
   }
 }
 </style>

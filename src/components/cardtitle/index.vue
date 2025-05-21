@@ -10,7 +10,7 @@ defineProps({
 </script>
 
 <template>
-   <div :class="[bem()]">
+   <div :class="[bem(), 'card-title-bg-com']">
     {{name}}
    </div>
 </template>
@@ -20,7 +20,6 @@ defineProps({
 .heluo-sys-card-title{
   height: @h;
   width: 100%;
-  background: linear-gradient( 90deg, #00B8BF 0%, rgba(41,227,191,0) 100%);
   position: relative;
   line-height:@h;
   text-indent: 36px;

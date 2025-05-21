@@ -26,9 +26,9 @@ defineProps({
 
 <style scoped lang="less">
 main {
-  width: 100px;
+  width: 80px;
   display: flex;
-  justify-content: space-around;
+  justify-content: right;
   align-items: center;
   flex-wrap: wrap;
   user-select: none;

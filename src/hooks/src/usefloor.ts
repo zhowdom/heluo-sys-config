@@ -54,7 +54,8 @@ export function useFloor(path:string) {
     const nextBtn = document.querySelector('.next')
     const floorList = document.querySelector('.scroll ul') as any
     const floorItems = floorList.querySelectorAll('.scroll li')
-    const itemHeight = 70 // 60px高度 + 10px间距
+    // const itemHeight = 70 // 60px高度 + 10px间距
+    const itemHeight = 50 // 40px高度 + 10px间距
     let currentIndex = 0
     const maxVisibleItems = Math.floor(340 / itemHeight) // 340px是滚动区域高度
     const maxIndex = floorItems.length - maxVisibleItems

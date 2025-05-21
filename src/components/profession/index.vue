@@ -20,7 +20,7 @@ const clickWrap = (item:IProfession, idx:number) => {
 </script>
 
 <template>
-   <div :class="[bem()]">
+   <div :class="[bem(), 'card-bg-com']">
     <cardtitle name="专业" />
     <ul>
       <li v-for="(item, idx) in professionList" :key="idx" class="flex-between" @click="clickWrap(item, idx)">
@@ -35,12 +35,11 @@ const clickWrap = (item:IProfession, idx:number) => {
 <style scoped lang="less">
 .heluo-sys-profession{
   width: 170px;
-  background: linear-gradient( 333deg, #00C2CE 0%, rgba(0,194,206,0) 100%), rgba(12,12,20,0.7);
   border-radius: 4px 4px 4px 4px;
   margin-right: 16px;
   ul{
-    padding: 10px;
-    height:380px;
+    padding: 10px 16px;
+    height:350px;
     display: flex; 
     flex-direction: column;
     li{
@@ -59,7 +58,7 @@ const clickWrap = (item:IProfession, idx:number) => {
     position: absolute;
     top:10px;
     right:0;
-    width: 100px;
+    width: 60px;
     height: 30px;
     z-index: 20;
   }
