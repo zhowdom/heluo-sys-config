@@ -1,6 +1,6 @@
-import { useUserStore } from '@/stores'
 import { useRouter } from 'vue-router'
-const router = useRouter()
+import { useUserStore } from '@/stores'
+
 export function useLogin() {
   const params = {
     // @ts-ignore
@@ -11,6 +11,8 @@ export function useLogin() {
   const doLogin = async () => {
     const userStore = useUserStore()
     userStore.userLogin(params)
+    const router = useRouter()
+    console.log(router, 'router')
     router.push({
       name: 'home',
       query: {},
