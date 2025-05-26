@@ -3,8 +3,10 @@ import { createNamespace } from '@/utils'
 const { bem } = createNamespace('heluo-sys-float-menu')
 import {UeReportType} from '@/types'
 import {useUeConnect} from '@/hooks'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
+import {watchEffect, ref} from 'vue'
 const router = useRouter()
+const route = useRoute()
 const {ueConnect} = useUeConnect()
 const handleToHome = () => {
   router.push({
@@ -13,21 +15,27 @@ const handleToHome = () => {
   })
   ueConnect(UeReportType.FLOAT_MENU_HOME, { opt: '首页' })
 }
+const isLayerPath = ref(false)
+const floatw = ref('448px')
+watchEffect(() => {
+  isLayerPath.value = route.path.includes('/layer')
+  floatw.value = route.path.includes('/layer') ? '70px' : '448px'
+})
 </script>
 
 <template>
    <div :class="[bem(), 'flex-center']">
-    <img src="@assets/usedimg/east@3x.png" @click="ueConnect(UeReportType.FLOAT_DIRECTION, { opt: '东' })" />
-    <img src="@assets/usedimg/south@3x.png" @click="ueConnect(UeReportType.FLOAT_DIRECTION, { opt: '南' })" />
+    <img src="@assets/usedimg/east@3x.png" @click="ueConnect(UeReportType.FLOAT_DIRECTION, { opt: '东' })" v-if="!isLayerPath" />
+    <img src="@assets/usedimg/south@3x.png" @click="ueConnect(UeReportType.FLOAT_DIRECTION, { opt: '南' })" v-if="!isLayerPath" />
     <img src="@assets/usedimg/home@3x.png" @click="handleToHome()" />
-    <img src="@assets/usedimg/west@3x.png" @click="ueConnect(UeReportType.FLOAT_DIRECTION, { opt: '西' })" />
-    <img src="@assets/usedimg/north@3x.png" @click="ueConnect(UeReportType.FLOAT_DIRECTION, { opt: '北' })" />
+    <img src="@assets/usedimg/west@3x.png" @click="ueConnect(UeReportType.FLOAT_DIRECTION, { opt: '西' })" v-if="!isLayerPath" />
+    <img src="@assets/usedimg/north@3x.png" @click="ueConnect(UeReportType.FLOAT_DIRECTION, { opt: '北' })" v-if="!isLayerPath" />
    </div>
 </template>
 
 <style scoped lang="less">
 .heluo-sys-float-menu{
-  width: 448px;
+  width: v-bind(floatw);
   height: 62px;
   position: absolute;
   bottom: 26px;

@@ -29,7 +29,7 @@ const clickWraper = (item:IFloor) => {
   getFloorlisttodevice(item.spaceId)
   ueConnect(UeReportType.FLOOR, {opt: item.spaceCode})
 }
-const isLayerPath = computed(() => route.path === '/layer')
+const isLayerPath = computed(() => route.path.includes('/layer'))
 </script>
 
 <template>
