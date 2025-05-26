@@ -10,12 +10,13 @@ import {useUeConnect} from '@/hooks'
 const {ueConnect} = useUeConnect()
 
 const props = defineProps<{
-  path?: string
+  path?: string,
+  spaceId?: string
 }>();
-const {getFloorData, floorData, formatFloor, initFloor, getFloorlisttodevice, floorToDeviceList, getFloorlisttodeviceLoading} = useFloor(props.path)
+const {getFloorData, floorData, formatFloor, initFloor, getFloorlisttodevice, floorToDeviceList, getFloorlisttodeviceLoading} = useFloor(props.path, props.spaceId)
 
 onMounted(async () => {
-  await getFloorData()
+  await getFloorData(props.spaceId)
   initFloor()
 })
 

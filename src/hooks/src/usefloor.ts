@@ -4,22 +4,22 @@ import {ref, Ref} from 'vue'
 import { useRouter } from 'vue-router'
 import {rnd} from '@/utils'
 
-export function useFloor(path:string) {
+export function useFloor(path:string, spaceId:string) {
   const floorData: Ref<IFloor[]> = ref<IFloor[]>([])
   const currentIndex = ref(0)
 
   const floorToDeviceList = ref<IDeviceType[]>()
   const router = useRouter()
+  const getFloorlisttodeviceLoading = ref(false)
 
-  const getFloorData = async () => {
+  const getFloorData = async (spaceId:string) => {
     const res = await floorlistApi()
     floorData.value = res?.data?.data || []
-    path === 'layer' && getFloorlisttodevice(floorData.value[0]['spaceId'])
+    path === 'layer' && getFloorlisttodevice(spaceId)
   }
 
   const formatFloor = (str:string) => str.replace(/F0?(\d{1,2})/, '$1F')
 
-  const getFloorlisttodeviceLoading = ref(false)
   const getFloorlisttodevice = async (spaceId) => {
     
     if (path === 'layer') {
@@ -44,7 +44,9 @@ export function useFloor(path:string) {
     } else {
       router.push({
         name: 'layer',
-        query: {},
+        params: {
+          spaceId
+        },
       })
     }
   }
@@ -60,8 +62,12 @@ export function useFloor(path:string) {
     const maxVisibleItems = Math.floor(340 / itemHeight) // 340px是滚动区域高度
     const maxIndex = floorItems.length - maxVisibleItems
 
-    // choosed first one while init
-    floorItems[0].classList.add('cur');
+    // choosed auto-matched item while init
+    const floorActivatedIdx = floorData.value.findIndex(v => v.spaceId === spaceId)
+    floorItems[floorActivatedIdx === -1 ? 0 : floorActivatedIdx].classList.add('cur');
+    if (floorActivatedIdx >= 7 && path === 'layer') {
+      scrollToIndex(1)
+    }
 
     // update the btn state
     function updateButtonState() {

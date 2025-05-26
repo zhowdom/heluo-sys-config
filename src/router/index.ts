@@ -11,7 +11,7 @@ const router = createRouter({
       component: home
     },
     {
-      path: '/layer',
+      path: '/layer/:spaceId',
       name: 'layer',
       // 路由级代码分割（懒加载）
       component: () => import('../views/layer/index.vue')
