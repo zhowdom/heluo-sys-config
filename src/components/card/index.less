@@ -1,8 +1,25 @@
-@onecardh: 286px;
-@onecardw: 400px;
 .cardboxwrap {
-  height: @onecardh;
-  width: @onecardw;
-  background: rgba(9,40,46,0.55);
+  width: 400px;
+  background: rgba(9, 40, 46, 0.55);
+  height: 286px;
 
+  @media (max-width: 1920px) {
+    height: 250px;
+  }
+
+  @media (min-width: 1921px) {
+    height: 286px;
+  }
+}
+
+.maincardbox {
+  height: 236px;
+
+  @media (max-width: 1920px) {
+    height: 200px;
+  }
+
+  @media (min-width: 1921px) {
+    height: 236px;
+  }
 }

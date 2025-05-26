@@ -23,7 +23,6 @@ defineProps({
   width:150px;
   height:140px;
   position:relative;
-  margin-top:60px;
   &__icon{
     // height:32px;
     // width:32px;

@@ -35,9 +35,7 @@ defineProps({
 .heluo-sys-card-item{
   width:209px;
   height:172px;
-  position: absolute;
-  top:80px;
-  right:20px;
+  margin-right:20px;
   &__mini{
     width: 84px;
     height:61px;

@@ -27,13 +27,15 @@ getCardData()
 <template>
    <div :class="bem()">
     <cardtitle :name="CardTypeNames[name]" />
-    <template v-if="name === 'devicesituation'">
-      <cardItemb :cardInfos="cardInfos" />
-    </template>
-    <template v-else>
-      <seat :name="name" />
-      <cardItem :cardInfos="cardInfos" />
-    </template>
+    <div :class="[bem('main-card'), 'flex-between']">
+      <template v-if="name === 'devicesituation'">
+        <cardItemb :cardInfos="cardInfos" />
+      </template>
+      <template v-else>
+        <seat :name="name" />
+        <cardItem :cardInfos="cardInfos" />
+      </template>
+    </div>
    </div>
 </template>
 
@@ -41,5 +43,8 @@ getCardData()
 @import url('./index.less');
 .heluo-sys-card-wrapper:extend(.cardboxwrap){
   position:relative;
+  &__main-card:extend(.maincardbox){
+    width: 100%;
+  }
 }
 </style>

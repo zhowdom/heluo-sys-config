@@ -47,8 +47,8 @@ onMounted(() => {
 </template>
 
 <style scoped lang="less">
-.heluo-sys-warn{
-  height:860px;
+@import url('./index.less');
+.heluo-sys-warn:extend(.warndialog){
   width:550px;
   background: rgba(31, 37, 42,.9);
   border-radius: 0px 0px 0px 0px;
@@ -78,10 +78,9 @@ onMounted(() => {
       }
     }
   }
-  &__show-list{
+  &__show-list:extend(.warnshowlist){
     overflow-y: scroll;
     margin-top: 12px;
-    height: 810px;
   }
   &__loading-info-state{
     // height: inherit;

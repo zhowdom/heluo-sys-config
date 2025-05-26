@@ -17,9 +17,11 @@ const handleToHome = () => {
 }
 const isLayerPath = ref(false)
 const floatw = ref('448px')
+const floatmgleft = ref('-224px')
 watchEffect(() => {
   isLayerPath.value = route.path.includes('/layer')
   floatw.value = route.path.includes('/layer') ? '70px' : '448px'
+  floatmgleft.value = route.path.includes('/layer') ? '-35px' : '-224px'
 })
 </script>
 
@@ -39,7 +41,7 @@ watchEffect(() => {
   height: 62px;
   position: absolute;
   bottom: 26px;
-  margin-left: -224px;
+  margin-left: v-bind(floatmgleft);
   left: 50%;
   z-index: 200;
   background: linear-gradient( 180deg, rgba(69,94,90,0.61) 0%, rgba(12,12,20,0.2) 100%);
