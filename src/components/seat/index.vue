@@ -18,25 +18,21 @@ defineProps({
 
 <style scoped lang="less">
 .heluo-sys-seat{
-  // width:120px;
-  // height:110px;
-  width:150px;
-  height:140px;
+  width:130px;
+  height:130px;
   position:relative;
+  margin-left: 15px;
+  margin-top: -5%;
   &__icon{
-    // height:32px;
-    // width:32px;
     height:62px;
     width:62px;
     position:absolute;
-    top:20px;
-    left:36px;
+    top:30px;
+    left:35px;
   }
   &__seat{
-    // width:120px;
-    // height:110px;
-    width:150px;
-    height:140px;
+    width:100%;
+    height:100%;
     position:absolute;
     bottom:-20px;
     left:0;

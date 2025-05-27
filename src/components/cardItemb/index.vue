@@ -57,11 +57,11 @@ defineProps({
 
 <style scoped lang="less">
 .heluo-sys-card-item-b{
-  margin-top:20px;
+  height: 100%;
   &__mini{
     width:160px;
-    height:70px;
-    margin-bottom:10px;
+    // height:70px;
+    height:50%;
   }
   &__l{
     img{
@@ -75,6 +75,7 @@ defineProps({
       font-weight: bold;
       font-size: 21px;
       color: #FFFFFF;
+      text-align: center;
     }
   }
 }

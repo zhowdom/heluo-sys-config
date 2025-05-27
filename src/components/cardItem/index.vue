@@ -34,12 +34,18 @@ defineProps({
 <style scoped lang="less">
 .heluo-sys-card-item{
   width:209px;
-  height:172px;
+  // height:172px;
+  height:74%;
   margin-right:20px;
   &__mini{
     width: 84px;
     height:61px;
     text-align:center;
+    &:last-child{
+      p{
+        color: #FF6F6F;
+      }
+    }
   }
   &__name{
     height: 26px;

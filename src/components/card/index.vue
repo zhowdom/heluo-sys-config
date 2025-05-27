@@ -27,7 +27,7 @@ getCardData()
 <template>
    <div :class="bem()">
     <cardtitle :name="CardTypeNames[name]" />
-    <div :class="[bem('main-card'), 'flex-between']">
+    <div :class="[name === 'devicesituation' ? bem('device-card') : bem('main-card'), 'flex-between']" :data-set="name">
       <template v-if="name === 'devicesituation'">
         <cardItemb :cardInfos="cardInfos" />
       </template>
@@ -45,6 +45,10 @@ getCardData()
   position:relative;
   &__main-card:extend(.maincardbox){
     width: 100%;
+  }
+  &__device-card{
+    width: 100%;
+    height: calc(100% - 50px);
   }
 }
 </style>
