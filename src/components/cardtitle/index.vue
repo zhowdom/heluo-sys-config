@@ -23,6 +23,7 @@ defineProps({
   position: relative;
   line-height:@h;
   text-indent: 36px;
+  font-size:1.7rem;
   &:before{
     content: '';
     width:12px;

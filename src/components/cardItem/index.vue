@@ -51,14 +51,15 @@ defineProps({
     height: 26px;
     line-height:26px;
     background: url('@assets/usedimg/carditem-bg@3x.png') no-repeat center / cover;
+    font-size: 1.45rem;
   }
   &__val{
     font-family: D-DIN Exp-DINExp, D-DIN Exp-DINExp;
     font-weight: bold;
     // font-size: 32px;
-    font-size: 28px;
+    font-size: 2.5rem;
     color: #FFFFFF;
-    padding-top:10px;
+    margin-top:6%;
   }
 }
 </style>

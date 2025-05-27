@@ -27,15 +27,12 @@ defineProps({
     height:62px;
     width:62px;
     position:absolute;
-    top:30px;
+    top:5%;
     left:35px;
   }
   &__seat{
     width:100%;
     height:100%;
-    position:absolute;
-    bottom:-20px;
-    left:0;
   }
 }
 </style>

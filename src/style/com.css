@@ -2,6 +2,10 @@
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   /* color-scheme: light dark; */ /* light dark theam */
 }
+html{
+  /* 基准字体大小 (16px) 的62.5% = 10px (方便rem计算) */
+  font-size: 62.5%;
+}
 *{
   margin:0;
   padding: 0;
@@ -22,6 +26,16 @@ body {
   width: 100%;
   /* background: url('@assets/usedimg/mask@2x.png') no-repeat center / cover; */
   color: #fff;
+
+  /* 使用vw单位实现响应式 (1.6vw = 16px在1000px视口宽度) */
+  font-size: 1.6vw;
+  /* 设置最小、理想值和最大字体大小 */
+  font-size: clamp(14px, 1.6vw, 18px);
+}
+
+.some-font-size{
+  /* 相对body的2.5倍大小 */
+  font-size: 2.5rem;
 }
 
 .flex-center{

@@ -70,10 +70,13 @@ defineProps({
     }
   }
   &__r{
+    p{
+      font-size: 1.5rem;
+    }
     p.num{
       font-family: D-DIN Exp-DINExp, D-DIN Exp-DINExp;
       font-weight: bold;
-      font-size: 21px;
+      font-size: 2rem;
       color: #FFFFFF;
       text-align: center;
     }
