@@ -7,7 +7,7 @@ import switchbtn from '@/components/switchbtn/index.vue'
 import {UeReportType, IProfession} from '@/types'
 import {useUeConnect} from '@/hooks'
 const {ueConnect} = useUeConnect()
-const {professionList, alterProfessionList} = useProfession()
+const {professionList, alterProfessionList, LayerHide} = useProfession()
 const clickWrap = (item:IProfession, idx:number) => {
   alterProfessionList(idx)
   ueConnect(UeReportType.PROFESSION, {
@@ -17,6 +17,9 @@ const clickWrap = (item:IProfession, idx:number) => {
     })
   })
 }
+defineExpose({
+  LayerHide
+})
 </script>
 
 <template>

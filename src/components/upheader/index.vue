@@ -1,15 +1,21 @@
 <script setup lang="ts">
+import { onMounted, ref } from 'vue'
 import { createNamespace } from '@/utils'
 const { bem } = createNamespace('heluo-sys-header')
 import weather from '@/components/weather/index.vue'
 import notice from '@/components/notice/index.vue'
 import user from '@/components/user/index.vue'
+const sysName = ref('')
+onMounted(() => {
+   // @ts-ignore
+   sysName.value = GLOBAL.sysName
+})
 </script>
 
 <template>
    <div :class="[bem(), 'flex-center']">
       <div :class="bem('name')">
-         科研建筑智慧运营平台
+         {{sysName}}
       </div>
       <weather />
       <notice />

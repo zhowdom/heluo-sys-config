@@ -5,13 +5,15 @@ import { useRouter } from 'vue-router'
 import {rnd} from '@/utils'
 
 export function useFloor(path:string, spaceId:string) {
+  const curUserChoosedFloorSpaceID = ref('')
   const floorData: Ref<IFloor[]> = ref<IFloor[]>([])
   const currentIndex = ref(0)
 
   const floorToDeviceList = ref<IDeviceType[]>()
+  
   const router = useRouter()
   const getFloorlisttodeviceLoading = ref(false)
-
+  
   const getFloorData = async (spaceId:string) => {
     const res = await floorlistApi()
     floorData.value = res?.data?.data || []
@@ -21,7 +23,7 @@ export function useFloor(path:string, spaceId:string) {
   const formatFloor = (str:string) => str.replace(/F0?(\d{1,2})/, '$1F')
 
   const getFloorlisttodevice = async (spaceId) => {
-    
+    curUserChoosedFloorSpaceID.value = spaceId
     if (path === 'layer') {
       getFloorlisttodeviceLoading.value = true
       const param = {
@@ -123,6 +125,7 @@ export function useFloor(path:string, spaceId:string) {
     currentIndex,
     floorToDeviceList,
     getFloorlisttodeviceLoading,
+    curUserChoosedFloorSpaceID,
     formatFloor,
     getFloorData,
     initFloor,

@@ -5,7 +5,7 @@ import {IVisibleControllerOption, IVisiblePool} from '@/types'
 export const useGlobalVisibleControllerStore = defineStore("globalVisibleController", () => {
   const globalVisiblePool = ref<IVisiblePool>({
     warn: { state: false },
-    profession: { state: true },
+    profession: { state: true }, // 预留整个专业面板的显隐[目前没用到]
     home_two_pannel: { state: true }
   })
 

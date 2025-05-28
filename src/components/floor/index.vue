@@ -2,7 +2,7 @@
 import { createNamespace } from '@/utils'
 import {useFloor} from '@/hooks'
 const { bem } = createNamespace('heluo-sys-floor')
-import {onMounted, computed} from 'vue'
+import {onMounted, computed, watch} from 'vue'
 import { useRoute } from 'vue-router'
 const route = useRoute()
 import {UeReportType, IFloor} from '@/types'
@@ -13,7 +13,7 @@ const props = defineProps<{
   path?: string,
   spaceId?: string
 }>();
-const {getFloorData, floorData, formatFloor, initFloor, getFloorlisttodevice, floorToDeviceList, getFloorlisttodeviceLoading} = useFloor(props.path, props.spaceId)
+const {getFloorData, floorData, formatFloor, initFloor, getFloorlisttodevice, floorToDeviceList, getFloorlisttodeviceLoading, curUserChoosedFloorSpaceID} = useFloor(props.path, props.spaceId)
 
 onMounted(async () => {
   await getFloorData(props.spaceId)
@@ -30,6 +30,14 @@ const clickWraper = (item:IFloor) => {
   ueConnect(UeReportType.FLOOR, {opt: item.spaceCode})
 }
 const isLayerPath = computed(() => route.path.includes('/layer'))
+
+const emit = defineEmits(['userChangedFloor'])
+watch(
+  curUserChoosedFloorSpaceID,
+  () => {
+    emit('userChangedFloor')
+  }
+)
 </script>
 
 <template>

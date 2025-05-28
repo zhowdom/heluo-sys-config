@@ -8,15 +8,16 @@ import { useRoute } from 'vue-router'
 const { bem } = createNamespace('heluo-sys-layer')
 const route = useRoute();
 const refFloor = ref(null)
+const refProfession = ref(null)
 const spaceId = route.params.spaceId as string;
 </script>
 
 <template>
   <div :class="[bem(), 'flex-between']">
     <!-- <floor top="270px" left="0px" path="layer" ref="refFloor" /> -->
-    <floor path="layer" ref="refFloor" :spaceId="spaceId" />
+    <floor path="layer" ref="refFloor" :spaceId="spaceId" @userChangedFloor="refProfession.LayerHide(true)" />
     <device :floorToDeviceList="refFloor?.floorToDeviceList" :loading="refFloor?.getFloorlisttodeviceLoading" />
-    <profession :class="bem('mgl-auto')" />
+    <profession :class="bem('mgl-auto')" ref="refProfession" />
   </div>
 </template>
 
