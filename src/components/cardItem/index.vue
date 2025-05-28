@@ -14,19 +14,19 @@ defineProps({
    <div :class="[bem(), 'flex-wrap', 'flex-between']">
     <div :class="bem('mini')">
       <div :class="bem('name')">总数</div>
-      <p :class="bem('val')">{{cardInfos.all}}</p>
+      <p :class="[bem('val'), 'set-comcard-fts-media']">{{cardInfos.all}}</p>
     </div>
     <div :class="bem('mini')">
       <div :class="bem('name')">运行状态</div>
-      <p :class="bem('val')">{{cardInfos.running}}</p>
+      <p :class="[bem('val'), 'set-comcard-fts-media']">{{cardInfos.running}}</p>
     </div>
     <div :class="bem('mini')">
       <div :class="bem('name')">停止</div>
-      <p :class="bem('val')">{{cardInfos.stopped}}</p>
+      <p :class="[bem('val'), 'set-comcard-fts-media']">{{cardInfos.stopped}}</p>
     </div>
     <div :class="bem('mini')">
       <div :class="bem('name')">报警</div>
-      <p :class="bem('val')">{{cardInfos.fault}}</p>
+      <p :class="[bem('val'), 'set-comcard-fts-media']">{{cardInfos.fault}}</p>
     </div>
    </div>
 </template>
@@ -56,10 +56,8 @@ defineProps({
   &__val{
     font-family: D-DIN Exp-DINExp, D-DIN Exp-DINExp;
     font-weight: bold;
-    // font-size: 32px;
-    font-size: 2.5rem;
     color: #FFFFFF;
-    margin-top:6%;
+    margin-top:1%;
   }
 }
 </style>

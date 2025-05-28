@@ -53,10 +53,14 @@ onMounted(() => {
   background: rgba(31, 37, 42,.9);
   border-radius: 0px 0px 0px 0px;
   position: absolute;
-  top:50px;
+  margin: auto 0;
+  position: absolute;
+  top: 0;
+  bottom: 0;
   right:20px;
   padding: 12px;
   z-index: 999;
+  box-sizing: border-box;
   &__type-box{
     ul{
       display: flex;

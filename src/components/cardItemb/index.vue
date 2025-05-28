@@ -13,42 +13,42 @@ defineProps({
 <template>
    <div :class="[bem(), 'flex-wrap', 'flex-center']">
     <div :class="[bem('mini'), 'flex-between']">
-      <div :class="bem('l')">
+      <div :class="[bem('l'), 'set-devices-img-media']">
         <img src="@assets/usedimg/taishi-1@3x(1).png">
       </div>
       <div :class="bem('r')">
         <p>接入设备数</p>
-        <p class="num">{{cardInfos.exceptionCount}}</p>
+        <div class="num set-devices-fts-media">{{cardInfos.exceptionCount}}</div>
       </div>
     </div>
 
     <div :class="[bem('mini'), 'flex-between']">
-      <div :class="bem('l')">
+      <div :class="[bem('l'), 'set-devices-img-media']">
         <img src="@assets/usedimg/taishi-2@3x(3).png">
       </div>
       <div :class="bem('r')">
         <p>运行设备数</p>
-        <p class="num">{{cardInfos.runingCount}}</p>
+        <div class="num set-devices-fts-media">{{cardInfos.runingCount}}</div>
       </div>
     </div>
 
     <div :class="[bem('mini'), 'flex-between']">
-      <div :class="bem('l')">
+      <div :class="[bem('l'), 'set-devices-img-media']">
         <img src="@assets/usedimg/taishi-3@3x.png">
       </div>
       <div :class="bem('r')">
         <p>故障设备数</p>
-        <p class="num">{{cardInfos.offlineCount}}</p>
+        <div class="num set-devices-fts-media">{{cardInfos.offlineCount}}</div>
       </div>
     </div>
 
     <div :class="[bem('mini'), 'flex-between']">
-      <div :class="bem('l')">
+      <div :class="[bem('l'), 'set-devices-img-media']">
         <img src="@assets/usedimg/taishi-4@3x(2).png">
       </div>
       <div :class="bem('r')">
         <p>警告设备数</p>
-        <p class="num">{{cardInfos.failureCount}}</p>
+        <div class="num set-devices-fts-media">{{cardInfos.failureCount}}</div>
       </div>
     </div>
 
@@ -61,24 +61,28 @@ defineProps({
   &__mini{
     width:160px;
     // height:70px;
-    height:50%;
-  }
-  &__l{
-    img{
-      width:70px;
-      height:75px;
+    height:45%;
+    &:nth-child(1),&:nth-child(2){
+      margin-top:3%;
     }
+    &:nth-child(3),&:nth-child(4){
+      margin-top:-10%;
+    }
+  }
+  &__l img{
+    width: 100%;
+    height: 100%;
   }
   &__r{
     p{
       font-size: 1.5rem;
     }
-    p.num{
+    .num{
       font-family: D-DIN Exp-DINExp, D-DIN Exp-DINExp;
       font-weight: bold;
-      font-size: 2rem;
       color: #FFFFFF;
       text-align: center;
+      padding-top: 1%;
     }
   }
 }

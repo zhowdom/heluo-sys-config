@@ -1,13 +1,18 @@
 export function autoImg(cardname:string, subpath:string) {
   let imgsMap: Record<string, { default: string }> = {}
   switch(subpath) {
-    case 'seat':
-      imgsMap = import.meta.glob('@assets/usedimg/seat/*.png', { 
+    case 'seat2':
+      imgsMap = import.meta.glob('@assets/usedimg/seat2/*.png', { 
         eager: true 
       })
         break;
     case 'device':
-      imgsMap = import.meta.glob('@assets/usedimg/device/*.png', { 
+      imgsMap = import.meta.glob('@assets/usedimg/device/*.svg', { 
+        eager: true 
+      })
+        break;
+    case 'seat':
+      imgsMap = import.meta.glob('@assets/usedimg/seat/*.png', { 
         eager: true 
       })
         break;
@@ -15,5 +20,5 @@ export function autoImg(cardname:string, subpath:string) {
       console.log('not matched')
   }
   const _path = `/src/assets/usedimg/${subpath}/`
-  return imgsMap[_path + cardname + '.png']['default']
+  return subpath === 'device' ? imgsMap[_path + cardname + '.svg']['default'] : imgsMap[_path + cardname + '.png']['default']
 }
