@@ -33,13 +33,14 @@ onMounted(() => {
   left: 0;
   right:0;
   z-index: 100;
-  background: url('@assets/usedimg/header-bg@3x.png') no-repeat center / cover;
+  background: url('@assets/usedimg/header-bg@2x.png') no-repeat center / cover;
   &__name{
-   font-size: 20px;
+   font-size: 27px;
    font-weight: bold;
    color: #fff;
    line-height: calc(@headerh - 20px);
-   height: inherit;
+   height: 90px;
+   filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));
   }
 }
 </style>
