@@ -162,9 +162,9 @@ export enum UeReportType {
    */
   WARN_ITEM = 'warn_item',
   /**
-   * 设备列表[定位-暂时不需要]
+   * 设备列表
    */
-  DEVICE_ITEM = 'device_item',
+  DEVICE_TYPE = 'device_type',
   /**
    * 专业面板每一项
    */
@@ -195,7 +195,7 @@ export enum UeReportParams {
   /**
    * 设备列表
    */
-  device_item = '定位',
+  device_type = '设备类型',
   /**
    * 专业面板每一项
    */

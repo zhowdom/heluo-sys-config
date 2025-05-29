@@ -12,7 +12,6 @@ export function useLogin() {
     const userStore = useUserStore()
     userStore.userLogin(params)
     const router = useRouter()
-    console.log(router, 'router')
     router.push({
       name: 'home',
       query: {},

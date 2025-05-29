@@ -2,12 +2,14 @@
 import { createNamespace, autoImg } from '@/utils'
 const { bem } = createNamespace('heluo-sys-device')
 import cardtitle from '@/components/cardtitle/index.vue'
+import {useUeConnect} from '@/hooks'
 // import Loading from '@/components/loading/index.vue'
-import {IDeviceType} from '@/types'
+import {IDeviceType, UeReportType} from '@/types'
 defineProps<{
   floorToDeviceList: IDeviceType[];
   loading: Boolean
 }>();
+const {ueConnect} = useUeConnect()
 </script>
 
 <template>
@@ -15,7 +17,7 @@ defineProps<{
     <cardtitle name="设备" />
     <div :class="bem('main')">
       <!-- <Loading v-if="loading" /> -->
-      <div v-for="(item, idx) in floorToDeviceList" :key="idx" :class="bem('each')">
+      <div v-for="(item, idx) in floorToDeviceList" :key="idx" :class="bem('each')" @click="ueConnect(UeReportType.DEVICE_TYPE, {opt: item.typeName})">
         <img :src="autoImg(item.typeCode, 'device')" />
         <p>{{item.typeName}}</p>
         <span>{{item.typeCount}}</span>

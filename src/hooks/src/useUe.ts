@@ -63,6 +63,13 @@ export function useUeConnect() {
           })
           window.ue.web.js_call_ue(UeReportParams[UeReportType.FLOOR], payload?.opt)
           break;
+        case UeReportType.DEVICE_TYPE:
+          console.log({
+            param1: UeReportParams[UeReportType.DEVICE_TYPE],
+            param2: payload?.opt
+          })
+          window.ue.web.js_call_ue(UeReportParams[UeReportType.DEVICE_TYPE], payload?.opt)
+          break;
         default:
           console.log('No matched to event type')
       }
