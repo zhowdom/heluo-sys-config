@@ -7,8 +7,8 @@ import {ref} from 'vue'
 import { useRoute } from 'vue-router'
 const { bem } = createNamespace('heluo-sys-layer')
 const route = useRoute();
-const refFloor = ref(null)
-const refProfession = ref(null)
+const refFloor = ref<HTMLElement | null>(null)
+const refProfession = ref<HTMLElement | null>(null)
 const spaceId = route.params.spaceId as string;
 </script>
 

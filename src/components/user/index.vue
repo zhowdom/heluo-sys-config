@@ -4,7 +4,7 @@ import { createNamespace } from '@/utils'
 const { bem } = createNamespace('heluo-sys-user')
 import dropMenu from '@/components/dropMenu/index.vue'
 import {useUser} from '@/hooks'
-const refUser = ref<HTMLElement>(null!)
+const refUser = ref<HTMLElement | null>(null!)
 const {handleMouseEnter, handleMouseLeave, initialh, visible} = useUser()
 </script>
 
