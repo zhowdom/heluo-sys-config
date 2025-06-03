@@ -3,12 +3,12 @@ import device from '@/components/device/index.vue'
 import floor from '@/components/floor/index.vue'
 import profession from '@/components/profession/index.vue'
 import { createNamespace } from '@/utils'
-import {ref} from 'vue'
+import {useTemplateRef} from 'vue'
 import { useRoute } from 'vue-router'
 const { bem } = createNamespace('heluo-sys-layer')
 const route = useRoute();
-const refFloor = ref(null)
-const refProfession = ref(null)
+const refFloor = useTemplateRef('refFloor')
+const refProfession = useTemplateRef('refProfession')
 const spaceId = route.params.spaceId as string;
 </script>
 

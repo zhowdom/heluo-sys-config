@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import {ref} from 'vue'
+import {useTemplateRef} from 'vue'
 import { createNamespace } from '@/utils'
 const { bem } = createNamespace('heluo-sys-user')
 import dropMenu from '@/components/dropMenu/index.vue'
 import {useUser} from '@/hooks'
-const refUser = ref(null)
+const refUser = useTemplateRef('refUser')
 const {handleMouseEnter, handleMouseLeave, initialh, visible} = useUser()
 </script>
 
