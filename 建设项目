@@ -166,6 +166,20 @@ export default defineConfig({
 安装依赖（如果提示 path 模块找不到）：
 npm install --save-dev @types/node
 
+14：TS项目编译打包后防止每个文件模块都新生成了一个编译的文件。
+  在tsconfig.json配置一项：
+  "noEmit": true, // 打包后，不额外对应新生成js文件
+
+15、打包配置相关：
+  在项目根目录中的index.html，中引入的JS，如果不加type="module"属性，则不会被vite打包，也不会在文件名自动添加随机后缀名。
+  <script type="module" src="/src/main.ts"></script>
+
+  放在根目录中的public中的文件，也不会被打包，可以直接在index.html文件中
+  <script src="/config.js"></script> 这样引入，且不会被打包编译。
+
+
+
+
 
 
 
