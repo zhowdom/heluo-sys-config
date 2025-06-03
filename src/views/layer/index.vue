@@ -16,7 +16,7 @@ const spaceId = route.params.spaceId as string;
   <div :class="[bem(), 'flex-between']">
     <!-- <floor top="270px" left="0px" path="layer" ref="refFloor" /> -->
     <floor path="layer" ref="refFloor" :spaceId="spaceId" @userChangedFloor="refProfession.LayerHide(true)" />
-    <device :floorToDeviceList="refFloor?.floorToDeviceList" :loading="refFloor?.getFloorlisttodeviceLoading" />
+    <device :floorToDeviceList="refFloor?.floorToDeviceList || []" :loading="refFloor?.getFloorlisttodeviceLoading" />
     <profession :class="bem('mgl-auto')" ref="refProfession" />
   </div>
 </template>
