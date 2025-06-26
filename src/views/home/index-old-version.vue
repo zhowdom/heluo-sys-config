@@ -19,12 +19,15 @@ function SwitchFoldOnlyTwoSide (state:boolean) {
     <!-- <img :src="logoUrl" alt="logo"> -->
     <!-- <img src="@/assets/usedimg/mask@2x.png" alt="logo"> -->
     <div :class="[bem('l'), 'animate__animated', globalVisiblePool.home_two_pannel.state ? ' animate__backInLeft' : 'animate__backOutLeft']">
-      <card name="introduction" position="left"></card>
-      <card name="devicetotal" position="left"></card>
+      <card name="airconditional" position="left"></card>
+      <card name="newwind" position="left"></card>
+      <card name="ventilate" position="left"></card>
     </div>
     <floor :class="[bem('mrgl-auto'), 'animate__animated', globalVisiblePool.home_two_pannel.state ? 'animate__backInRight' : 'animate__backOutRight']" />
     <div :class="[bem('r'), 'animate__animated', globalVisiblePool.home_two_pannel.state ? 'animate__backInRight' : 'animate__backOutRight']">
-      <card name="devicelist" position="right"></card>
+      <card name="devicesituation" position="right"></card>
+      <card name="exhaust" position="right"></card>
+      <card name="remainwind" position="right"></card>
     </div>
   </div>
 </template>

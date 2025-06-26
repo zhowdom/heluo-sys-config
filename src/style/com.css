@@ -18,13 +18,13 @@ a {
 a:hover {
   color: #535bf2;
 }
-
 body {
   margin: 0;
   display: flex;
   place-items: center;
   width: 100%;
-  /* background: url('@assets/usedimg/mask@2x.png') no-repeat center / cover; */
+  background: url('@assets/usedimg/body-zz.png') no-repeat center / cover;
+
   color: #fff;
 
   /* 使用vw单位实现响应式 (1.6vw = 16px在1000px视口宽度) */
@@ -85,20 +85,20 @@ ul,li,ol{
 }
 /* 整个滚动条 */
 ::-webkit-scrollbar {
-  width: 10px; /* 垂直滚动条宽度 */
-  height: 10px; /* 水平滚动条高度 */
+  width: 0; /* 垂直滚动条宽度 */
+  height: 0; /* 水平滚动条高度 */
 }
 
 /* 滚动条轨道（背景） */
 ::-webkit-scrollbar-track {
   background: #456c6e; 
-  border-radius: 5px;
+  border-radius: 3px;
 }
 
 /* 滚动条滑块（可拖动部分） */
 ::-webkit-scrollbar-thumb {
   background: #08b5bb; 
-  border-radius: 5px;
+  border-radius: 3px;
 }
 
 /* 鼠标悬停时滑块样式 */
@@ -109,4 +109,31 @@ ul,li,ol{
 /* 滚动条角落（水平和垂直滚动条交汇处） */
 ::-webkit-scrollbar-corner {
   background: #f1f1f1;
+}
+.autoWrap {
+  overflow-wrap: break-word;  /* 首选方式 */
+  word-break: break-word;    /* 备用方式 */
+  hyphens: auto;            /* 支持连字符的优雅断词 */
+  white-space: normal;      /* 确保空格正常处理 */
+}
+/*文字从上往下渐变*/
+.gradientTxt{
+  font-family: D-DIN Exp-DINExp, D-DIN Exp-DINExp;
+  font-weight: bold;
+  background: linear-gradient(to bottom, #12A6F5, #FFFFFF);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.txtellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;        /* 根据容器宽度自适应 */
+}
+/*移除 input 获取焦点后的默认样式-蓝色边框或轮廓线*/
+input:focus {
+  outline: 0;
+  box-shadow: none;
+  border-color: inherit; /* 可选，保持边框颜色不变 */
 }

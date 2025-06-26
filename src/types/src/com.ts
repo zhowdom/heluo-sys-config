@@ -23,6 +23,18 @@ export enum CardTypeEnum {
 
  export enum CardTypeNames {
   /**
+   * 项目简介
+   */
+  introduction = '项目简介',
+  /**
+   * 设备总数
+   */
+  devicetotal = '设备总数',
+  /**
+   * 设备列表
+   */
+  devicelist = '设备列表',
+  /**
    * 智能空调
    */
   airconditional = '智能空调',
@@ -219,4 +231,9 @@ export interface IProfession {
    * 专业面板每一项开启状态
    */
   state: boolean;
+}
+export enum EnuMenusIds {
+  HOME = 1,
+  QU_WEI = 2,
+  MAN_YOU = 3
 }

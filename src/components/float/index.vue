@@ -1,56 +1,84 @@
 <script setup lang="ts">
 import { createNamespace } from '@/utils'
 const { bem } = createNamespace('heluo-sys-float-menu')
-import {UeReportType} from '@/types'
+import {UeReportType, EnuMenusIds} from '@/types'
 import {useUeConnect} from '@/hooks'
 import { useRouter, useRoute } from 'vue-router'
 import {watchEffect, ref} from 'vue'
+import {useGlobalVisibleControllerStore} from '@/stores'
 const router = useRouter()
 const route = useRoute()
 const {ueConnect} = useUeConnect()
+const globalVisibleControllerStore = useGlobalVisibleControllerStore()
+const curClickMenuid = ref(1)
 const handleToHome = () => {
+  curClickMenuid.value = 1
   router.push({
     name: 'home',
     query: {},
   })
+  globalVisibleControllerStore.globalControlVisible({name: 'home_two_pannel', state: true})
   ueConnect(UeReportType.FLOAT_MENU_HOME, { opt: '首页' })
 }
 const isLayerPath = ref(false)
-const floatw = ref('448px')
-const floatmgleft = ref('-224px')
 watchEffect(() => {
   isLayerPath.value = route.path.includes('/layer')
-  floatw.value = route.path.includes('/layer') ? '70px' : '448px'
-  floatmgleft.value = route.path.includes('/layer') ? '-35px' : '-224px'
 })
+const handleManYou = () => {
+  curClickMenuid.value = 3
+}
+const handleQuWei = () => {
+  curClickMenuid.value = 2
+  globalVisibleControllerStore.globalControlVisible({name: 'home_two_pannel', state: false})
+}
 </script>
 
 <template>
    <div :class="[bem(), 'flex-center']">
-    <img src="@assets/usedimg/east@3x.png" @click="ueConnect(UeReportType.FLOAT_DIRECTION, { opt: '东' })" v-if="!isLayerPath" />
-    <img src="@assets/usedimg/south@3x.png" @click="ueConnect(UeReportType.FLOAT_DIRECTION, { opt: '南' })" v-if="!isLayerPath" />
-    <img src="@assets/usedimg/home@3x.png" @click="handleToHome()" />
-    <img src="@assets/usedimg/west@3x.png" @click="ueConnect(UeReportType.FLOAT_DIRECTION, { opt: '西' })" v-if="!isLayerPath" />
-    <img src="@assets/usedimg/north@3x.png" @click="ueConnect(UeReportType.FLOAT_DIRECTION, { opt: '北' })" v-if="!isLayerPath" />
+
+    <div class="each">
+      <img v-if="curClickMenuid === EnuMenusIds.HOME" src="@assets/usedimg/home-1.png" @click="handleToHome()" />
+      <img v-else src="@assets/usedimg/home-0.png" @click="handleToHome()" />
+      <div class="txt" :class="{'cur': curClickMenuid === EnuMenusIds.HOME}">首页</div>
+    </div>
+
+    <div class="each" v-if="isLayerPath">
+      <img v-if="curClickMenuid === EnuMenusIds.MAN_YOU" src="@assets/usedimg/manyou-1.png" @click="handleManYou()" />
+      <img v-else src="@assets/usedimg/manyou-0.png" @click="handleManYou()" />
+      <div class="txt" :class="{'cur': curClickMenuid === EnuMenusIds.MAN_YOU}">漫游</div>
+    </div>
+    <div class="each" v-else>
+      <img v-if="curClickMenuid === EnuMenusIds.QU_WEI" src="@assets/usedimg/quwei-1.png" @click="handleQuWei()" />
+      <img v-else src="@assets/usedimg/quwei-0.png" @click="handleQuWei()" />
+      <div class="txt" :class="{'cur': curClickMenuid === EnuMenusIds.QU_WEI}">区位</div>
+    </div>
+
    </div>
 </template>
 
 <style scoped lang="less">
 .heluo-sys-float-menu{
-  width: v-bind(floatw);
-  height: 62px;
+  width: 180px;
+  height: 106px;
   position: absolute;
   bottom: 26px;
-  margin-left: v-bind(floatmgleft);
+  margin-left: -90px;
   left: 50%;
   z-index: 200;
-  background: linear-gradient( 180deg, rgba(69,94,90,0.61) 0%, rgba(12,12,20,0.2) 100%);
-  box-shadow: 0px 6px 14px 0px rgba(0,42,72,0.4);
-  border-radius: 8px 8px 8px 8px;
-  img{
-    height: 40px;
-    width: 40px;
-    cursor: pointer;
+  .each{
+    width: 72px;
+    img{
+      width: 72px;
+      height: 84px;
+    }
+    .txt{
+      font-size: 14px;
+      text-align: center;
+      &.cur{
+        color: #5fc2a5;
+      }
+    }
   }
+
 }
 </style>

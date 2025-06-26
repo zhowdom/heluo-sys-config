@@ -1,0 +1,56 @@
+<script setup lang="ts">
+import { createNamespace } from '@/utils'
+const { bem } = createNamespace('heluo-sys-float-menu')
+import {UeReportType} from '@/types'
+import {useUeConnect} from '@/hooks'
+import { useRouter, useRoute } from 'vue-router'
+import {watchEffect, ref} from 'vue'
+const router = useRouter()
+const route = useRoute()
+const {ueConnect} = useUeConnect()
+const handleToHome = () => {
+  router.push({
+    name: 'home',
+    query: {},
+  })
+  ueConnect(UeReportType.FLOAT_MENU_HOME, { opt: '首页' })
+}
+const isLayerPath = ref(false)
+const floatw = ref('448px')
+const floatmgleft = ref('-224px')
+watchEffect(() => {
+  isLayerPath.value = route.path.includes('/layer')
+  floatw.value = route.path.includes('/layer') ? '70px' : '448px'
+  floatmgleft.value = route.path.includes('/layer') ? '-35px' : '-224px'
+})
+</script>
+
+<template>
+   <div :class="[bem(), 'flex-center']">
+    <img src="@assets/usedimg/east@3x.png" @click="ueConnect(UeReportType.FLOAT_DIRECTION, { opt: '东' })" v-if="!isLayerPath" />
+    <img src="@assets/usedimg/south@3x.png" @click="ueConnect(UeReportType.FLOAT_DIRECTION, { opt: '南' })" v-if="!isLayerPath" />
+    <img src="@assets/usedimg/home@3x.png" @click="handleToHome()" />
+    <img src="@assets/usedimg/west@3x.png" @click="ueConnect(UeReportType.FLOAT_DIRECTION, { opt: '西' })" v-if="!isLayerPath" />
+    <img src="@assets/usedimg/north@3x.png" @click="ueConnect(UeReportType.FLOAT_DIRECTION, { opt: '北' })" v-if="!isLayerPath" />
+   </div>
+</template>
+
+<style scoped lang="less">
+.heluo-sys-float-menu{
+  width: v-bind(floatw);
+  height: 62px;
+  position: absolute;
+  bottom: 26px;
+  margin-left: v-bind(floatmgleft);
+  left: 50%;
+  z-index: 200;
+  background: linear-gradient( 180deg, rgba(69,94,90,0.61) 0%, rgba(12,12,20,0.2) 100%);
+  box-shadow: 0px 6px 14px 0px rgba(0,42,72,0.4);
+  border-radius: 8px 8px 8px 8px;
+  img{
+    height: 40px;
+    width: 40px;
+    cursor: pointer;
+  }
+}
+</style>
