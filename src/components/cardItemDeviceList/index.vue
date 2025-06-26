@@ -80,7 +80,7 @@ onMounted(() => {
       float: left;
       margin-left: 16px;
       margin-top: 16px;
-      &.cur{
+      &:hover,&.cur{
         background-image: url('@assets/usedimg/h1-d-cur.png');
       }
     }
@@ -99,7 +99,7 @@ onMounted(() => {
       border-radius: 4px 0 0 4px;
       opacity: 0.4;
       height: 100%;
-      width: 84%;
+      width: 88%;
       overflow: hidden;
       padding: 0;
       border:none;
@@ -109,7 +109,7 @@ onMounted(() => {
     .btn{
       width: 16%;
       height: 100%;
-      background: linear-gradient( 180deg, #297063 0%, rgba(70,255,221,0.48) 100%);
+      background: linear-gradient( 180deg, #297063 0%, rgba(70,255,221,1) 100%);
       border-radius: 4px;
       position: absolute;
       top:0;

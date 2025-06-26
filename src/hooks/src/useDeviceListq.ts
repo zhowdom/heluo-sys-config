@@ -51,7 +51,6 @@ export function useDeviceListInfos() {
       spaceId: curSpaceId,
       typeId: curTypeId
     }
-    console.log(_params, '_params0-0-0')
     const res = await getDeviceListApi(_params)
     queryResultList.value = res?.data?.data || []
   }
@@ -59,10 +58,6 @@ export function useDeviceListInfos() {
   const handleTypeClick = async (id) => {
     curTypeId.value = id  
     curSpaceId.value = ''
-    console.log({
-      curTypeId: curTypeId.value,
-      curSpaceId: curSpaceId.value
-    })
     await getAllSpaceListData()
     queryResultListData(curTypeId.value, curSpaceId.value)
   }

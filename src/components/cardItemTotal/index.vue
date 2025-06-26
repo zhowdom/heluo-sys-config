@@ -28,29 +28,29 @@ onMounted(() => {
           <img class="arrow" src="@assets/usedimg/percent-arrow.png" />
         </div>
       </div>
-      <div :class="[bem('min'), 'flex-between']" style="padding: 10px;">
+      <div :class="[bem('min'), 'flex-between', 'z-0']" style="padding: 10px;">
         <div class="l total">总设备</div>
         <div class="r device-ct"><span class="gradientTxt">{{deviceTotalInfos.totalCount}}</span><span>台</span></div>
       </div>
     </div>
 
     <div :class="[bem('two-side')]">
-      <div :class="[bem('min'), 'flex-between']">
+      <div :class="[bem('min'), 'flex-between', 'z-1']">
         <div class="l online">在线设备</div>
         <div class="r">{{deviceTotalInfos.onlineCount}}</div>
       </div>
 
-      <div :class="[bem('min'), 'flex-between']">
+      <div :class="[bem('min'), 'flex-between', , 'z-2']">
         <div class="l offline">离线设备</div>
         <div class="r">{{deviceTotalInfos.offlineCount}}</div>
       </div>
 
-      <div :class="[bem('min'), 'flex-between']">
+      <div :class="[bem('min'), 'flex-between', , 'z-3']">
         <div class="l wran">故障设备</div>
         <div class="r">{{deviceTotalInfos.failureCount}}</div>
       </div>
 
-      <div :class="[bem('min'), 'flex-between']">
+      <div :class="[bem('min'), 'flex-between', , 'z-4']">
         <div class="l error">异常设备</div>
         <div class="r">{{deviceTotalInfos.wranCount}}</div>
       </div>
@@ -65,17 +65,36 @@ onMounted(() => {
   width: 100%;
   padding: 0 14px;
   &__two-side{
-    width:40%;
+    width:44%;
     height: 100%;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /* 垂直居中整个容器 */
-    align-items: center;    /* 水平居中整个容器 */
-    gap: 10px; 
+    position: relative;
+    .z-0{
+      bottom: 8%;
+      left: 0;
+    }
+    .z-1{
+      top: 8%;
+      right: 0;
+    }
+    .z-2{
+      top: calc(8% + 16% + 6.66%);
+      right: 0;
+    }
+    .z-3{
+      top: calc(8% + 16% + 6.66% + 16% + 6.66%);
+      right: 0;
+    }
+    .z-4{
+      bottom: 8%;
+      right: 0;
+    }
     .top{
       height: 64%;
       width: 128px;
+
+      position: absolute;
+      top:50%;
+      margin-top:-65%;
       .circle{
         // height: 80%; /*128/160=0.8*/
         height: 128px;
@@ -102,6 +121,7 @@ onMounted(() => {
     background-size: 100% 100%;
     padding: 10px 20px;
     box-sizing: border-box;
+    position: absolute;
     .l{
       position: relative;
       font-size:14px;

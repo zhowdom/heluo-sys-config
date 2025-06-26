@@ -27,16 +27,13 @@ export function useLoadMoreWarn() {
       pageLength: 100000,
       type: currenntChoosedWarnCode.value
     }
-    console.log(param, 'param')
     try {
       let res = await warnlistApi(param);
-      console.log(res, 'warn000')
       warnListArr.value = res.data.data || []
       // currentPage.value = res.data.currentPage // 接口currentPage返回错误，此处没有用这个做分页逻辑
       totalPage.value = res.data.totalPage
       rowCount.value = res.data.rowCount
       currentPage.value++
-      console.log(currentPage.value, 'currentPage.value')
       setTimeout(() => {
         isloadingRequest.value = false
       }, rnd(1,5) * 200)

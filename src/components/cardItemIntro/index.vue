@@ -57,7 +57,7 @@ onMounted(() => {
     }
     &::before {
       position: absolute;
-      bottom: 68px;
+      bottom: 78px;
       right: -255px;
       content: '';
       height: 1px;
