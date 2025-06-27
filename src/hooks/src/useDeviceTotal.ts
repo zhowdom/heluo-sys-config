@@ -16,10 +16,10 @@ export function useDeviceTotalInfos() {
       deviceTotalInfos.value = {
         totalCount: res?.data?.data?.totalCount,
         runningRate: parseFloat(res?.data?.data?.exceptionRate?.match(/\d+\.?\d*/)[0]), //?
-        onlineCount: res?.data?.data?.exceptionCount, //?
+        onlineCount: res?.data?.data?.runingCount,
         offlineCount: res?.data?.data?.offlineCount,
         failureCount: res?.data?.data?.failureCount,
-        wranCount: res?.data?.data?.exceptionCount, //?
+        wranCount: res?.data?.data?.exceptionCount,
       }
     } catch(e) {
       console.log(e)

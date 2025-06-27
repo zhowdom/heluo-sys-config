@@ -2,7 +2,7 @@ import { getDeviceTypeListApi, getSpaceListApi, getDeviceListApi } from '@/apis'
 import {ref} from 'vue'
 
 export function useDeviceListInfos() {
-  const comParams = {pageType: "SAF"}
+  const comParams = {pageType: "ELE"}
   const allDeviceList = ref([])
   const allSpaceList = ref([])
   const queryResultList = ref([])

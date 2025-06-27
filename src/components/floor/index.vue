@@ -7,6 +7,8 @@ import { useRoute } from 'vue-router'
 const route = useRoute()
 import {UeReportType, IFloor} from '@/types'
 import {useUeConnect} from '@/hooks'
+import {useGlobalVisibleControllerStore} from '@/stores'
+const globalVisibleControllerStore = useGlobalVisibleControllerStore()
 const {ueConnect} = useUeConnect()
 
 const props = defineProps<{
@@ -27,6 +29,7 @@ defineExpose({
 
 const clickWraper = (item:IFloor) => {
   getFloorlisttodevice(item.spaceId)
+  globalVisibleControllerStore.globalControlVisible({name: 'float_menu_state', state: 4})
   ueConnect(UeReportType.FLOOR, {opt: item.spaceCode})
 }
 const isLayerPath = computed(() => route.path.includes('/layer'))

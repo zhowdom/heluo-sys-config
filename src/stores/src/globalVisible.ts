@@ -6,12 +6,14 @@ export const useGlobalVisibleControllerStore = defineStore("globalVisibleControl
   const globalVisiblePool = ref<IVisiblePool>({
     warn: { state: false },
     profession: { state: true }, // 预留整个专业面板的显隐[目前没用到]
-    home_two_pannel: { state: true }
+    home_two_pannel: { state: true },
+    float_menu_state: { // 用来区分整个底部菜单按钮的激活选中状态
+      state: 1
+    }
   })
-
+  
   // 通用型显隐面板、弹窗方法
   const globalControlVisible = (opt:IVisibleControllerOption) => {
-    console.log(opt, '通用型显隐面板、弹窗方法')
     // 如果是空或者undefined, 就状态取反
     if (opt.state === '' || opt.state === undefined) {
       globalVisiblePool.value[opt.name].state = !globalVisiblePool.value[opt.name].state

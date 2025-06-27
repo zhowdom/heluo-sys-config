@@ -166,6 +166,10 @@ export enum UeReportType {
    */
   FLOAT_MENU_HOME = 'float_menu_home',
   /**
+   * 漫游菜单
+   */
+  MAN_YOU = 'man_you',
+  /**
    * 天气[无需参数]
    */
   WEATHER = 'weather',
@@ -192,6 +196,10 @@ export enum UeReportParams {
    * 悬浮菜单角度
    */
   float_direction = '点击角度',
+  /**
+   * 悬浮菜单首页Home
+   */
+  man_you = '漫游',
   /**
    * 悬浮菜单首页Home
    */
@@ -235,5 +243,6 @@ export interface IProfession {
 export enum EnuMenusIds {
   HOME = 1,
   QU_WEI = 2,
-  MAN_YOU = 3
+  MAN_YOU = 3,
+  LAYER = 4 // 在layer页面点击了楼层，漫游需要取消选中状态
 }

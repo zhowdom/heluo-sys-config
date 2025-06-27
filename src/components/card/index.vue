@@ -24,7 +24,7 @@ const props = defineProps({
   }
 })
 const {getCardData, cardInfos} = useCard(props.name)
-getCardData()
+// getCardData() // 二期没有普通类型的卡片展示
 const computedH = computed(() => {
   switch(props.name) {
     case 'introduction':
@@ -45,11 +45,11 @@ const computedH = computed(() => {
     <div :class="[bem('device-card-inner'), 'flex-between']" :data-set="name">
       <!--项目介绍卡片-->
       <template v-if="name === 'introduction'">
-        <cardItemIntro :cardInfos="cardInfos" />
+        <cardItemIntro />
       </template>
       <!--设备总数卡片-->
       <template v-else-if="name === 'devicetotal'">
-        <cardItemTotal :cardInfos="cardInfos" />
+        <cardItemTotal />
       </template>
       <!--设备列表（2期改版）卡片-->
       <template v-else-if="name === 'devicelist'">

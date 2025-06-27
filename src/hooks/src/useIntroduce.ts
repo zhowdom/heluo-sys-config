@@ -9,11 +9,9 @@ export function useIntroduceInfos() {
   const getData = async () => {
     try {
       const res = await introductionApi()
-      const tempDiv = document.createElement('div')
-      tempDiv.innerHTML = res?.data?.data?.[0]['introduction']
       introduceInfos.value = {
         image: res?.data?.data?.[0]['image'],
-        introduction: tempDiv.textContent || tempDiv.innerText,
+        introduction: res?.data?.data?.[0]['introduction']
       }
     } catch(e) {
       console.log(e)

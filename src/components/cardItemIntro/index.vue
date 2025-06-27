@@ -1,14 +1,8 @@
 <script setup lang="ts">
 import { createNamespace } from '@/utils'
-import { ICardCommonInfos } from '@/types'
 import {useIntroduceInfos} from '@/hooks'
 const { bem } = createNamespace('heluo-sys-card-item-intro')
-import { PropType, onMounted } from 'vue'
-defineProps({
-  cardInfos: {
-    type: Object as PropType<ICardCommonInfos>,
-  }
-})
+import { onMounted } from 'vue'
 const {introduceInfos, getData} = useIntroduceInfos()
 onMounted(() => {
   getData()
@@ -21,9 +15,7 @@ onMounted(() => {
       <img :src="introduceInfos.image">
     </div>
     <div class="txt">
-      <p class="autoWrap">
-      {{introduceInfos.introduction}}
-      </p>
+      <div class="autoWrap ptxt" v-html="introduceInfos.introduction"></div>
     </div>
    </div>
 </template>
@@ -76,7 +68,7 @@ onMounted(() => {
     overflow-y: scroll;
     margin: 16px 0;
   }
-  p{
+  .ptxt{
     font-family: Alibaba PuHuiTi 2.0, Alibaba PuHuiTi 20;
     font-weight: normal;
     font-size: 14px;

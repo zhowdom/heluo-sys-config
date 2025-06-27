@@ -1,15 +1,9 @@
 <script setup lang="ts">
 import { createNamespace } from '@/utils'
-import { ICardCommonInfos } from '@/types'
 const { bem } = createNamespace('heluo-sys-card-item-b')
-import { PropType, onMounted } from 'vue'
+import { onMounted } from 'vue'
 import percentcircle from '../circle/index.vue'
 import {useDeviceTotalInfos} from '@/hooks'
-defineProps({
-  cardInfos: {
-    type: Object as PropType<ICardCommonInfos>,
-  }
-})
 const {deviceTotalInfos, getData} = useDeviceTotalInfos()
 onMounted(() => {
   getData()

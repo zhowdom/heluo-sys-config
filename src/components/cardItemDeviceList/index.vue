@@ -1,14 +1,8 @@
 <script setup lang="ts">
 import { createNamespace } from '@/utils'
-import { ICardCommonInfos } from '@/types'
 const { bem } = createNamespace('heluo-sys-card-device-list')
-import { PropType, onMounted } from 'vue'
+import { onMounted } from 'vue'
 import {useDeviceListInfos} from '@/hooks'
-defineProps({
-  cardInfos: {
-    type: Object as PropType<ICardCommonInfos>,
-  }
-})
 const { allDeviceList, allSpaceList, queryResultList, getAllDeviceListData, getAllSpaceListData, queryResultListData, handleTypeClick, handleSpaceClick, curTypeId, curSpaceId, searchKey } = useDeviceListInfos()
 onMounted(() => {
   getAllDeviceListData()
@@ -21,7 +15,7 @@ onMounted(() => {
     <div class="com-block">
       <div :class="{'cur': curTypeId === item.typeId}" @click="handleTypeClick(item.typeId)" v-for="(item, index) in allDeviceList" :key="index" class="each flex-center txtellipsis">{{item.typeName}}</div>
     </div>
-    <div class="com-block bdrt">
+    <div class="com-block bdrt" style="margin-top:10px">
       <div :class="{'cur': curSpaceId === item.spaceId}" @click="handleSpaceClick(item.spaceId)" v-for="item in allSpaceList" :key="item.spaceId" class="each flex-center txtellipsis">{{item.spaceName}}</div>
     </div>
 
@@ -42,7 +36,7 @@ onMounted(() => {
         </div>
       </div>
       <div class="main">
-        <div v-for="(item, index) in queryResultList" :key="item.spaceId" class="comsetw flex-between bg-main">
+        <div v-for="(item, index) in queryResultList" :key="item.spaceId + Math.random()" class="comsetw flex-between bg-main">
           <div class="cel1 cel txtellipsis">{{index+1}}</div>
           <div class="cel2 cel txtellipsis">{{item.deviceName}}</div>
           <div class="cel3 cel txtellipsis">{{item.systemName}}</div>
