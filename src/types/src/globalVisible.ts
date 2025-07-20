@@ -13,7 +13,9 @@ export enum VisiblePoolEnu {
   // 首页左右两side面板显隐
   HOME_TWO_PANNEL = 'home_two_pannel',
   // 记录底部菜单按钮的选中激活状态区分
-  FLOAT_MENU_STATE= 'float_menu_state'
+  FLOAT_MENU_STATE= 'float_menu_state',
+  // 漫游页面左右两side面板显隐
+  MANYOU_TWO_PANNEL = 'manyou_two_pannel'
 }
 export interface IVisibleItem {
   state: boolean|number

@@ -77,6 +77,13 @@ export function useUeConnect() {
           })
           window.ue.web.js_call_ue(UeReportParams[UeReportType.MAN_YOU], payload?.opt)
           break;
+        case UeReportType.LOCATION:
+          console.log({
+            param1: UeReportParams[UeReportType.LOCATION],
+            param2: payload?.opt
+          })
+          window.ue.web.js_call_ue(UeReportParams[UeReportType.LOCATION], payload?.opt)
+          break;
         default:
           console.log('No matched to event type')
       }

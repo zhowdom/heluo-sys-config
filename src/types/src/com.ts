@@ -189,6 +189,10 @@ export enum UeReportType {
    * 楼层
    */
   FLOOR = 'floor',
+  /**
+   * 设备定位
+   */
+  LOCATION = 'location',
 }
 // UE与店端通讯传递的对应类别参数名
 export enum UeReportParams {
@@ -224,6 +228,10 @@ export enum UeReportParams {
    * 楼层
    */
   floor = '楼层抽屉',
+  /**
+   * 设备定位
+   */
+  location = '定位',
 }
 
 export interface IProfession {

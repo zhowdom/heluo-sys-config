@@ -3,7 +3,7 @@ import { createNamespace } from '@/utils'
 const { bem } = createNamespace('heluo-sys-card-device-list')
 import { onMounted } from 'vue'
 import {useDeviceListInfos} from '@/hooks'
-const { allDeviceList, allSpaceList, queryResultList, getAllDeviceListData, getAllSpaceListData, queryResultListData, handleTypeClick, handleSpaceClick, curTypeId, curSpaceId, searchKey } = useDeviceListInfos()
+const { allDeviceList, allSpaceList, queryResultList, getAllDeviceListData, getAllSpaceListData, queryResultListData, handleTypeClick, handleSpaceClick, curTypeId, curSpaceId, searchKey, handleLocation } = useDeviceListInfos()
 onMounted(() => {
   getAllDeviceListData()
 
@@ -42,7 +42,7 @@ onMounted(() => {
           <div class="cel3 cel txtellipsis">{{item.systemName}}</div>
           <div class="cel4 cel txtellipsis">{{item.spaceName}}</div>
           <div class="cel5 cel" :class="[item.statusName === '离线' ? 'off' : 'on']">{{item.statusName}}</div>
-          <div class="cel6 cel">
+          <div class="cel6 cel" @click="handleLocation(item.deviceCode)">
             <img src="@/assets/usedimg/dw.png" />
           </div>
         </div>

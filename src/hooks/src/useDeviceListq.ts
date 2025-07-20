@@ -1,5 +1,7 @@
 import { getDeviceTypeListApi, getSpaceListApi, getDeviceListApi } from '@/apis'
 import {ref} from 'vue'
+import {useUeConnect} from '@/hooks'
+import {UeReportType} from '@/types'
 
 export function useDeviceListInfos() {
   const comParams = {pageType: "ELE"}
@@ -10,6 +12,7 @@ export function useDeviceListInfos() {
   const curTypeId = ref<number|string>('')
   const curSpaceId = ref<number|string>('')
   const searchKey = ref('')
+  const {ueConnect} = useUeConnect()
 
   const getAllDeviceListData = async () => {
     try {
@@ -65,6 +68,10 @@ export function useDeviceListInfos() {
     curSpaceId.value = id
     queryResultListData(curTypeId.value, curSpaceId.value)
   }
+
+  const handleLocation = (deviceCode:string) => {
+    ueConnect(UeReportType.LOCATION, { opt: deviceCode })
+  }
   
   return {
     allDeviceList,
@@ -75,6 +82,7 @@ export function useDeviceListInfos() {
     queryResultListData,
     handleTypeClick,
     handleSpaceClick,
+    handleLocation,
     curSpaceId,
     curTypeId,
     searchKey

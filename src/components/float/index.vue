@@ -11,6 +11,7 @@ const route = useRoute()
 const {ueConnect} = useUeConnect()
 const globalVisibleControllerStore = useGlobalVisibleControllerStore()
 const handleToHome = () => {
+  globalVisibleControllerStore.globalControlVisible({name: 'manyou_two_pannel', state: true})
   globalVisibleControllerStore.globalControlVisible({name: 'float_menu_state', state: 1})
   router.push({
     name: 'home',
@@ -25,6 +26,7 @@ watchEffect(() => {
 })
 const handleManYou = () => {
   globalVisibleControllerStore.globalControlVisible({name: 'float_menu_state', state: 3})
+  globalVisibleControllerStore.globalControlVisible({name: 'manyou_two_pannel', state: false})
   ueConnect(UeReportType.MAN_YOU)
 }
 const handleQuWei = () => {
