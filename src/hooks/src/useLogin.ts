@@ -1,10 +1,11 @@
 import { useRouter } from 'vue-router'
 import { useUserStore } from '@/stores'
+import md5 from 'js-md5';
 
 export function useLogin() {
   const params = {
     // @ts-ignore
-    password: GLOBAL.password,
+    password: md5(GLOBAL.password),
     // @ts-ignore
     userName: GLOBAL.userName
   }
