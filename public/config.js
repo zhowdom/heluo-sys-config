@@ -1,7 +1,7 @@
 var GLOBAL = {
   /* 项目自定义配置在这里 */
-  userName: 'AppId-25009-001',
-  password: 'Abc123@#',
+  userName: 'hladmin',
+  password: 'hl#2023@cn',
   Host: 'https://api.helotus.cn/',
   sysName: '科研建筑智慧运营平台',
   professionList: [

@@ -254,3 +254,14 @@ export enum EnuMenusIds {
   MAN_YOU = 3,
   LAYER = 4 // 在layer页面点击了楼层，漫游需要取消选中状态
 }
+/*通用的底座数据类型*/
+export interface IBeautyFoundation {
+  // 单一标题时候的标题
+  title?: string;
+  // 数值+单位时候，数值
+  value?: number;
+  // 数值+单位时候，单位
+  unit?: string;
+  // 副描述
+  subDesc: string;
+}
