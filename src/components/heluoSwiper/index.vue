@@ -1,25 +1,19 @@
 <template>
-    <div class="container mx-auto py-12">
-    <h2 class="text-2xl font-bold mb-6 text-center">Swiper.js 轮播演示</h2>
+    <div class="container">
     
     <!-- Swiper 容器 -->
     <div class="swiper-container">
       <swiper 
         :modules="modules" 
-        :pagination="{ clickable: true }"
         :slides-per-view="slidesPerView"
+        :slide-to-clicked-slide="true"
+        space-between="32"
         :navigation="true"
         class="mySwiper"
       >
         <!-- 轮播项 -->
-        <swiper-slide v-for="(item, index) in slides" :key="index">
-          <div class="slide-content bg-white rounded-lg shadow-md p-6 text-center">
-            <div class="text-4xl mb-4">
-              <img :src="item.icon" />
-            </div>
-            <h3 class="text-xl font-bold mb-2">{{ item.title }}</h3>
-            <p class="text-gray-600">{{ item.description }}</p>
-          </div>
+        <swiper-slide v-for="(item, index) in slides" :key="index" class="swiper-item">
+          <div @click="handleClick(item.title, index)" :class="['each-item-text', index === curActivedIdx ? 'cur' : '']">{{item.title}}</div>
         </swiper-slide>
       </swiper>
     </div>
@@ -37,37 +31,55 @@
   import 'swiper/css/navigation';
 
   // 控制可见项目数量的变量
-const slidesPerView = ref(3);
+const slidesPerView = ref(6);
+// 当前点击激活的项目高亮标记下标
+const curActivedIdx = ref(0)
 
   // 轮播数据
 const slides = ref([
   {
-    title: '特性一',
-    description: 'Swiper.js 是一个强大的现代滑动库',
-    icon: 'https://fastly.jsdelivr.net/npm/@vant/assets/apple-1.jpeg'
+    title: '全部',
   },
   {
-    title: '特性二',
-    description: '完美支持 Vue3 和 Composition API',
-    icon: 'https://fastly.jsdelivr.net/npm/@vant/assets/apple-2.jpeg'
+    title: '1楼',
   },
   {
-    title: '特性三',
-    description: '提供丰富的插件和自定义选项',
-    icon: 'https://fastly.jsdelivr.net/npm/@vant/assets/apple-3.jpeg'
+    title: '2楼',
   },
   {
-    title: '特性四',
-    description: '响应式设计，适配各种设备',
-    icon: '	https://fastly.jsdelivr.net/npm/@vant/assets/apple-4.jpeg'
+    title: '3楼',
+  },
+  {
+    title: '4楼',
+  },
+  {
+    title: '5楼',
+  },
+  {
+    title: '6楼',
+  },
+  {
+    title: '7楼',
+  },
+  {
+    title: '8楼',
+  },
+  {
+    title: '9楼',
   }
 ]);
 
 // 注册需要的 Swiper 模块
 const modules = [Pagination, Navigation];
+
+//点击事件
+const handleClick = (i, idx) => {
+  console.log(i, '点击项目')
+  curActivedIdx.value = idx
+}
 </script>
   
-<style>
+<style scoped lang="less">
   /* 自定义 Swiper 容器样式 */
 .swiper-container {
   max-width: 800px;
@@ -76,21 +88,64 @@ const modules = [Pagination, Navigation];
 
 /* 自定义轮播项样式 */
 .slide-content {
-  min-height: 250px;
+  min-height: 100px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-/* 自定义分页指示器颜色 */
-.swiper-pagination-bullet-active {
-  background-color: #4F46E5 !important;
-}
 
 /* 自定义导航按钮颜色 */
 .swiper-button-prev,
 .swiper-button-next {
   color: #4F46E5 !important;
+}
+:deep(.swiper-item){
+  height: 26px!important;/*swiper子项目整体高度，父级继承*/
+  width: 44px!important;/*swiper子项目整体宽度，父级继承*/
+}
+/* 容器内边距为10px，实现箭头与内容的间距 */
+:deep(.swiper) {
+  padding-left: 32px !important;
+  padding-right: 32px !important;
+}
+/* 每一项文字 */
+.each-item-text{
+  font-family: Alibaba PuHuiTi 2.0, Alibaba PuHuiTi 20;
+  font-weight: normal;
+  font-size: 14px;
+  color: rgba(255,255,255,0.68);
+  text-align: center;
+  line-height: 22px;
+  border-radius: 58px!important;
+  background: rgba(40, 56, 59);
+  cursor: pointer;
+  box-sizing: border-box;
+  &.cur{
+    border: 2px solid #1AE2BE;
+  }
+}
+:deep(.swiper-button-next){
+  height: 26px;
+  width: 16px;
+  position: absolute;
+  top: 22px;
+  right: 0;
+  background: url('@assets/usedimg/swiper_right@2x.png') no-repeat center / cover;
+  &:after{
+    display: none;
+  }
+}
+:deep(.swiper-button-prev){
+  height: 26px;
+  width: 16px;
+  background: url('@assets/usedimg/swiper_left@2x.png') no-repeat center / cover;
+  &:after{
+    display: none;
+  }
+  position: absolute;
+  top: 22px;
+  left: 0;
 }
 </style>
