@@ -29,41 +29,41 @@
   import 'swiper/css/navigation';
 
   // 控制可见项目数量的变量
-const slidesPerView = ref(6);
+const slidesPerView = ref(2);
 // 当前点击激活的项目高亮标记下标
 const curActivedIdx = ref(0)
 
   // 轮播数据
 const slides = ref([
   {
-    title: '全部',
+    title: '101室',
+    desc: '送风开启',
+    num: 2
   },
   {
-    title: '1楼',
+    title: '102室',
+    desc: '送风开启',
+    num: 2
   },
   {
-    title: '2楼',
+    title: '103室',
+    desc: '送风开启',
+    num: 2
   },
   {
-    title: '3楼',
+    title: '104室',
+    desc: '送风开启',
+    num: 2
   },
   {
-    title: '4楼',
+    title: '105室',
+    desc: '送风开启',
+    num: 2
   },
   {
-    title: '5楼',
-  },
-  {
-    title: '6楼',
-  },
-  {
-    title: '7楼',
-  },
-  {
-    title: '8楼',
-  },
-  {
-    title: '9楼',
+    title: '106室',
+    desc: '送风开启',
+    num: 2
   }
 ]);
 
@@ -100,8 +100,8 @@ const handleClick = (i, idx) => {
   color: #4F46E5 !important;
 }
 :deep(.swiper-item){
-  height: 26px!important;/*swiper子项目整体高度，父级继承*/
-  width: 44px!important;/*swiper子项目整体宽度，父级继承*/
+  height: 72px!important;/*swiper子项目整体高度，父级继承*/
+  width: 154px!important;/*swiper子项目整体宽度，父级继承*/
 }
 /* 容器内边距为10px，实现箭头与内容的间距 */
 :deep(.swiper) {
@@ -115,20 +115,22 @@ const handleClick = (i, idx) => {
   font-size: 14px;
   color: rgba(255,255,255,0.68);
   text-align: center;
-  line-height: 22px;
-  border-radius: 58px!important;
+  border-radius: 8px!important;
   background: rgba(40, 56, 59);
   cursor: pointer;
   box-sizing: border-box;
+  height: 72px;
+  line-height: 72px;
+  background: url('@assets/usedimg/heluoSwiperLinkroom@2x.png') no-repeat center / cover;
   &.cur{
-    border: 2px solid #1AE2BE;
+    background: url('@assets/usedimg/heluoSwiperLinkroom_cur@2x.png') no-repeat center / cover;
   }
 }
 :deep(.swiper-button-next){
   height: 26px;
   width: 16px;
   position: absolute;
-  top: 22px;
+  top: 45px;
   right: 0;
   background: url('@assets/usedimg/swiper_right@2x.png') no-repeat center / cover;
   &:after{
@@ -143,7 +145,7 @@ const handleClick = (i, idx) => {
     display: none;
   }
   position: absolute;
-  top: 22px;
+  top: 45px;
   left: 0;
 }
 </style>

@@ -77,9 +77,6 @@ ul,li,ol{
   height:100vh!important;
 }
 
-.card-bg-com{
-  background: rgba(79, 92, 97, .5);
-}
 .card-title-bg-com{
   background: linear-gradient(90deg, rgba(0, 184, 191, 0.3) 0%, rgba(41, 227, 191, 0) 100%);
 }
@@ -136,4 +133,8 @@ input:focus {
   outline: 0;
   box-shadow: none;
   border-color: inherit; /* 可选，保持边框颜色不变 */
+}
+/*系统主背景色【卡片、弹窗等背景色】*/
+.card-bg-com{
+  background: rgba(79, 92, 97, .5);
 }

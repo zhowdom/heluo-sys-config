@@ -40,7 +40,7 @@ const computedH = computed(() => {
 </script>
 
 <template>
-   <div :class="bem()" :style="{height: computedH}">
+   <div :class="[bem(), 'card-bg-com']" :style="{height: computedH}">
     <cardtitle :name="CardTypeNames[name]" />
     <div :class="[bem('device-card-inner'), 'flex-between']" :data-set="name">
       <!--项目介绍卡片-->

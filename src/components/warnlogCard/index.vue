@@ -1,0 +1,68 @@
+<template>
+    <!--报警记录卡片组件-->
+    <div :class="bem()">
+      <div class="room">
+        <p class="name">实验室10<span class="desc">温度气压异常</span></p>
+      </div>
+      <div class="date">
+        <span class="year">2025年07月28日</span>
+        <span class="hours">15:24:34</span>
+      </div>
+      <span class="status">离线</span>
+    </div>
+</template>
+  
+<script setup lang='ts'>
+import { createNamespace } from '@/utils'
+const { bem } = createNamespace('heluo-sys-warnlogcard')
+
+</script>
+  
+<style scoped lang="less">
+  .heluo-sys-warnlogcard{
+    width: 100%;
+    height: 72px;
+    background: linear-gradient( 180deg, rgba(101,124,137,0.05) 0%, rgba(66,100,105,0.3) 100%);
+    border-radius: 2px;
+    color: #fff;
+    font-size: 14px;
+    padding: 11px 16px;
+    box-sizing: border-box;
+    position: relative;
+    border-radius: 5px;
+    &::before{
+      content: '';
+      width: 7px;
+      height: 7px;
+      border-radius: 100%;
+      background: #FF6B57FF;
+      display: inline-block;
+      position: absolute;
+      top:18px;
+      left: 20px;
+    }
+    .desc{
+      background: rgba(255,107,87,0.2);
+      padding: 3px 5px;
+      font-size: 12px;
+      margin-left: 10px;
+    }
+    .name{
+      text-indent: 20px;
+    }
+    .status{
+      position: absolute;
+      top:10px;
+      right: 10px;
+      color: #FF6B57FF;
+      font-size: 20px;
+      font-weight: 400;
+    }
+    .date{
+      padding-top: 10px;
+      .hours{
+        padding-left: 10px;
+      }
+    }
+  }
+</style>

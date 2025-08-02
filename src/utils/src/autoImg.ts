@@ -1,4 +1,8 @@
 export function autoImg(cardname:string, subpath:string) {
+  console.log({
+    cardname,
+    subpath
+  })
   let imgsMap: Record<string, { default: string }> = {}
   switch(subpath) {
     case 'seat2':
@@ -20,5 +24,13 @@ export function autoImg(cardname:string, subpath:string) {
       console.log('not matched')
   }
   const _path = `/src/assets/usedimg/${subpath}/`
-  return subpath === 'device' ? imgsMap[_path + cardname + '.svg']['default'] : imgsMap[_path + cardname + '.png']['default']
+  if (subpath === 'device') {
+    if (!imgsMap[_path + cardname + '.svg']?.['default']) {
+      // 如果没有匹配
+      cardname = 'notMatched'
+    }
+    return imgsMap[_path + cardname + '.svg']['default']
+  } else {
+    return imgsMap[_path + cardname + '.png']['default']
+  }
 }

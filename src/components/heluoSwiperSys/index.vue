@@ -29,41 +29,29 @@
   import 'swiper/css/navigation';
 
   // 控制可见项目数量的变量
-const slidesPerView = ref(6);
+const slidesPerView = ref(3);
 // 当前点击激活的项目高亮标记下标
 const curActivedIdx = ref(0)
 
   // 轮播数据
 const slides = ref([
   {
-    title: '全部',
+    title: '新风系统',
   },
   {
-    title: '1楼',
+    title: '排风系统',
   },
   {
-    title: '2楼',
+    title: '智能空调',
   },
   {
-    title: '3楼',
+    title: '实验室门禁',
   },
   {
-    title: '4楼',
+    title: '监控系统',
   },
   {
-    title: '5楼',
-  },
-  {
-    title: '6楼',
-  },
-  {
-    title: '7楼',
-  },
-  {
-    title: '8楼',
-  },
-  {
-    title: '9楼',
+    title: '消毒系统',
   }
 ]);
 
@@ -100,8 +88,8 @@ const handleClick = (i, idx) => {
   color: #4F46E5 !important;
 }
 :deep(.swiper-item){
-  height: 26px!important;/*swiper子项目整体高度，父级继承*/
-  width: 44px!important;/*swiper子项目整体宽度，父级继承*/
+  height: 68px!important;/*swiper子项目整体高度，父级继承*/
+  width: 92px!important;/*swiper子项目整体宽度，父级继承*/
 }
 /* 容器内边距为10px，实现箭头与内容的间距 */
 :deep(.swiper) {
@@ -115,11 +103,12 @@ const handleClick = (i, idx) => {
   font-size: 14px;
   color: rgba(255,255,255,0.68);
   text-align: center;
-  line-height: 22px;
-  border-radius: 58px!important;
+  border-radius: 8px!important;
   background: rgba(40, 56, 59);
   cursor: pointer;
   box-sizing: border-box;
+  height: 68px;
+  line-height: 68px;
   &.cur{
     border: 2px solid #1AE2BE;
   }
@@ -128,7 +117,7 @@ const handleClick = (i, idx) => {
   height: 26px;
   width: 16px;
   position: absolute;
-  top: 22px;
+  top: 45px;
   right: 0;
   background: url('@assets/usedimg/swiper_right@2x.png') no-repeat center / cover;
   &:after{
@@ -143,7 +132,7 @@ const handleClick = (i, idx) => {
     display: none;
   }
   position: absolute;
-  top: 22px;
+  top: 45px;
   left: 0;
 }
 </style>

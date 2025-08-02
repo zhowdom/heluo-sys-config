@@ -2,11 +2,11 @@
 // import logoUrl from '@/assets/usedimg/mask@2x.png'
 import card from '@/components/card/index.vue'
 import floor from '@/components/floor/index.vue'
-import homeTop3Square from '@/components/homeTop3Square/index.vue'
 import heluoSwiper from '@/components/heluoSwiper/index.vue'
-import smallDeviceinfo from '@/components/smallDeviceinfo/index.vue'
 import cardtitle from '@/components/cardtitle/index.vue'
-
+import oppositeAngleA from '@/components/oppositeAngleA/index.vue'
+import heluoSwiperPressure from '@/components/heluoSwiperPressure/index.vue'
+import warnlogCard from '@/components/warnlogCard/index.vue'
 
 
 import { createNamespace } from '@/utils'
@@ -23,23 +23,44 @@ function SwitchFoldOnlyTwoSide (state:boolean) {
 
 <template>
   <div :class="[bem(), 'flex-between']">
-    <!-- <img :src="logoUrl" alt="logo"> -->
-    <!-- <img src="@/assets/usedimg/mask@2x.png" alt="logo"> -->
     <div :class="[bem('l'), 'animate__animated', globalVisiblePool.home_two_pannel.state ? ' animate__backInLeft' : 'animate__backOutLeft']">
-      <card name="introduction" position="left"></card>
-      <card name="devicetotal" position="left"></card>
+      <!--环境实时监测-->
+      <div>
+        <cardtitle name="环境实时监测" />
+        <oppositeAngleA />
+      </div>
+
+      <!--温湿度趋势-->
+      <div>
+        <cardtitle name="温湿度趋势" />
+        <heluoSwiper />
+        <div style="height: 260px;width: 100%;background: #2e3e42;">曲线统计图</div>
+      </div>
+
+      <!--压差实时监测-->
+      <div>
+        <cardtitle name="压差实时监测" />
+        <div class="main-presure">
+          <heluoSwiperPressure />
+        </div>
+        
+      </div>
+
     </div>
     <floor :class="[bem('mrgl-auto'), 'animate__animated', globalVisiblePool.home_two_pannel.state ? 'animate__backInRight' : 'animate__backOutRight']" />
     <div :class="[bem('r'), 'animate__animated', globalVisiblePool.home_two_pannel.state ? 'animate__backInRight' : 'animate__backOutRight', 'card-bg-com']">
-      <!-- <card name="devicelist" position="right"></card> -->
-      <homeTop3Square />
-      <div style="background: #313e41;width:100%;height: 160px;">柱状图表</div>
+      <cardtitle name="余风量趋势" />
       <heluoSwiper />
-      <!--设备信息小面板-->
-      <smallDeviceinfo />
-      <div style="background: #313e41;width:100%;height: 160px;">
-        <cardtitle name="设备使用率排行" />
-        横向条图表
+      <div style="background: #313e41;width:100%;height: 160px;">曲线图表</div>
+
+      <cardtitle name="报警记录" />
+      <div class="warnlog-box">
+        <warnlogCard />
+        <warnlogCard />
+        <warnlogCard />
+        <warnlogCard />
+        <warnlogCard />
+        <warnlogCard />
       </div>
     </div>
   </div>

@@ -252,7 +252,10 @@ export enum EnuMenusIds {
   HOME = 1,
   QU_WEI = 2,
   MAN_YOU = 3,
-  LAYER = 4 // 在layer页面点击了楼层，漫游需要取消选中状态
+  ENVIRONMENT = 5,
+  SECURITY = 6,
+  ELECTRICITY = 7,
+  LAYER = 4 // 在二级楼层layer页面点击了楼层，漫游需要取消选中状态
 }
 /*通用的底座数据类型*/
 export interface IBeautyFoundation {
