@@ -7,6 +7,8 @@ import cardtitle from '@/components/cardtitle/index.vue'
 import oppositeAngleA from '@/components/oppositeAngleA/index.vue'
 import heluoSwiperPressure from '@/components/heluoSwiperPressure/index.vue'
 import warnlogCard from '@/components/warnlogCard/index.vue'
+import swiperEcharts from '@/components/swiperEcharts/index.vue'
+import curlyLineChartsForWind from '@/components/curlyLineChartsForWind/index.vue'
 
 
 import { createNamespace } from '@/utils'
@@ -34,7 +36,8 @@ function SwitchFoldOnlyTwoSide (state:boolean) {
       <div>
         <cardtitle name="温湿度趋势" />
         <heluoSwiper />
-        <div style="height: 260px;width: 100%;background: #2e3e42;">曲线统计图</div>
+        <heluoSwiper />
+        <swiperEcharts />
       </div>
 
       <!--压差实时监测-->
@@ -51,7 +54,7 @@ function SwitchFoldOnlyTwoSide (state:boolean) {
     <div :class="[bem('r'), 'animate__animated', globalVisiblePool.home_two_pannel.state ? 'animate__backInRight' : 'animate__backOutRight', 'card-bg-com']">
       <cardtitle name="余风量趋势" />
       <heluoSwiper />
-      <div style="background: #313e41;width:100%;height: 160px;">曲线图表</div>
+      <curlyLineChartsForWind />
 
       <cardtitle name="报警记录" />
       <div class="warnlog-box">

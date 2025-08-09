@@ -6,7 +6,7 @@
         :modules="modules" 
         :slides-per-view="slidesPerView"
         :slide-to-clicked-slide="true"
-        space-between="32"
+        space-between="0"
         :navigation="true"
         class="mySwiper"
       >
@@ -73,9 +73,8 @@ const modules = [Pagination, Navigation];
   /* 自定义 Swiper 容器样式 */
 .swiper-container {
   margin: 0 auto;
-  width: 400px;
+  width: 400px!important;
   height: 240px;
-  background: pink;
 }
 
 /* 自定义轮播项样式 */
@@ -89,12 +88,12 @@ const modules = [Pagination, Navigation];
 
 :deep(.swiper-item){
   height: 202px!important;/*swiper子项目整体高度，父级继承*/
-  width: 368px!important;/*swiper子项目整体宽度，父级继承*/
+  width: 100%!important;/*swiper子项目整体宽度，父级继承*/
   .each{
     display: flex;
     flex-wrap: wrap; /* 允许换行 */
-    gap: 10px; /* 子元素之间的间距 */
-    padding: 10px;
+    gap: 0; /* 子元素之间的间距 */
+    padding: 0;
     .mini{
       flex: 1; /* 让子元素等分剩余空间 */
       min-width: calc(33.333% - 10px); /* 确保每行最多3个，减去gap的影响 */
@@ -104,8 +103,8 @@ const modules = [Pagination, Navigation];
 }
 /* 容器内边距为10px，实现箭头与内容的间距 */
 :deep(.swiper) {
-  padding-left: 32px !important;
-  padding-right: 32px !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }
 
 :deep(.swiper-button-next){

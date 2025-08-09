@@ -27,6 +27,12 @@ const { bem } = createNamespace('heluo-sys-smallDeviceinfo')
   
 <style scoped lang="less">
   .heluo-sys-smallDeviceinfo{
+    width: calc(100% - 32px);
+    background: linear-gradient( 180deg, rgba(101,124,137,0.05) 0%, rgba(66,100,105,0.3) 100%);
+    margin: 0 auto;
+    .top {
+      padding: 10px 10px 0 10px;
+    }
     .l{
       font-size: 14px;
       font-weight: bold;

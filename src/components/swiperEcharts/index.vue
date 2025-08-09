@@ -6,13 +6,13 @@
         :modules="modules" 
         :slides-per-view="slidesPerView"
         :slide-to-clicked-slide="true"
-        space-between="32"
+        space-between="0"
         :navigation="true"
         class="mySwiper"
       >
         <!-- 轮播项 -->
         <swiper-slide v-for="(item, index) in slides" :key="index" class="swiper-item">
-          <div @click="handleClick(item.title, index)" :class="['each-item-text', index === curActivedIdx ? 'cur' : '']">{{item.title}}</div>
+          <curlyLineCharts />
         </swiper-slide>
       </swiper>
     </div>
@@ -22,6 +22,7 @@
   import { ref, onMounted } from 'vue';
   import { Swiper, SwiperSlide } from 'swiper/vue';
   import { Pagination, Navigation } from 'swiper/modules';
+  import curlyLineCharts from '../curlyLineCharts/index.vue'
   
   // 引入 Swiper 样式
   import 'swiper/css';
@@ -29,52 +30,47 @@
   import 'swiper/css/navigation';
 
   // 控制可见项目数量的变量
-const slidesPerView = ref(2);
+const slidesPerView = ref(1);
 // 当前点击激活的项目高亮标记下标
 const curActivedIdx = ref(0)
 
   // 轮播数据
 const slides = ref([
   {
-    title: '101室',
-    desc: '送风开启',
-    num: 2
+    title: '全部',
   },
   {
-    title: '102室',
-    desc: '送风开启',
-    num: 2
+    title: '1楼',
   },
   {
-    title: '103室',
-    desc: '送风开启',
-    num: 2
+    title: '2楼',
   },
   {
-    title: '104室',
-    desc: '送风开启',
-    num: 2
+    title: '3楼',
   },
   {
-    title: '105室',
-    desc: '送风开启',
-    num: 2
+    title: '4楼',
   },
   {
-    title: '106室',
-    desc: '送风开启',
-    num: 2
+    title: '5楼',
+  },
+  {
+    title: '6楼',
+  },
+  {
+    title: '7楼',
+  },
+  {
+    title: '8楼',
+  },
+  {
+    title: '9楼',
   }
 ]);
 
 // 注册需要的 Swiper 模块
 const modules = [Pagination, Navigation];
 
-//点击事件
-const handleClick = (i, idx) => {
-  console.log(i, '点击项目')
-  curActivedIdx.value = idx
-}
 </script>
   
 <style scoped lang="less">
@@ -94,37 +90,20 @@ const handleClick = (i, idx) => {
 }
 
 :deep(.swiper-item){
-  height: 72px!important;/*swiper子项目整体高度，父级继承*/
-  width: 154px!important;/*swiper子项目整体宽度，父级继承*/
+  height: 100%!important;/*swiper子项目整体高度，父级继承*/
+  width: 100%!important;/*swiper子项目整体宽度，父级继承*/
 }
 /* 容器内边距为10px，实现箭头与内容的间距 */
 :deep(.swiper) {
-  padding-left: 32px !important;
-  padding-right: 32px !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }
-/* 每一项文字 */
-.each-item-text{
-  font-family: Alibaba PuHuiTi 2.0, Alibaba PuHuiTi 20;
-  font-weight: normal;
-  font-size: 14px;
-  color: rgba(255,255,255,0.68);
-  text-align: center;
-  border-radius: 8px!important;
-  background: rgba(40, 56, 59);
-  cursor: pointer;
-  box-sizing: border-box;
-  height: 72px;
-  line-height: 72px;
-  background: url('@assets/usedimg/heluoSwiperLinkroom@2x.png') no-repeat center / cover;
-  &.cur{
-    background: url('@assets/usedimg/heluoSwiperLinkroom_cur@2x.png') no-repeat center / cover;
-  }
-}
+
 :deep(.swiper-button-next){
   height: 26px;
   width: 16px;
   position: absolute;
-  top: 45px;
+  top: 55%;
   right: 0;
   background: url('@assets/usedimg/swiper_right@2x.png') no-repeat center / cover;
   &:after{
@@ -139,7 +118,7 @@ const handleClick = (i, idx) => {
     display: none;
   }
   position: absolute;
-  top: 45px;
+  top: 55%;
   left: 0;
 }
 </style>

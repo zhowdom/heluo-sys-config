@@ -6,7 +6,7 @@
         :modules="modules" 
         :slides-per-view="slidesPerView"
         :slide-to-clicked-slide="true"
-        space-between="32"
+        space-between="12"
         :navigation="true"
         class="mySwiper"
       >
@@ -93,12 +93,6 @@ const handleClick = (i, idx) => {
   align-items: center;
 }
 
-
-/* 自定义导航按钮颜色 */
-.swiper-button-prev,
-.swiper-button-next {
-  color: #4F46E5 !important;
-}
 :deep(.swiper-item){
   height: 26px!important;/*swiper子项目整体高度，父级继承*/
   width: 44px!important;/*swiper子项目整体宽度，父级继承*/
@@ -117,18 +111,18 @@ const handleClick = (i, idx) => {
   text-align: center;
   line-height: 22px;
   border-radius: 58px!important;
-  background: rgba(40, 56, 59);
+  background: #2a3a3d;
   cursor: pointer;
-  box-sizing: border-box;
+  border: 1px solid #2a3a3d;
   &.cur{
-    border: 2px solid #1AE2BE;
+    border: 1px solid #1AE2BE;
   }
 }
 :deep(.swiper-button-next){
   height: 26px;
   width: 16px;
   position: absolute;
-  top: 22px;
+  top: 21px;
   right: 0;
   background: url('@assets/usedimg/swiper_right@2x.png') no-repeat center / cover;
   &:after{
@@ -143,7 +137,7 @@ const handleClick = (i, idx) => {
     display: none;
   }
   position: absolute;
-  top: 22px;
+  top: 21px;
   left: 0;
 }
 </style>

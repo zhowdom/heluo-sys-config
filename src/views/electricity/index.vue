@@ -46,11 +46,19 @@ function SwitchFoldOnlyTwoSide (state:boolean) {
       <!--设备列表-->
       <div>
         <cardtitle name="设备列表" />
-        <comSubTitle />
-        <heluoSwiper />
-        <comSubTitle />
-        <heluoSwiperDevice />
+        <div style="height:10vh;padding-top: 12px;">
+          <comSubTitle style="margin-bottom: 20px;" />
+          <heluoSwiper />
+        </div>
+        <!-- <comSubTitle /> -->
+        <!-- <heluoSwiperDevice /> -->
         <newDeviceItem />
+        <newDeviceItem />
+        <newDeviceItem />
+        <newDeviceItem />
+        <newDeviceItem />
+        <newDeviceItem />
+        
 
       </div>
 

@@ -37,15 +37,24 @@ function SwitchFoldOnlyTwoSide (state:boolean) {
         <cardtitle name="系统状态" />
         <sysStatus />
       </div>
-      <comSubTitle />
-      <heluoSwiperDevice />
+      <!-- <comSubTitle /> -->
+      <!-- <heluoSwiperDevice /> -->
 
       <!--设备列表-->
       <div>
         <cardtitle name="设备列表" />
-        <comSubTitle />
-        <heluoSwiper />
+
+        <div style="height:10vh;padding-top: 12px;">
+          <comSubTitle style="margin-bottom: 20px;" />
+          <heluoSwiper />
+        </div>
         
+        <newDeviceItem />
+        <newDeviceItem />
+        <newDeviceItem />
+        <newDeviceItem />
+        <newDeviceItem />
+        <newDeviceItem />
         <newDeviceItem />
 
       </div>
@@ -73,9 +82,7 @@ function SwitchFoldOnlyTwoSide (state:boolean) {
         <devicePureTxtpanel />
       </div>
       <comSubTitle />
-      <div style="height: 140px;width: 100%;background: #71e0a5;">
-        视频监控
-      </div>
+      <div style="height: 140px;width: 100%;"></div>
       
     </div>
   </div>

@@ -1,7 +1,7 @@
 <template>
     
     <!-- Swiper 容器 -->
-    <div class="swiper-container">
+    <div class="swiper-container flex-center">
       <swiper 
         :modules="modules" 
         :slides-per-view="slidesPerView"
@@ -70,6 +70,7 @@ const handleClick = (i, idx) => {
 .swiper-container {
   margin: 0 auto;
   width: 400px;
+  height: 10vh;
 }
 
 /* 自定义轮播项样式 */
@@ -81,12 +82,6 @@ const handleClick = (i, idx) => {
   align-items: center;
 }
 
-
-/* 自定义导航按钮颜色 */
-.swiper-button-prev,
-.swiper-button-next {
-  color: #4F46E5 !important;
-}
 :deep(.swiper-item){
   height: 68px!important;/*swiper子项目整体高度，父级继承*/
   width: 92px!important;/*swiper子项目整体宽度，父级继承*/

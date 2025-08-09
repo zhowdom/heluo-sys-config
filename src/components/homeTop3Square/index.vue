@@ -17,12 +17,6 @@
           <p class="label">未处理</p>
           <p class="num willdo">2390</p>
         </div>
-
-        <ul>
-          <li>预警总数</li>
-          <li>已处理</li>
-          <li>未处理</li>
-        </ul>
       </div>
       
     </div>
@@ -37,42 +31,17 @@ const { bem } = createNamespace('heluo-sys-hometop3square')
   
 <style scoped lang="less">
   .heluo-sys-hometop3square{
+    /*标题50,组件主体120， 占（170/980）*100 = 17vh*/
+    height: 15vh;
     .main{
-      gap: 10px;
-      padding-bottom: 30px;
+      padding-bottom: 20px;
       position: relative;
-    }
-    
-    ul{
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      li{
-        font-family: Alibaba PuHuiTi, Alibaba PuHuiTi;
-        font-weight: 400;
-        font-size: 14px;
-        color: rgba(255,255,255,0.8);
-        line-height: 14px;
-        float: left;
-        &::before{
-          content: '';
-          display: inline-block;
-          width: 12px;
-          height: 12px;
-          border-radius: 100%;
-        }
-        &:nth-child(1)::before {
-            background: linear-gradient( 180deg, #FFF4E2 0%, #EACFA2 21%, rgba(184,162,126,0.87) 67%, rgba(170,151,119,0.12) 100%);
-        }
-        &:nth-child(2)::before {
-            background: linear-gradient( 180deg, #EAFFE2 0%, #97DAB7 21%, rgba(113,167,140,0.87) 67%, rgba(113,167,140,0.12) 100%);
-        }
-        &:nth-child(3)::before {
-            background: linear-gradient( 180deg, #E2FDFF 0%, #98D9DE 21%, rgba(119,170,173,0.87) 67%, rgba(112,159,163,0.12) 100%);
-        }
+      padding: 0 10px 0 10px;
+      .l,.m,.r{
+        margin-top:10px;
       }
     }
+    
     .l,.m,.r{
       width: 114px;
       height: 73px;

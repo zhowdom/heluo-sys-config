@@ -6,6 +6,8 @@ import homeTop3Square from '@/components/homeTop3Square/index.vue'
 import heluoSwiper from '@/components/heluoSwiper/index.vue'
 import smallDeviceinfo from '@/components/smallDeviceinfo/index.vue'
 import cardtitle from '@/components/cardtitle/index.vue'
+import horizontalCharts from '@/components/horizontalCharts/index.vue'
+import verticalCharts from '@/components/verticalCharts/index.vue'
 
 
 
@@ -23,8 +25,6 @@ function SwitchFoldOnlyTwoSide (state:boolean) {
 
 <template>
   <div :class="[bem(), 'flex-between']">
-    <!-- <img :src="logoUrl" alt="logo"> -->
-    <!-- <img src="@/assets/usedimg/mask@2x.png" alt="logo"> -->
     <div :class="[bem('l'), 'animate__animated', globalVisiblePool.home_two_pannel.state ? ' animate__backInLeft' : 'animate__backOutLeft']">
       <card name="introduction" position="left"></card>
       <card name="devicetotal" position="left"></card>
@@ -33,13 +33,17 @@ function SwitchFoldOnlyTwoSide (state:boolean) {
     <div :class="[bem('r'), 'animate__animated', globalVisiblePool.home_two_pannel.state ? 'animate__backInRight' : 'animate__backOutRight', 'card-bg-com']">
       <!-- <card name="devicelist" position="right"></card> -->
       <homeTop3Square />
-      <div style="background: #313e41;width:100%;height: 160px;">柱状图表</div>
+      <verticalCharts />
       <heluoSwiper />
       <!--设备信息小面板-->
-      <smallDeviceinfo />
-      <div style="background: #313e41;width:100%;height: 160px;">
+      <div class="small-box-deviceinfo-wrap">
+        <smallDeviceinfo />
+        <smallDeviceinfo />
+      </div>
+      
+      <div style="background: #313e41;width:100%;height: 22vh">
         <cardtitle name="设备使用率排行" />
-        横向条图表
+        <horizontalCharts />
       </div>
     </div>
   </div>

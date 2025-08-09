@@ -18,7 +18,13 @@
              <!-- <sysStatus /> -->
               <!-- <heluoSwiperLinkroom /> -->
                <!-- <heluoSwiperDianwei /> -->
-                <deviceDetailsPanel />
+                <!-- <deviceDetailsPanel /> -->
+
+                 <!-- <verticalCharts /> -->
+                  <!-- <twoYEcharts /> -->
+                   <!-- <horizontalCharts /> -->
+                    <!-- <curlyLineCharts /> -->
+                     <swiperEcharts />
 </template>
   
 <script setup lang='ts'>
@@ -38,6 +44,11 @@
   import heluoSwiperLinkroom from '@/components/heluoSwiperLinkroom/index.vue'
   import heluoSwiperDianwei from '@/components/heluoSwiperDianwei/index.vue'
   import deviceDetailsPanel from '@/components/deviceDetailsPanel/index.vue'
+  import verticalCharts from '@/components/verticalCharts/index.vue'
+  import twoYEcharts from '@/components/twoYEcharts/index.vue'
+  import horizontalCharts from '@/components/horizontalCharts/index.vue'
+  import curlyLineCharts from '@/components/curlyLineCharts/index.vue'
+  import swiperEcharts from '@/components/swiperEcharts/index.vue'
 
   import {ref} from 'vue'
   const testdata = ref({

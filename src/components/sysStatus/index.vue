@@ -24,6 +24,7 @@ const { bem } = createNamespace('heluo-sys-sysStatus')
 <style scoped lang="less">
   .heluo-sys-sysStatus{
     gap: 10px;
+    height: 14vh;
     .each{
       height: 90px;
       width:70px;

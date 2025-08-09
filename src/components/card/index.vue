@@ -26,15 +26,16 @@ const props = defineProps({
 const {getCardData, cardInfos} = useCard(props.name)
 // getCardData() // 二期没有普通类型的卡片展示
 const computedH = computed(() => {
+  // 一整屏高度980px是按照设计稿来的
   switch(props.name) {
     case 'introduction':
-     return '56vh' // 项目介绍卡片高度占整屏高度58%（572/980=0.58）
+     return '56vh' // [项目介绍卡片]高度占整屏高度58%（572/980=0.58）
     case 'devicetotal':
-     return '32vh' // 设备总数卡片高度占整屏高度30%（288/980=0.3）
+     return '32vh' // [设备总数卡片]高度占整屏高度30%（288/980=0.3）
     case 'devicelist':
-     return '88vh' // 设备列表卡片高度占整屏高度88%（860/980=0.88）
+     return '88vh' // [设备列表卡片]高度占整屏高度88%（860/980=0.88）
     default: 
-     return '29vh' // 普通常规通用卡片高度占整屏高度29% (286px/980px=0.29)
+     return '29vh' // [普通常规通用卡片]高度占整屏高度29% (286px/980px=0.29)
   }
 })
 </script>

@@ -81,12 +81,6 @@ const handleClick = (i, idx) => {
   align-items: center;
 }
 
-
-/* 自定义导航按钮颜色 */
-.swiper-button-prev,
-.swiper-button-next {
-  color: #4F46E5 !important;
-}
 :deep(.swiper-item){
   height: 34px!important;/*swiper子项目整体高度，父级继承*/
   width: 92px!important;/*swiper子项目整体宽度，父级继承*/
