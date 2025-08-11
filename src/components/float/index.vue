@@ -37,6 +37,7 @@ const handleQuWei = () => {
 
 const handleSecurity = () => {
   globalVisibleControllerStore.globalControlVisible({name: 'float_menu_state', state: 6})
+  globalVisibleControllerStore.globalControlVisible({name: 'home_two_pannel', state: true})
   router.push({
     name: 'security',
     query: {},
@@ -44,6 +45,7 @@ const handleSecurity = () => {
 }
 const handleEnvironment = () => {
   globalVisibleControllerStore.globalControlVisible({name: 'float_menu_state', state: 5})
+  globalVisibleControllerStore.globalControlVisible({name: 'home_two_pannel', state: true})
   router.push({
     name: 'environment',
     query: {},
@@ -51,6 +53,7 @@ const handleEnvironment = () => {
 }
 const handleElectricity = () => {
   globalVisibleControllerStore.globalControlVisible({name: 'float_menu_state', state: 7})
+  globalVisibleControllerStore.globalControlVisible({name: 'home_two_pannel', state: true})
   router.push({
     name: 'electricity',
     query: {},
@@ -71,22 +74,22 @@ const curMenuActivedState = computed(() => globalVisibleControllerStore.globalVi
 
     <!--环境-->
     <div class="each">
-      <img v-if="curMenuActivedState === EnuMenusIds.ENVIRONMENT" src="@assets/usedimg/quwei-1.png" @click="handleEnvironment()" />
-      <img v-else src="@assets/usedimg/quwei-0.png" @click="handleEnvironment()" />
+      <img v-if="curMenuActivedState === EnuMenusIds.ENVIRONMENT" src="@assets/usedimg/hj-1.png" @click="handleEnvironment()" />
+      <img v-else src="@assets/usedimg/hj-0.png" @click="handleEnvironment()" />
       <div class="txt" :class="{'cur': curMenuActivedState === EnuMenusIds.ENVIRONMENT}">环境</div>
     </div>
 
     <!--安防-->
     <div class="each">
-      <img v-if="curMenuActivedState === EnuMenusIds.SECURITY" src="@assets/usedimg/quwei-1.png" @click="handleSecurity()" />
-      <img v-else src="@assets/usedimg/quwei-0.png" @click="handleSecurity()" />
+      <img v-if="curMenuActivedState === EnuMenusIds.SECURITY" src="@assets/usedimg/af-1.png" @click="handleSecurity()" />
+      <img v-else src="@assets/usedimg/af-0.png" @click="handleSecurity()" />
       <div class="txt" :class="{'cur': curMenuActivedState === EnuMenusIds.SECURITY}">安防</div>
     </div>
 
     <!--机电-->
     <div class="each">
-      <img v-if="curMenuActivedState === EnuMenusIds.ELECTRICITY" src="@assets/usedimg/quwei-1.png" @click="handleElectricity()" />
-      <img v-else src="@assets/usedimg/quwei-0.png" @click="handleElectricity()" />
+      <img v-if="curMenuActivedState === EnuMenusIds.ELECTRICITY" src="@assets/usedimg/jd-1.png" @click="handleElectricity()" />
+      <img v-else src="@assets/usedimg/jd-0.png" @click="handleElectricity()" />
       <div class="txt" :class="{'cur': curMenuActivedState === EnuMenusIds.ELECTRICITY}">机电</div>
     </div>
 
@@ -109,13 +112,14 @@ const curMenuActivedState = computed(() => globalVisibleControllerStore.globalVi
 
 <style scoped lang="less">
 .heluo-sys-float-menu{
-  width: 180px;
   height: 106px;
   position: absolute;
-  bottom: 26px;
-  margin-left: -90px;
-  left: 50%;
   z-index: 200;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  bottom: 26px;
+  
   .each{
     width: 72px;
     img{

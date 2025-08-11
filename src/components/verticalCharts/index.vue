@@ -50,6 +50,11 @@ const initChart = () => {
       orient: 'horizontal',
       left: 'center',
       top: '0%',
+      textStyle: {
+        color: 'white', // 核心配置：字体颜色
+        fontSize: 11,   // 可选：字体大小
+        fontWeight: 'normal' // 可选：字体粗细
+      },
       // 设置图例标记为圆形（原点）
       icon: 'circle',  // 核心配置：圆形图标
       itemWidth: 10,   // 原点宽度
@@ -62,6 +67,15 @@ const initChart = () => {
       data: ['设备', '能耗', '仪器', '安防', '安全', '环境'],
       axisPointer: {
         type: 'shadow'
+      },
+      axisLabel: {
+          color: 'white', // 刻度文字颜色
+          fontSize: 11
+      },
+      axisLine: {
+          lineStyle: {
+              color: 'rgba(255, 255, 255, 0.3)' // 浅色轴线，与白色刻度搭配
+          }
       }
     }
   ],
@@ -72,8 +86,17 @@ const initChart = () => {
       min: 0,
       max: 25,
       interval: 5,
+      splitLine: {
+          show: true, // 显示网格线
+          lineStyle: {
+              type: 'dashed',
+              color: '#b9c2c6' // 网格线颜色设为红色
+          }
+      },
       axisLabel: {
         // formatter: '{value} °C'
+        color: 'white',
+        fontSize: 11,
         formatter: '{value}'
       }
     }

@@ -12,7 +12,7 @@
       >
         <!-- 轮播项 -->
         <swiper-slide v-for="(item, index) in slides" :key="index" class="swiper-item">
-          <div @click="handleClick(item.title, index)" :class="['each-item-text', index === curActivedIdx ? 'cur' : '']">{{item.title}}</div>
+          <div @click="handleClick(item.title, item?.id)" :class="['each-item-text', index === curActivedIdx ? 'cur' : '']">{{item.title}}</div>
         </swiper-slide>
       </swiper>
     </div>
@@ -37,21 +37,19 @@ const curActivedIdx = ref(0)
 const slides = ref([
   {
     title: '新风系统',
+    id: 0,
   },
   {
     title: '排风系统',
+    id: 1,
   },
   {
     title: '智能空调',
+    id: 2,
   },
   {
-    title: '实验室门禁',
-  },
-  {
-    title: '监控系统',
-  },
-  {
-    title: '消毒系统',
+    title: '通风终端',
+    id: 3,
   }
 ]);
 
@@ -63,6 +61,10 @@ const handleClick = (i, idx) => {
   console.log(i, '点击项目')
   curActivedIdx.value = idx
 }
+
+defineExpose({
+  curActivedIdx
+})
 </script>
   
 <style scoped lang="less">

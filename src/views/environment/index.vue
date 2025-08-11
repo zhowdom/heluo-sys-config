@@ -78,5 +78,8 @@ function SwitchFoldOnlyTwoSide (state:boolean) {
   &__mrgl-auto{
     margin-left: auto;
   }
+  .warnlog-box{
+    padding-top: 1vh;
+  }
 }
 </style>

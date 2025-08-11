@@ -24,7 +24,8 @@
                   <!-- <twoYEcharts /> -->
                    <!-- <horizontalCharts /> -->
                     <!-- <curlyLineCharts /> -->
-                     <swiperEcharts />
+                     <!-- <swiperEcharts /> -->
+                      <settimeout />
 </template>
   
 <script setup lang='ts'>
@@ -49,6 +50,7 @@
   import horizontalCharts from '@/components/horizontalCharts/index.vue'
   import curlyLineCharts from '@/components/curlyLineCharts/index.vue'
   import swiperEcharts from '@/components/swiperEcharts/index.vue'
+  import settimeout from '@/components/settimeout/index.vue'
 
   import {ref} from 'vue'
   const testdata = ref({

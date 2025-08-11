@@ -1,5 +1,8 @@
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers'
 import path from 'path' // need install @types/node
 import legacy from '@vitejs/plugin-legacy'
 
@@ -7,6 +10,22 @@ import legacy from '@vitejs/plugin-legacy'
 export default defineConfig({
   plugins: [
     vue(),
+    // 自动导入Ant Design Vue相关函数
+    AutoImport({
+      resolvers: [AntDesignVueResolver()]
+    }),
+    // 自动导入Ant Design Vue组件
+    Components({
+      resolvers: [
+        // 配置Ant Design Vue组件解析器
+        AntDesignVueResolver({
+          // 自动引入相关样式，false表示不引入全部样式
+          importStyle: 'less',
+          // 自动导入图标组件
+          resolveIcons: true  // 开启图标自动导入
+        })
+      ]
+    }),
     legacy({
       targets: ["ie>11"],
       additionalLegacyPolyfills: ["regenerator-runtime/runtime"], //解决跨域警告

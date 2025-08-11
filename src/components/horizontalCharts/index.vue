@@ -47,7 +47,7 @@ const initChart = () => {
     grid: {
       left: 10,    // 左间距
       right: 40,   // 右间距
-      top: 0,     // 上间距
+      top: 20,     // 上间距
       bottom: 10,  // 下间距
       containLabel: true  // 确保标签不被裁剪
     },
@@ -70,7 +70,7 @@ const initChart = () => {
       // 取消X轴坐标刻度
       axisTick: {
         show: false
-      },
+      }
       // axisLabel: {
       //   formatter: '{value} 小时'  // x轴显示小时单位
       // }
@@ -84,6 +84,8 @@ const initChart = () => {
         show: false
       },
       axisLabel: {
+        color: 'white', // 刻度文字颜色
+        fontSize: 12,
         interval: 0  // 确保所有标签都显示
       }
     },

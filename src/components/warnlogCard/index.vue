@@ -20,7 +20,7 @@ const { bem } = createNamespace('heluo-sys-warnlogcard')
   
 <style scoped lang="less">
   .heluo-sys-warnlogcard{
-    width: 100%;
+    width: calc(100% - 30px);
     height: 72px;
     background: linear-gradient( 180deg, rgba(101,124,137,0.05) 0%, rgba(66,100,105,0.3) 100%);
     border-radius: 2px;
@@ -30,6 +30,8 @@ const { bem } = createNamespace('heluo-sys-warnlogcard')
     box-sizing: border-box;
     position: relative;
     border-radius: 5px;
+    margin-bottom: 1vh;
+    margin: 0 auto;
     &::before{
       content: '';
       width: 7px;
@@ -55,7 +57,7 @@ const { bem } = createNamespace('heluo-sys-warnlogcard')
       top:10px;
       right: 10px;
       color: #FF6B57FF;
-      font-size: 20px;
+      font-size: 15px;
       font-weight: 400;
     }
     .date{

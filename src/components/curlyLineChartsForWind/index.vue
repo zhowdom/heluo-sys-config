@@ -54,6 +54,10 @@ const initChart = () => {
     {
       type: 'category',
       data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+      axisLabel: {
+          color: 'white', // 刻度文字颜色
+          fontSize: 11 // 可选：调整文字大小
+      },
       axisPointer: {
         type: 'shadow'
       }
@@ -67,8 +71,18 @@ const initChart = () => {
       min: 0,
       max: 25,
       interval: 5,
+      splitLine: {
+          show: true, // 显示网格线
+      },
+      nameTextStyle: {
+          color: 'white', // 核心配置：名称文字颜色为白色
+          fontSize: 11,   // 可选：文字大小
+          fontWeight: 'bold' // 可选：文字粗细
+      },
       axisLabel: {
-        formatter: '{value} °C'
+        formatter: '{value} °C',
+        color: 'white', // 刻度文字颜色
+        fontSize: 11
       }
     }
   ],
@@ -81,6 +95,20 @@ const initChart = () => {
           return value + ' ml';
         }
       },
+      lineStyle: {
+        width: 2,
+        color: '#5eb5ce' // 设置线条颜色为橙色
+      },
+      itemStyle: {
+          color: '#5eb5ce', // 橙色数据点
+          borderColor: 'white', // 白色边框（可选，增强视觉效果）
+          borderWidth: 2 // 边框宽度
+      },
+      showSymbol: false,  // 不显示数据点标记
+      // 可选：鼠标 hover 时也不显示拐点
+      // emphasis: {
+      //     showSymbol: false
+      // },
       smooth: true,
       data: [
         2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3

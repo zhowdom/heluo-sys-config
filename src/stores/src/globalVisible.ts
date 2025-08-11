@@ -6,7 +6,7 @@ export const useGlobalVisibleControllerStore = defineStore("globalVisibleControl
   const globalVisiblePool = ref<IVisiblePool>({
     warn: { state: false },
     profession: { state: true }, // 预留整个专业面板的显隐[目前没用到]
-    home_two_pannel: { state: true }, // 首页左右两侧显隐状态
+    home_two_pannel: { state: true }, // 首页、机电、环境、安防等页面左右两侧显隐状态
     manyou_two_pannel: { state: true }, // 漫游页面左右两侧显隐状态
     float_menu_state: { // 用来区分整个底部菜单按钮的激活选中状态
       state: 1

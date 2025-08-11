@@ -12,6 +12,7 @@ defineProps({
 <template>
    <div :class="[bem(), 'card-title-bg-com']">
     {{name}}
+    <slot name="close"></slot>
    </div>
 </template>
 
