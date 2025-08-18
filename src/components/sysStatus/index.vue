@@ -1,15 +1,15 @@
 <template>
     <div :class="[bem(), 'flex-between']">
       <div class="each">
-        <div class="num">100</div>
+        <div class="num">{{props?.infos?.running}}</div>
         <div class="desc">在线设备</div>
       </div>
       <div class="each">
-        <div class="num">32</div>
+        <div class="num">{{props?.infos?.stopped}}</div>
         <div class="desc">离线设备</div>
       </div>
       <div class="each">
-        <div class="num">22</div>
+        <div class="num">{{props?.infos?.fault}}</div>
         <div class="desc">维护中</div>
       </div>
     </div>
@@ -17,7 +17,10 @@
   
 <script setup lang='ts'>
 import { createNamespace } from '@/utils'
+import {defineProps} from 'vue'
 const { bem } = createNamespace('heluo-sys-sysStatus')
+
+const props = defineProps(['infos'])
 
 </script>
   
@@ -40,7 +43,7 @@ const { bem } = createNamespace('heluo-sys-sysStatus')
         color: #FF6B57;
         text-align: center;
         position: absolute;
-        top:20px;
+        top:15px;
         left: 0;
         width: 100%;
       }

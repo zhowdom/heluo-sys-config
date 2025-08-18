@@ -2,20 +2,23 @@
     <!--报警记录卡片组件-->
     <div :class="bem()">
       <div class="room">
-        <p class="name">实验室10<span class="desc">温度气压异常</span></p>
+        <p class="name">{{props?.infos?.spaceIdName}}<span class="desc">{{props.infos?.alarmDesc}}</span></p>
       </div>
       <div class="date">
-        <span class="year">2025年07月28日</span>
-        <span class="hours">15:24:34</span>
+        <span class="year">{{dayjs(props.infos?.alarmTime).format('YYYY/MM/DD')}}</span>
+        <span class="hours">{{dayjs(props.infos?.alarmTime).format('HH:mm:ss')}}</span>
       </div>
-      <span class="status">离线</span>
+      <span class="status">{{props?.infos?.processStatusName}}</span>
     </div>
 </template>
   
 <script setup lang='ts'>
 import { createNamespace } from '@/utils'
 const { bem } = createNamespace('heluo-sys-warnlogcard')
+import {defineProps} from 'vue'
+import dayjs from 'dayjs';
 
+const props = defineProps(['infos'])
 </script>
   
 <style scoped lang="less">
@@ -30,8 +33,8 @@ const { bem } = createNamespace('heluo-sys-warnlogcard')
     box-sizing: border-box;
     position: relative;
     border-radius: 5px;
-    margin-bottom: 1vh;
     margin: 0 auto;
+    margin-bottom: 1vh;
     &::before{
       content: '';
       width: 7px;

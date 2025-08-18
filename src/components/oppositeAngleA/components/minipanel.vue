@@ -1,14 +1,24 @@
 <template>
     <div :class="bem()">
-      <div class="name">气压</div>
-      <div class="infos">54%</div>
+      <div class="name">{{props?.name}}</div>
+      <div class="infos">{{props?.val}}{{props?.unit}}</div>
     </div>
 </template>
   
 <script setup lang='ts'>
 import { createNamespace } from '@/utils'
 const { bem } = createNamespace('heluo-sys-opposite-angle-minipanel')
-  
+const props = defineProps({
+  name: {
+    type: String
+  },
+  val: {
+    type: String
+  },
+  unit: {
+    String
+  }
+})
 </script>
   
 <style scoped lang="less">

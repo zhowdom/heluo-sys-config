@@ -16,12 +16,22 @@
         </swiper-slide>
       </swiper>
     </div>
+
+
+     <a-modal v-model:visible="visible" title="新风机组-001室 详情"
+      :footer="null"
+      class="custom-modal"
+      >
+      <miniRoom />
+    </a-modal>
+
 </template>
   
 <script setup lang='ts'>
   import { ref, onMounted } from 'vue';
   import { Swiper, SwiperSlide } from 'swiper/vue';
   import { Pagination, Navigation } from 'swiper/modules';
+  import miniRoom from '@/components/miniRoom/index.vue'
   
   // 引入 Swiper 样式
   import 'swiper/css';
@@ -32,6 +42,7 @@
 const slidesPerView = ref(2);
 // 当前点击激活的项目高亮标记下标
 const curActivedIdx = ref(0)
+const isnavigation = ref(true)
 
   // 轮播数据
 const slides = ref([
@@ -74,7 +85,10 @@ const modules = [Pagination, Navigation];
 const handleClick = (i, idx) => {
   console.log(i, '点击项目')
   curActivedIdx.value = idx
+  visible.value = true
 }
+
+const visible = ref(false)
 </script>
   
 <style scoped lang="less">

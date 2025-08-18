@@ -9,9 +9,20 @@
 import { createNamespace } from '@/utils'
 const { bem } = createNamespace('heluo-sys-verticalCharts')
 
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, defineProps, watch } from 'vue'
 // 引入ECharts
 import * as echarts from 'echarts'
+import dayjs from 'dayjs';
+
+const props = defineProps(['echartdata', 'activeIndex'])
+
+watch(
+  () => props.echartdata,
+  (newval) => {
+    initChart()
+  }
+)
+
 
 // 获取图表容器的引用
 const chartRef = ref(null)
@@ -31,7 +42,7 @@ const initChart = () => {
   grid: {
       left: 15,    // 左侧间隙
       right: 15,   // 右侧间隙
-      top: 75,     // 顶部间隙
+      top: 80,     // 顶部间隙
       bottom: 15,  // 底部间隙
       containLabel: true  // 确保标签不被裁剪
     },
@@ -49,11 +60,16 @@ const initChart = () => {
       orient: 'horizontal',
       left: 'center',
       top: '10%',
+      textStyle: {
+        color: 'white', // 核心配置：字体颜色为白色
+        fontSize: 12,   // 可选：字体大小
+        fontWeight: 'normal' // 可选：字体粗细
+    },
     },
     xAxis: [
     {
       type: 'category',
-      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+      data: props.echartdata && props.echartdata['list'].map(v => dayjs(v.time).format('YY/MM/DD')),
       axisPointer: {
         type: 'shadow'
       },
@@ -67,7 +83,7 @@ const initChart = () => {
   yAxis: [
     {
       type: 'value',
-      name: '温度',
+      // name: '温度', // Y轴顶部的小单位
       min: 0,
       max: 25,
       interval: 5,
@@ -84,7 +100,7 @@ const initChart = () => {
           fontWeight: 'bold' // 可选：文字粗细
       },
       axisLabel: {
-        formatter: '{value} °C',
+        formatter: `{value} ${props.echartdata && props.echartdata['unitName']}`,
         color: 'white', // 刻度文字颜色
         fontSize: 11
       },
@@ -92,11 +108,11 @@ const initChart = () => {
   ],
     series: [
     {
-      name: '蒸发量', // 蒸发量
+      name: props.echartdata && props.echartdata['attributeName'],
       type: 'line',
       tooltip: {
         valueFormatter: function (value) {
-          return value + ' ml';
+          return value + ` ${props.echartdata && props.echartdata['unitName']}`;
         }
       },
       lineStyle: {
@@ -114,9 +130,7 @@ const initChart = () => {
       //     showSymbol: false
       // },
       smooth: true,
-      data: [
-        2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3
-      ]
+      data: props.echartdata && props.echartdata['list'].map(v => v.value),
     }
   ]
   }
@@ -151,7 +165,7 @@ onUnmounted(() => {
 <style scoped lang="less">
   .heluo-sys-verticalCharts{
     /*30vh*/
-    height: 30vh;
+    height: 27vh;
     width:100%;
     .chart-box{
       height: 100%;

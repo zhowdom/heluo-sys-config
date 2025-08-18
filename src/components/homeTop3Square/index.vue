@@ -5,17 +5,17 @@
         <div class="l">
           <img src="@/assets/usedimg/hometop3square-0@2x.png" />
           <p class="label">预警总数</p>
-          <p class="num warn">2390</p>
+          <p class="num warn">{{props?.infos?.total || 0}}</p>
         </div>
         <div class="m">
           <img src="@/assets/usedimg/hometop3square1@2x.png" />
           <p class="label">已处理</p>
-          <p class="num done">2390</p>
+          <p class="num done">{{props?.infos?.processedCount || 0}}</p>
         </div>
         <div class="r">
           <img src="@/assets/usedimg/hometop3square2@2x.png" />
           <p class="label">未处理</p>
-          <p class="num willdo">2390</p>
+          <p class="num willdo">{{props?.infos?.unProcessCount || 0}}</p>
         </div>
       </div>
       
@@ -26,7 +26,17 @@
 import cardtitle from '../cardtitle/index.vue'
 import { createNamespace } from '@/utils'
 const { bem } = createNamespace('heluo-sys-hometop3square')
-  
+import { PropType, defineProps } from 'vue'
+interface Iprops {
+  processedCount: number
+  total: number
+  unProcessCount: number
+}
+const props = defineProps({
+  infos: {
+    type: Object as PropType<Iprops>
+  }
+})
 </script>
   
 <style scoped lang="less">

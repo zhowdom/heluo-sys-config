@@ -268,3 +268,19 @@ export interface IBeautyFoundation {
   // 副描述
   subDesc: string;
 }
+
+export enum  SysType {
+  FreshAirSystem = 0,  // 新风系统
+  ExhaustSystem = 1,   // 排风系统
+  SmartAirConditioner = 2,  // 智能空调
+  VentilationTerminal = 3   // 通风终端
+}
+/*系统中swiper的类型区分，主要是用来区分每个不同类型时参数props不同的*/
+export enum  SwiperPropsType {
+  ShiYanShi = 0,  // 实验室101、102、103
+  ChuanGanQi = 1,   // 传感器1、2、3
+  WarnType = 2,  // 全部报警、设备报警、能耗报警
+  DeviceType = 3,   // 智能空调、通风柜、净化机组
+  Floor = 4, // 1楼、2楼、3楼
+}
+

@@ -1,7 +1,7 @@
 <template>
     <!--通用的副标题组件[带背景]-->
     <div :class="bem()">
-      <span class="name">设备状态</span>
+      <span class="name">{{props?.titleName}}</span>
       <div class="bg">
         <img class="left" src="@/assets/usedimg/comsubtitle-0.png" />
         <img class="center" src="@/assets/usedimg/comsubtitle-1.png" />
@@ -13,7 +13,12 @@
 <script setup lang='ts'>
 import { createNamespace } from '@/utils'
 const { bem } = createNamespace('heluo-sys-comsubtitle')
-
+const props = defineProps({
+  titleName: {
+    type: String,
+    default: ''
+  }
+})
 </script>
   
 <style scoped lang="less">

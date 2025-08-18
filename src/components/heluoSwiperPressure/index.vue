@@ -1,7 +1,7 @@
 <template>
     
     <!-- Swiper 容器 -->
-    <div class="swiper-container">
+    <div class="swiper-container flex-center">
       <swiper 
         :modules="modules" 
         :slides-per-view="slidesPerView"
@@ -13,37 +13,37 @@
         <!-- 轮播项 -->
         <swiper-slide class="swiper-item">
           <div class="each">
-            <beautyFoundation class="mini" :infos="{ value: 1, unit: '%', subDesc: '实验室102'}" />
-            <beautyFoundation class="mini" :infos="{ value: 1, unit: '%', subDesc: '实验室102'}" />
-            <beautyFoundation class="mini" :infos="{ value: 1, unit: '%', subDesc: '实验室102'}" />
+            <beautyFoundation class="mini" :infos="{ value: 89, unit: 'Pa', subDesc: '实验室101'}" />
+            <beautyFoundation class="mini" :infos="{ value: 23, unit: 'Pa', subDesc: '实验室102'}" />
+            <beautyFoundation class="mini" :infos="{ value: 45, unit: 'Pa', subDesc: '实验室103'}" />
 
-            <beautyFoundation class="mini" :infos="{ value: 1, unit: '%', subDesc: '实验室102'}" />
-            <beautyFoundation class="mini" :infos="{ value: 1, unit: '%', subDesc: '实验室102'}" />
-            <beautyFoundation class="mini" :infos="{ value: 1, unit: '%', subDesc: '实验室102'}" />
+            <beautyFoundation class="mini" :infos="{ value: 17, unit: 'Pa', subDesc: '实验室104'}" />
+            <beautyFoundation class="mini" :infos="{ value: 19, unit: 'Pa', subDesc: '实验室105'}" />
+            <beautyFoundation class="mini" :infos="{ value: 69, unit: 'Pa', subDesc: '实验室106'}" />
           </div>
         </swiper-slide>
 
         <swiper-slide class="swiper-item">
           <div class="each">
-            <beautyFoundation class="mini" :infos="{ value: 1, unit: '%', subDesc: '实验室102'}" />
-            <beautyFoundation class="mini" :infos="{ value: 1, unit: '%', subDesc: '实验室102'}" />
-            <beautyFoundation class="mini" :infos="{ value: 1, unit: '%', subDesc: '实验室102'}" />
+            <beautyFoundation class="mini" :infos="{ value: 39, unit: 'Pa', subDesc: '实验室107'}" />
+            <beautyFoundation class="mini" :infos="{ value: 12, unit: 'Pa', subDesc: '实验室108'}" />
+            <beautyFoundation class="mini" :infos="{ value: 10, unit: 'Pa', subDesc: '实验室109'}" />
 
-            <beautyFoundation class="mini" :infos="{ value: 1, unit: '%', subDesc: '实验室102'}" />
-            <beautyFoundation class="mini" :infos="{ value: 1, unit: '%', subDesc: '实验室102'}" />
-            <beautyFoundation class="mini" :infos="{ value: 1, unit: '%', subDesc: '实验室102'}" />
+            <beautyFoundation class="mini" :infos="{ value: 21, unit: 'Pa', subDesc: '实验室110'}" />
+            <beautyFoundation class="mini" :infos="{ value: 51, unit: 'Pa', subDesc: '实验室111'}" />
+            <beautyFoundation class="mini" :infos="{ value: 90, unit: 'Pa', subDesc: '实验室112'}" />
           </div>
         </swiper-slide>
 
         <swiper-slide class="swiper-item">
           <div class="each">
-            <beautyFoundation class="mini" :infos="{ value: 1, unit: '%', subDesc: '实验室102'}" />
-            <beautyFoundation class="mini" :infos="{ value: 1, unit: '%', subDesc: '实验室102'}" />
-            <beautyFoundation class="mini" :infos="{ value: 1, unit: '%', subDesc: '实验室102'}" />
+            <beautyFoundation class="mini" :infos="{ value: 1, unit: 'Pa', subDesc: '实验室102'}" />
+            <beautyFoundation class="mini" :infos="{ value: 1, unit: 'Pa', subDesc: '实验室102'}" />
+            <beautyFoundation class="mini" :infos="{ value: 1, unit: 'Pa', subDesc: '实验室102'}" />
 
-            <beautyFoundation class="mini" :infos="{ value: 1, unit: '%', subDesc: '实验室102'}" />
-            <beautyFoundation class="mini" :infos="{ value: 1, unit: '%', subDesc: '实验室102'}" />
-            <beautyFoundation class="mini" :infos="{ value: 1, unit: '%', subDesc: '实验室102'}" />
+            <beautyFoundation class="mini" :infos="{ value: 1, unit: 'Pa', subDesc: '实验室102'}" />
+            <beautyFoundation class="mini" :infos="{ value: 1, unit: 'Pa', subDesc: '实验室102'}" />
+            <beautyFoundation class="mini" :infos="{ value: 1, unit: 'Pa', subDesc: '实验室102'}" />
           </div>
         </swiper-slide>
       </swiper>
@@ -63,6 +63,7 @@
 
   // 控制可见项目数量的变量
 const slidesPerView = ref(1);
+const isnavigation = ref(true)
 
 // 注册需要的 Swiper 模块
 const modules = [Pagination, Navigation];
@@ -74,7 +75,7 @@ const modules = [Pagination, Navigation];
 .swiper-container {
   margin: 0 auto;
   width: 400px!important;
-  height: 240px;
+  height: 200px;
 }
 
 /* 自定义轮播项样式 */

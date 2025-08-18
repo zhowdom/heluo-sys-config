@@ -11,8 +11,8 @@
         class="mySwiper"
       >
         <!-- 轮播项 -->
-        <swiper-slide v-for="(item, index) in slides" :key="index" class="swiper-item">
-          <div @click="handleClick(item.title, item?.id)" :class="['each-item-text', index === curActivedIdx ? 'cur' : '']">{{item.title}}</div>
+        <swiper-slide v-for="(item, idx) in slides" :key="item.code" class="swiper-item">
+          <div @click="handleClick(item, idx)" :class="['each-item-text', idx === curActivedIdx ? 'cur' : '']">{{item.name}}</div>
         </swiper-slide>
       </swiper>
     </div>
@@ -22,6 +22,7 @@
   import { ref, onMounted } from 'vue';
   import { Swiper, SwiperSlide } from 'swiper/vue';
   import { Pagination, Navigation } from 'swiper/modules';
+  import {SysType} from '@/types'
   
   // 引入 Swiper 样式
   import 'swiper/css';
@@ -32,26 +33,10 @@
 const slidesPerView = ref(3);
 // 当前点击激活的项目高亮标记下标
 const curActivedIdx = ref(0)
+const curActivedSys = ref()
 
   // 轮播数据
-const slides = ref([
-  {
-    title: '新风系统',
-    id: 0,
-  },
-  {
-    title: '排风系统',
-    id: 1,
-  },
-  {
-    title: '智能空调',
-    id: 2,
-  },
-  {
-    title: '通风终端',
-    id: 3,
-  }
-]);
+const slides = ref(GLOBAL.sysList);
 
 // 注册需要的 Swiper 模块
 const modules = [Pagination, Navigation];
@@ -60,10 +45,12 @@ const modules = [Pagination, Navigation];
 const handleClick = (i, idx) => {
   console.log(i, '点击项目')
   curActivedIdx.value = idx
+  curActivedSys.value = i?.code
 }
 
 defineExpose({
-  curActivedIdx
+  curActivedIdx,
+  curActivedSys
 })
 </script>
   
@@ -101,13 +88,16 @@ defineExpose({
   color: rgba(255,255,255,0.68);
   text-align: center;
   border-radius: 8px!important;
-  background: rgba(40, 56, 59);
+  background: rgba(255,255,255,0.06);
   cursor: pointer;
   box-sizing: border-box;
   height: 68px;
   line-height: 68px;
   &.cur{
-    border: 2px solid #1AE2BE;
+    // border: 2px solid #1AE2BE;
+    // width: 92px;
+    // height: 68px;
+    background: url('@assets/usedimg/haha.png') no-repeat center / cover;
   }
 }
 :deep(.swiper-button-next){

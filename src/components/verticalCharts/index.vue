@@ -9,9 +9,12 @@
 import { createNamespace } from '@/utils'
 const { bem } = createNamespace('heluo-sys-verticalCharts')
 
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, defineProps, watch } from 'vue'
+
 // 引入ECharts
 import * as echarts from 'echarts'
+
+const props = defineProps(['chartlist'])
 
 // 获取图表容器的引用
 const chartRef = ref(null)
@@ -64,7 +67,8 @@ const initChart = () => {
     xAxis: [
     {
       type: 'category',
-      data: ['设备', '能耗', '仪器', '安防', '安全', '环境'],
+      // data: ['设备', '能耗', '仪器', '安防', '安全', '环境'],
+      data: props.chartlist.map(v => v.typeName),
       axisPointer: {
         type: 'shadow'
       },
@@ -103,51 +107,19 @@ const initChart = () => {
   ],
     series: [
     {
-      name: '预警总数',
+      name: '告警',
       type: 'bar',
+      barWidth: 10,
       tooltip: {
         valueFormatter: function (value) {
-          return value
+          return value + '次'
         }
       },
       itemStyle: {
-        color: '#dfcca7'
+        color: '#80a68e'
       },
       smooth: true,
-      data: [
-        2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3
-      ]
-    },
-    {
-      name: '已处理',
-      type: 'bar',
-      itemStyle: {
-        color: '#9ccaae'
-      },
-      tooltip: {
-        valueFormatter: function (value) {
-          return value
-        }
-      },
-      smooth: true,
-      data: [
-        2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3
-      ]
-    },
-    {
-      name: '未处理',
-      type: 'bar',
-      itemStyle: {
-        color: '#a8d8da'
-      },
-      tooltip: {
-        valueFormatter: function (value) {
-          // return value + ' °C';
-          return value
-        }
-      },
-      smooth: true,
-      data: [2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]
+      data: props.chartlist.map(v => v.count)
     }
   ]
   }
@@ -163,9 +135,14 @@ const handleResize = () => {
   }
 }
 
+watch(
+  () => props.chartlist,
+  (newVal) => {
+    initChart()
+  }
+)
 // 组件挂载时初始化图表
 onMounted(() => {
-  initChart()
   window.addEventListener('resize', handleResize)
 })
 

@@ -53,7 +53,7 @@ const initChart = () => {
     xAxis: [
     {
       type: 'category',
-      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+      data: ['00:00', '06:00', '12:00', '18:00', '19:00', '21:00', '23:00'],
       axisLabel: {
           color: 'white', // 刻度文字颜色
           fontSize: 11 // 可选：调整文字大小
@@ -67,20 +67,24 @@ const initChart = () => {
   yAxis: [
     {
       type: 'value',
-      name: '温度',
+      // name: '³/h',
       min: 0,
       max: 25,
       interval: 5,
-      splitLine: {
-          show: true, // 显示网格线
-      },
       nameTextStyle: {
           color: 'white', // 核心配置：名称文字颜色为白色
           fontSize: 11,   // 可选：文字大小
           fontWeight: 'bold' // 可选：文字粗细
       },
+      splitLine: {
+          show: true, // 显示网格线
+          lineStyle: {
+              type: 'dashed',
+              color: '#b9c2c6' // 网格线颜色设为红色
+          }
+      },
       axisLabel: {
-        formatter: '{value} °C',
+        formatter: '{value} ³/h',
         color: 'white', // 刻度文字颜色
         fontSize: 11
       }
@@ -88,11 +92,11 @@ const initChart = () => {
   ],
     series: [
     {
-      name: '蒸发量', // 蒸发量
+      name: '余风量',
       type: 'line',
       tooltip: {
         valueFormatter: function (value) {
-          return value + ' ml';
+          return value + ' ³/h';
         }
       },
       lineStyle: {
@@ -102,7 +106,7 @@ const initChart = () => {
       itemStyle: {
           color: '#5eb5ce', // 橙色数据点
           borderColor: 'white', // 白色边框（可选，增强视觉效果）
-          borderWidth: 2 // 边框宽度
+          borderWidth: 2, // 边框宽度
       },
       showSymbol: false,  // 不显示数据点标记
       // 可选：鼠标 hover 时也不显示拐点

@@ -7,7 +7,7 @@
         :slides-per-view="slidesPerView"
         :slide-to-clicked-slide="true"
         space-between="32"
-        :navigation="true"
+        ::navigation="true"
         class="mySwiper"
       >
         <!-- 轮播项 -->
@@ -32,6 +32,7 @@
 const slidesPerView = ref(3);
 // 当前点击激活的项目高亮标记下标
 const curActivedIdx = ref(0)
+const isnavigation = ref(true)
 
   // 轮播数据
 const slides = ref([

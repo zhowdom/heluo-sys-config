@@ -1,7 +1,7 @@
 <template>
     
     <!-- Swiper 容器 -->
-    <div class="swiper-container">
+    <div class="swiper-container flex-center">
       <swiper 
         :modules="modules" 
         :slides-per-view="slidesPerView"
@@ -9,21 +9,22 @@
         space-between="0"
         :navigation="true"
         class="mySwiper"
-        @slide-change="handleSlideChange"
       >
         <!-- 轮播项 -->
-        <swiper-slide v-for="(item, index) in slides" :key="index" class="swiper-item">
-          <curlyLineCharts :echartdata="slides[currentIndex]" :activeIndex="currentIndex" />
+        <swiper-slide v-for="(item, idx) in slides" :key="item.code" class="swiper-item">
+          <!-- <div @click="handleClick(item, idx)" :class="['each-item-text', idx === curActivedIdx ? 'cur' : '']">{{item.name}}</div> -->
+           <oppositeAngleA />
         </swiper-slide>
       </swiper>
     </div>
 </template>
   
 <script setup lang='ts'>
-  import { ref, onMounted, defineProps, watch, defineExpose } from 'vue';
+  import { ref, onMounted } from 'vue';
   import { Swiper, SwiperSlide } from 'swiper/vue';
   import { Pagination, Navigation } from 'swiper/modules';
-  import curlyLineCharts from '../curlyLineCharts/index.vue'
+  import {SysType} from '@/types'
+  import oppositeAngleA from '@/components/oppositeAngleA/index.vue'
   
   // 引入 Swiper 样式
   import 'swiper/css';
@@ -34,38 +35,25 @@
 const slidesPerView = ref(1);
 // 当前点击激活的项目高亮标记下标
 const curActivedIdx = ref(0)
-const isnavigation = ref(true)
-const props = defineProps(['swiperdData'])
+const curActivedSys = ref()
 
   // 轮播数据
-const slides = ref([]);
-const curEchartData = ref([])
-
-// 当前索引状态
-const currentIndex = ref(0);
-// 处理幻灯片切换事件
-const handleSlideChange = (swiperInstance: any) => {
-  // 获取当前索引（非循环模式用activeIndex，循环模式用realIndex）
-  currentIndex.value = swiperInstance.activeIndex;
-};
-
-watch(
-  () => props.swiperdData,
-  (newVal) => {
-    slides.value = newVal.map(v => {
-      return { attributeName: v.attributeName, attributeCode: v.attributeCode, list: v.values, unitName: v.unitName }
-    })
-  }
-)
-console.log(slides, 'slides')
+const slides = ref(GLOBAL.sysList);
 
 // 注册需要的 Swiper 模块
 const modules = [Pagination, Navigation];
 
-defineExpose({
-  currentIndex
-})
+//点击事件
+const handleClick = (i, idx) => {
+  console.log(i, '点击项目')
+  curActivedIdx.value = idx
+  curActivedSys.value = i?.code
+}
 
+defineExpose({
+  curActivedIdx,
+  curActivedSys
+})
 </script>
   
 <style scoped lang="less">
@@ -73,6 +61,7 @@ defineExpose({
 .swiper-container {
   margin: 0 auto;
   width: 400px;
+  height: 19vh;
 }
 
 /* 自定义轮播项样式 */
@@ -85,7 +74,7 @@ defineExpose({
 }
 
 :deep(.swiper-item){
-  height: 100%!important;/*swiper子项目整体高度，父级继承*/
+  height: 153px!important;/*swiper子项目整体高度，父级继承*/
   width: 100%!important;/*swiper子项目整体宽度，父级继承*/
 }
 /* 容器内边距为10px，实现箭头与内容的间距 */
@@ -93,12 +82,31 @@ defineExpose({
   padding-left: 0 !important;
   padding-right: 0 !important;
 }
-
+/* 每一项文字 */
+.each-item-text{
+  font-family: Alibaba PuHuiTi 2.0, Alibaba PuHuiTi 20;
+  font-weight: normal;
+  font-size: 14px;
+  color: rgba(255,255,255,0.68);
+  text-align: center;
+  border-radius: 8px!important;
+  background: rgba(255,255,255,0.06);
+  cursor: pointer;
+  box-sizing: border-box;
+  height: 68px;
+  line-height: 68px;
+  &.cur{
+    // border: 2px solid #1AE2BE;
+    // width: 92px;
+    // height: 68px;
+    background: url('@assets/usedimg/haha.png') no-repeat center / cover;
+  }
+}
 :deep(.swiper-button-next){
   height: 26px;
   width: 16px;
   position: absolute;
-  top: 55%;
+  top: 88px;
   right: 0;
   background: url('@assets/usedimg/swiper_right@2x.png') no-repeat center / cover;
   &:after{
@@ -113,7 +121,7 @@ defineExpose({
     display: none;
   }
   position: absolute;
-  top: 55%;
+  top: 88px;
   left: 0;
 }
 </style>

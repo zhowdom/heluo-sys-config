@@ -34,7 +34,7 @@
 const slidesPerView = ref(2);
 // 当前点击激活的项目高亮标记下标
 const curActivedIdx = ref(0)
-
+const isnavigation = ref(true)
   // 轮播数据
 const slides = ref([
   {
@@ -84,6 +84,7 @@ const handleClick = (i, idx) => {
 .swiper-container {
   margin: 0 auto;
   width: 400px;
+  padding: 10px 0;
 }
 
 /* 自定义轮播项样式 */

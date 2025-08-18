@@ -9,9 +9,11 @@
 import { createNamespace } from '@/utils'
 const { bem } = createNamespace('heluo-sys-verticalCharts')
 
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, watch } from 'vue'
 // 引入ECharts
 import * as echarts from 'echarts'
+
+const props = defineProps(['chartData'])
 
 // 获取图表容器的引用
 const chartRef = ref(null)
@@ -32,14 +34,6 @@ const initChart = () => {
     { offset: 1, color: '#a7c9e6' } 
   ])
   
-  // 图表数据
-  const chartData = [
-    { name: '智能照明', value: 12 },
-    { name: '空调', value: 80 },
-    { name: '多联机模块', value: 120 },
-    { name: '消毒剂', value: 50 },
-    { name: '空气加湿器', value: 175 }
-  ]
 
   // 图表配置项
   const option = {
@@ -78,7 +72,7 @@ const initChart = () => {
   // Y轴
   yAxis: {
       type: 'category',
-      data: chartData.map(item => item.name),  // 左侧项目名称
+      data: props?.chartData.map(item => item.deviceName),  // 左侧项目名称
       // 隐藏x轴方向的网格线（竖线）
       splitLine: {
         show: false
@@ -91,17 +85,21 @@ const initChart = () => {
     },
     series: [
       {
-        name: '运行时间',
+        name: '使用时间',
         type: 'bar',
-        data: chartData.map(item => item.value),
+        data: props?.chartData.map(item => item.hours),
         barWidth: 10,  // 条的宽度
         itemStyle: {
           color: colorGradient  // 应用渐变色
         },
+        tooltip: {
+          valueFormatter: function (value) {
+            return value +'小时'
+          }
+        },
         label: {
           show: true,
           position: 'right',  // 数值显示在条的右侧
-          formatter: '{c}小时'
         }
       }
     ]
@@ -117,10 +115,14 @@ const handleResize = () => {
     chartInstance.resize()
   }
 }
-
+watch(
+  () => props?.chartData,
+  (newVal) => {
+    initChart()
+  }
+)
 // 组件挂载时初始化图表
 onMounted(() => {
-  initChart()
   window.addEventListener('resize', handleResize)
 })
 

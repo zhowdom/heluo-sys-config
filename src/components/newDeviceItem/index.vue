@@ -49,7 +49,8 @@ const emit = defineEmits(['deviceChange'])
       padding-right: 10px;
     }
     &:hover{
-      background: #2e5756;
+      background: linear-gradient( 180deg, rgba(45,240,231,0) 0%, rgba(45,240,231,0.3) 100%);
+      border-bottom: 1px solid #29E3BF;
     }
   }
 </style>

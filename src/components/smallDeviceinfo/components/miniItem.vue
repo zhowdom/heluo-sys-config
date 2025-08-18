@@ -1,14 +1,23 @@
 <template>
     <div :class="bem()">
-      <p class="name">报警设备</p>
-      <p class="red desc">原子吸收罩</p>
+      <p class="name txtellipsis">{{props?.infos?.label}}</p>
+      <p class="red desc txtellipsis">{{props?.infos?.desc}}</p>
     </div>
 </template>
   
 <script setup lang='ts'>
 import { createNamespace } from '@/utils'
 const { bem } = createNamespace('heluo-sys-smallDeviceinfo-mini')
-
+import { PropType, defineProps } from 'vue'
+interface Iprops {
+  label: string
+  desc: string
+}
+const props = defineProps({
+  infos: {
+    type: Object as PropType<Iprops>
+  }
+})
 </script>
   
 <style scoped lang="less">
@@ -20,6 +29,9 @@ const { bem } = createNamespace('heluo-sys-smallDeviceinfo-mini')
     }
     .desc{
       color: #fff;
+    }
+    .name,.desc{
+      max-width: 109px;
     }
   }
 </style>

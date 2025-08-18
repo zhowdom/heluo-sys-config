@@ -11,8 +11,8 @@ const periods = ref([
   { name: '工作日8:00', val: 4},
   { name: '周末9:00', val: 5},
 ])
-const curIndexBtns = ref(-1)
-const curIndexPeriods = ref(-1)
+const curIndexBtns = ref(0)
+const curIndexPeriods = ref(0)
 const handleBtns = (idx) => curIndexBtns.value = idx
 const handlePeriods = (idx) => curIndexPeriods.value = idx
 </script>
@@ -37,8 +37,10 @@ const handlePeriods = (idx) => curIndexPeriods.value = idx
   .btns{
     background: rgba(66,100,105,0.2);
     border-radius: 4px;
+    margin: 20px 0 30px 0;
     .btncom{
-    padding: 14px 80px;
+    padding: 7px 80px;
+    cursor: pointer;
     }
     .cur{
       background: linear-gradient( 180deg, rgba(26,226,190,0.4) 0%, rgba(0,0,0,0.08) 49%, rgba(26,226,190,0.4) 100%);
@@ -53,6 +55,9 @@ const handlePeriods = (idx) => curIndexPeriods.value = idx
       border-radius: 4px;
       border: 1px solid #206EAA;
       margin-right: 8px;
+      line-height: 30px;
+      padding: 5px 7px;
+      cursor: pointer;
     }
     .cur{
       background: rgba(255,200,93,0.1);

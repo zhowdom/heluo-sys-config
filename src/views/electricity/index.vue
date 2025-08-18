@@ -17,10 +17,13 @@ import heluoSwiperLinkroom from '@/components/heluoSwiperLinkroom/index.vue'
 import heluoSwiperDianwei from '@/components/heluoSwiperDianwei/index.vue'
 import smallAirCondition from '@/components/smallAirCondition/index.vue'
 
-import {ref, watch} from 'vue'
+import {onMounted, ref, watch} from 'vue'
 import { createNamespace } from '@/utils'
 import {useGlobalVisibleControllerStore} from '@/stores'
 import {storeToRefs} from 'pinia'
+import {SysType, SwiperPropsType} from '@/types'
+import {commoncardApi, floorlistApi, sencedeviceApi} from '@/apis'
+
 const globalVisibleControllerStore = useGlobalVisibleControllerStore()
 const {globalVisiblePool} = storeToRefs(globalVisibleControllerStore)
 const { bem } = createNamespace('heluo-sys-electricity-wrap')
@@ -36,7 +39,62 @@ const closeDrawer = () => { drawerOpen.value = false }
 
 // 当前选择的系统ID标识符
 const curSystemId = ref(0);
+const curSystemCode = ref('');
 const sysRef = ref()
+const floorData = ref([])
+const deviceList = ref([])
+
+
+const handleDeviceChange = (s) => {
+  // 根据设备ID来动态展示右侧的设备详情信息弹窗
+  openDrawer()
+}
+
+const listdata = ref([
+  { title: '全部'},
+  { title: '1楼'},
+  { title: '2楼'},
+  { title: '3楼'},
+  { title: '4楼'},
+  { title: '5楼'},
+  { title: '6楼'},
+  { title: '7楼'},
+])
+const sysInfos = ref()
+
+const runSysInofsApi = async (typeCode) => {
+  const res = await commoncardApi(
+    {
+    spaceId: "",
+    typeCode
+  }
+)
+sysInfos.value = res?.data?.data
+  console.log('系统状态数据', res)
+}
+
+// 查询楼层
+const queryFloor = async () => {
+  const res = await floorlistApi()
+  floorData.value = res?.data?.data || []
+}
+
+const handleFloorUpdate = async (payload) => {
+  console.log(payload, 'payload')
+  // 拿到当前的spaceId 与 curSystemId.value
+ const res = await sencedeviceApi({
+    spaceId: payload?.queryCode,
+    typeCode: curSystemCode.value
+  })
+  deviceList.value = res?.data?.data || []
+  console.log(res?.data?.data.length, '?????')
+}
+
+onMounted(() => {
+  curSystemCode.value = GLOBAL.sysList[0]['code']
+  runSysInofsApi(GLOBAL.sysList[0]['code'])
+  queryFloor()
+})
 
 watch(
   // 监听系统更改
@@ -45,43 +103,43 @@ watch(
     curSystemId.value = newVal
   }
 )
+watch(
+  // 监听系统更改
+  () => sysRef.value?.curActivedSys,
+  (newVal) => {
+    curSystemCode.value = newVal
+    runSysInofsApi(newVal)
+  }
+)
 
-const handleDeviceChange = (s) => {
-  // 根据设备ID来动态展示右侧的设备详情信息弹窗
-  openDrawer()
-}
 </script>
 
 <template>
   <div :class="[bem(), 'flex-between']">
     <div :class="[bem('l'), 'animate__animated', globalVisiblePool.home_two_pannel.state ? ' animate__backInLeft' : 'animate__backOutLeft']">
-      <div>
+      <div class="card-bg-com">
         <cardtitle name="系统选择" @click="openDrawer" />
         <heluoSwiperSys ref="sysRef" />
       </div>
 
  
-      <div>
+      <div class="card-bg-com">
         <cardtitle name="系统状态" />
-        <sysStatus />
+        <sysStatus :infos="sysInfos" />
       </div>
 
       <!--设备列表-->
-      <div>
+      <div class="card-bg-com">
         <cardtitle name="设备列表" />
         <div style="height:10vh;padding-top: 12px;">
-          <comSubTitle style="margin-bottom: 20px;" />
-          <heluoSwiper />
+          <comSubTitle title-name="楼层选择" style="margin-bottom: 20px;" />
+          <heluoSwiper :swiper-data="floorData" :type="SwiperPropsType.Floor" @updateCurIndex="handleFloorUpdate" />
         </div>
         <!-- <comSubTitle /> -->
         <!-- <heluoSwiperDevice /> -->
-        <newDeviceItem @deviceChange="handleDeviceChange" />
-        <newDeviceItem @deviceChange="handleDeviceChange" />
-        <newDeviceItem @deviceChange="handleDeviceChange" />
-        <newDeviceItem @deviceChange="handleDeviceChange" />
-        <newDeviceItem @deviceChange="handleDeviceChange" />
-        <newDeviceItem @deviceChange="handleDeviceChange" />
-        
+        <div class="device-list">
+          <newDeviceItem v-for="(item, index) in deviceList" :key="index" @deviceChange="handleDeviceChange" />
+        </div>
 
       </div>
 
@@ -151,13 +209,13 @@ const handleDeviceChange = (s) => {
           <devicePureTxtpanel />
           <devicePureTxtpanel />
         </div>
-        <comSubTitle v-if="curSystemId === 0 || curSystemId === 1" />
-        <heluoSwiperLinkroom v-if="curSystemId === 0 || curSystemId === 1" />
-        <smallAirCondition v-if="curSystemId === 2" />
+        <comSubTitle title-name="关联房间列表" v-if="curSystemId === SysType.FreshAirSystem || curSystemId === SysType.ExhaustSystem" style="margin-bottom: 10px;" />
+        <heluoSwiperLinkroom v-if="curSystemId === SysType.FreshAirSystem || curSystemId === SysType.ExhaustSystem" />
+        <smallAirCondition v-if="curSystemId === SysType.SmartAirConditioner" />
 
         <!--机电-智能空调-右下角有设备点位的数据吗？？？这里先注释掉了-->
-        <comSubTitle v-if="curSystemId === 0 || curSystemId === 1 || curSystemId === 3" />
-        <heluoSwiperDianwei v-if="curSystemId === 0 || curSystemId === 1 || curSystemId === 3" />
+        <comSubTitle title-name="设备点位数据" v-if="curSystemId === SysType.FreshAirSystem || curSystemId === SysType.ExhaustSystem || curSystemId === SysType.VentilationTerminal" style="margin-top:10px;" />
+        <heluoSwiperDianwei v-if="curSystemId === SysType.FreshAirSystem || curSystemId === SysType.ExhaustSystem || curSystemId === SysType.VentilationTerminal" />
         </div>
     </div>
     </a-drawer>
@@ -194,9 +252,14 @@ const handleDeviceChange = (s) => {
   .close-box{
     position: absolute;
     top:0;
-    right:0;
+    right:20px;
     font-size: 23px;
+    cursor: pointer;
   }
+}
+.device-list{
+  height: 44vh;
+  overflow-y: scroll;
 }
 </style>
 <style>

@@ -1,8 +1,8 @@
 <template>
     <div :class="bem()">
-      <div v-if="props.topType === 1" :class="['flex-center', bem('top')]">
+      <div v-if="props.topType === 1" :class="[bem('top')]">
         <span :class="bem('val')">{{props.infos.value}}</span>
-        <span  :class="bem('uni')">{{props.infos.unit}}</span>
+        <span  :class="bem('unit')">{{props.infos.unit}}</span>
       </div>
       <div v-else class="flex-center">
         <span>{{props.infos.title}}</span>
@@ -28,7 +28,6 @@ const props = defineProps({
     type: Object as PropType<IBeautyFoundation>
   }
 })
-console.log(props, 'props---')
 </script>
   
 <style scoped lang="less">
@@ -37,8 +36,10 @@ console.log(props, 'props---')
     height: 96px;
     width: 105px;
     background: url('@assets/usedimg/beauty-foundation@2x.png') no-repeat center / cover;
+    background-size: 105px 96px;
     &__top{
-      padding-top: 10px;
+      padding-top: 13px;
+      text-align: center;
     }
     &__val{
       font-family: D-DIN-DIN, D-DIN-DIN;
@@ -51,6 +52,7 @@ console.log(props, 'props---')
       font-weight: normal;
       font-size: 14px;
       color: #FFFFFF;
+      padding-left: 5px;
     }
     &__subdesc{
       font-family: Alibaba PuHuiTi 2.0, Alibaba PuHuiTi 20;
