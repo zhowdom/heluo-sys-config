@@ -10,10 +10,10 @@
         :navigation="true"
         class="mySwiper"
       >
-        <!-- 轮播项 -->
-        <swiper-slide v-for="(item, idx) in slides" :key="item.code" class="swiper-item">
+        <!-- 如果是办公室房间详情的环境数据，则只有一项 -->
+        <swiper-slide v-for="(item, idx) in all_watchInfos" :key="idx" class="swiper-item">
           <!-- <div @click="handleClick(item, idx)" :class="['each-item-text', idx === curActivedIdx ? 'cur' : '']">{{item.name}}</div> -->
-           <oppositeAngleA />
+           <oppositeAngleA :eachinfos="item?.attributes" :name="item?.name" :type="type" />
         </swiper-slide>
       </swiper>
     </div>
@@ -36,6 +36,8 @@ const slidesPerView = ref(1);
 // 当前点击激活的项目高亮标记下标
 const curActivedIdx = ref(0)
 const curActivedSys = ref()
+
+const props = defineProps(['all_watchInfos', 'type'])
 
   // 轮播数据
 const slides = ref(GLOBAL.sysList);

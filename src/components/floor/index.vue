@@ -1,12 +1,11 @@
 <script setup lang="ts">
 import { createNamespace } from '@/utils'
-import {useFloor} from '@/hooks'
+import {useFloor, useUeConnect} from '@/hooks'
 const { bem } = createNamespace('heluo-sys-floor')
 import {onMounted, computed, watch} from 'vue'
 import { useRoute } from 'vue-router'
 const route = useRoute()
 import {UeReportType, IFloor} from '@/types'
-import {useUeConnect} from '@/hooks'
 import {useGlobalVisibleControllerStore} from '@/stores'
 const globalVisibleControllerStore = useGlobalVisibleControllerStore()
 const {ueConnect} = useUeConnect()

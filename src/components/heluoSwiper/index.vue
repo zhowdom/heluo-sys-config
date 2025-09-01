@@ -2,22 +2,31 @@
     
     <!-- Swiper 容器 -->
     <div class="swiper-container">
-      <swiper 
+      <div class="custom-nav prev-btn" @click="handlePrev">
+        <i class="icon-left"></i>
+      </div>
+      <div class="custom-nav next-btn" @click="handleNext">
+        <i class="icon-right"></i>
+      </div>
+      <div class="inner">
+        <swiper
         :modules="modules" 
         :slides-per-view="slidesPerView"
+        @swiper="handleSwiperInit"
         :slide-to-clicked-slide="true"
-        space-between="15"
-        :navigation="true"
+        space-between="10"
         class="mySwiper"
       >
         <!-- 轮播项 -->
         <swiper-slide v-for="(item, index) in props?.swiperData" :key="index" class="swiper-item">
-          <div v-if="props.type === SwiperPropsType.WarnType" @click="handleClick(item?.typeCode, index)" :class="['each-item-text', index === curActivedIdx ? 'cur' : '']">{{item?.typeName}}</div>
-          <div v-if="props.type === SwiperPropsType.ShiYanShi" @click="handleClick(item?.spaceId, index)" :class="['each-item-text', index === curActivedIdx ? 'cur' : '']">{{item?.spaceName}}</div>
-          <div v-if="props.type === SwiperPropsType.ChuanGanQi" @click="handleClick(item?.deviceId, index)" :class="['each-item-text', index === curActivedIdx ? 'cur' : '']">{{item?.deviceName}}</div>
-          <div v-if="props.type === SwiperPropsType.Floor" @click="handleClick(item?.spaceId, index)" :class="['each-item-text', index === curActivedIdx ? 'cur' : '']">{{item?.spaceName}}</div>
+          <div v-if="props.type === SwiperPropsType.WarnType" @click="handleClick(item?.typeCode, index)" :class="['each-item-text txtellipsis', index === curActivedIdx ? 'cur' : '']">{{item?.typeName}}</div>
+          <div v-if="props.type === SwiperPropsType.ShiYanShi" @click="handleClick(item?.spaceId, index)" :class="['each-item-text txtellipsis', index === curActivedIdx ? 'cur' : '']">{{item?.spaceName}}</div>
+          <div v-if="props.type === SwiperPropsType.ChuanGanQi" @click="handleClick(item?.deviceId, index)" :class="['each-item-text txtellipsis', index === curActivedIdx ? 'cur' : '']">{{item?.deviceName}}</div>
+          <div v-if="props.type === SwiperPropsType.Floor" @click="handleClick(item?.spaceId, index)" :class="['each-item-text txtellipsis', index === curActivedIdx ? 'cur' : '']">{{item?.spaceName}}</div>
         </swiper-slide>
       </swiper>
+      </div>
+      
     </div>
 </template>
   
@@ -36,8 +45,26 @@
 const slidesPerView = ref(4);
 // 当前点击激活的项目高亮标记下标
 const curActivedIdx = ref(0)
+let swiperInstance = null;
 
+// 初始化完成后获取实例
+const handleSwiperInit = (swiper) => {
+  swiperInstance = swiper;
+  console.log('Swiper初始化完成');
+};
 
+// 自定义导航按钮事件
+const handlePrev = () => {
+  if (swiperInstance) {
+    swiperInstance.slidePrev(); // 切换到上一组
+  }
+};
+
+const handleNext = () => {
+  if (swiperInstance) {
+    swiperInstance.slideNext(); // 切换到下一组
+  }
+};
 
 const props = defineProps(['swiperData', 'type'])
 const emit = defineEmits(['updateCurIndex'])
@@ -62,6 +89,13 @@ const handleClick = (i, idx) => {
 .swiper-container {
   margin: 0 auto;
   width: 400px;
+  padding: 0 10px;
+  box-sizing: border-box;
+  position: relative;
+  .inner{
+    width: calc(100% - 23px);
+    margin: 0 auto;
+  }
 }
 
 /* 自定义轮播项样式 */
@@ -79,8 +113,8 @@ const handleClick = (i, idx) => {
 }
 /* 容器内边距为10px，实现箭头与内容的间距 */
 :deep(.swiper) {
-  padding-left: 32px !important;
-  padding-right: 32px !important;
+  // padding-left: 32px !important;
+  // padding-right: 32px !important;
 }
 /* 每一项文字 */
 .each-item-text{
@@ -90,35 +124,38 @@ const handleClick = (i, idx) => {
   color: rgba(255,255,255,0.68);
   text-align: center;
   line-height: 22px;
-  background: #2a3a3d;
+  background: #29393c;
   border-radius: 10px;
   cursor: pointer;
-  border: 1px solid #2a3a3d;
+  border-bottom: 1px solid rgba(255,255,255,.6);
   background: rgba(32,59,65,0.8) rgba(37,57,58,0.8);
   &.cur{
-    border: 1px solid #1AE2BE;
+    background: #112024;
+    border: 2px solid #1AE2BE;
+  }
+  &:hover{
+    background: linear-gradient( 180deg, rgba(45,240,231,0) 0%, rgba(45,240,231,0.3) 100%);
+    border-bottom: 1px solid #29E3BF;
+    box-sizing: border-box;
+    border-left: none;
+    border-right: none;
+    border-top:none;
   }
 }
-:deep(.swiper-button-next){
-  height: 26px;
-  width: 16px;
+
+.custom-nav{
   position: absolute;
-  top: 21px;
-  right: 0;
-  background: url('@assets/usedimg/swiper_right@2x.png') no-repeat center / cover;
-  &:after{
-    display: none;
-  }
-}
-:deep(.swiper-button-prev){
+  top: -1px;
   height: 26px;
   width: 16px;
+  cursor: pointer;
+}
+.prev-btn{
   background: url('@assets/usedimg/swiper_left@2x.png') no-repeat center / cover;
-  &:after{
-    display: none;
-  }
-  position: absolute;
-  top: 21px;
   left: 0;
+}
+.next-btn{
+  background: url('@assets/usedimg/swiper_right@2x.png') no-repeat center / cover;
+  right: 0;
 }
 </style>

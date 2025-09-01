@@ -25,7 +25,21 @@ enum Api {
   roomList = 'api/iot/space/roomList', // 实验室101、102、103
   sencedevice = 'api/iot/device/list', // 传感器1、2、3
   getAllEnvDataLog = 'api/ems/getAllEnvDataLog',  // 温度、湿度曲线数据
-  getEnvironmentData = 'api/iot/space/environmentData' // 温度、湿度曲线数据
+  getEnvironmentData = 'api/iot/space/environmentData',
+  getGetDeviceDetails = 'api/digital/GetDeviceDetails', 
+
+  getPoint = 'openapi/iot/QueryPoint', // 查询点位
+  queryControlList = 'api/iot/GetDeviceControlList', // 设备控制面板
+
+
+  //办公室详情
+  officeBrief = 'api/iot/space/introduction',
+  officeDeviceList = 'api/digital/getDeviceList',
+
+  // 合并后的接口
+  queryAllSelect = 'openapi/iot/QueryAllSelect', // 根据设备id及设备Code获取设备详情、设备控制点位、设备实时数据点位接口
+  getSpaceNewAll = 'api/iot/space/GetSpaceNewAll', // 获取房间介绍、房间内部环境数据、设备列表（办公室详情）
+  setAttributeVal = 'openapi/iot/device/setAttributeVal', // 控制接口
   
 }
 
@@ -54,4 +68,16 @@ export const getSpaceInfoApi = (data) => post(Api.getSpaceInfo, data)
 export const getSpaceInfoApi_new = (data) => post(Api.getSpaceInfo_new, data)
 export const sencedeviceApi = (data) => post(Api.sencedevice, data)
 export const getAllEnvDataLogApi = (data) => post(Api.getAllEnvDataLog, data)
-export const getEnvironmentDataApi = (data) => post(Api.getEnvironmentData, data)
+export const getEnvironmentDataApi = () => post(Api.getEnvironmentData)
+export const getGetDeviceDetailsApi = (data) => post(Api.getGetDeviceDetails, data)
+
+export const getPointApi = () => post(Api.getPoint)
+export const queryControlListApi = (data) => post(Api.queryControlList, data)
+export const officeBriefApi = (data) => post(Api.officeBrief, data)
+export const officeDeviceListApi = (data) => post(Api.officeDeviceList, data)
+
+// 一些老接口优化合并后接口
+export const queryAllSelectApi = (data) => post(Api.queryAllSelect, data)
+export const getSpaceNewAllApi = (data) => post(Api.getSpaceNewAll, data)
+export const setAttributeValApi = (data) => post(Api.setAttributeVal, data)
+

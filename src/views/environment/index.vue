@@ -16,7 +16,7 @@ import { createNamespace } from '@/utils'
 import {useGlobalVisibleControllerStore} from '@/stores'
 import {storeToRefs} from 'pinia'
 import {ref, onMounted, watch} from 'vue'
-import {getSpaceInfoApi_new, roomListApi, sencedeviceApi, warnlistApi, getAllEnvDataLogApi} from '@/apis'
+import {getSpaceInfoApi_new, roomListApi, sencedeviceApi, warnlistApi, getAllEnvDataLogApi, getEnvironmentDataApi} from '@/apis'
 import {SwiperPropsType} from '@/types'
 
 const globalVisibleControllerStore = useGlobalVisibleControllerStore()
@@ -28,7 +28,7 @@ function SwitchFoldOnlyTwoSide (state:boolean) {
 }
 
 const listdata = ref([
-  { title: '实验室101'},
+  { typeCode: '实验室101'},
   { title: '实验室102'},
   { title: '实验室103'},
   { title: '实验室104'},
@@ -53,6 +53,7 @@ const cur_deviceId = ref('')
 const swiperdData = ref([])
 const myswiper = ref()
 const curEnvironmentInfos = ref()
+const all_watchInfos = ref()
 
 const handleShiYanShi = (payload) => {
   // 获取当前选中的实验室，拿到spaceId
@@ -61,12 +62,13 @@ const handleShiYanShi = (payload) => {
   cur_spaceName.value = listdata.value.find(v => {
     return v?.spaceId === payload?.queryCode
   })['spaceName']
-
+  temperatureChartData()
   console.log(cur_spaceName.value, '909090909')
 }
 const handleChuanGanQi = (payload) => {
   // 获取当前选中的传感器，拿到deviceId
   cur_deviceId.value = payload?.queryCode
+  temperatureChartData()
 }
 
 // 《一》先查询实验室101、102、103swiper列表数据
@@ -99,6 +101,7 @@ listdata2.value = res?.data?.data || []
 
 // 《三》温度、湿度曲线数据
 const temperatureChartData = async () => {
+  console.log(cur_deviceId.value, '当前的设备ID------')
   const res = await getAllEnvDataLogApi({
     deviceId: cur_deviceId.value,
     firstTime: "15:00:00",
@@ -137,24 +140,40 @@ const runWarnlistApi = async () => {
   console.log('报警记录数据', res)
 }
 
+// 查询所有环境报警指标信息
+const getEnvironmentData = async () => {
+const res = await getEnvironmentDataApi()
+all_watchInfos.value = res?.data?.data
+console.log(res, 'iiii999shhshs9')
+}
+
+// 封装组合获取曲线数据的函数
+const composeQueryCharts = async () => {
+  // 先查询空间
+  await runRoomListApi()
+  // 再查对应空间下的设备
+  await runSencedeviceApi()
+  // 再查对应设备下的曲线数据
+  await temperatureChartData()
+}
 
 onMounted(async () => {
-  await runRoomListApi()
-  await runSencedeviceApi()
-  await temperatureChartData()
+  await composeQueryCharts()
   // runGetSpaceInfoApi(swiperdData.value[0]['attributeCode'])
   runGetSpaceInfoApi()
   runWarnlistApi()
+  getEnvironmentData()
 })
 
+// 当空间发生切换变化时
 watch(
-  () => myswiper.value?.currentIndex,
+  () => cur_spaceId.value,
   (newVal) => {
-    console.log(newVal, 'ns')
-    // runGetSpaceInfoApi(swiperdData.value[newVal]?.['attributeCode'])
-    runGetSpaceInfoApi()
+    // 重新根据最新的空间ID 来查当前空间对应的设备列表
+    runSencedeviceApi()
   }
 )
+
 </script>
 
 <template>
@@ -164,14 +183,18 @@ watch(
       <div class="card-bg-com">
         <cardtitle name="环境实时监测" />
         <!-- <oppositeAngleA :infos="curEnvironmentInfos" :name="cur_spaceName" /> -->
-         <composeSwiper />
+         <composeSwiper :all_watchInfos="all_watchInfos" />
       </div>
 
       <!--温湿度趋势-->
       <div class="card-bg-com">
         <cardtitle name="环境趋势" />
-        <heluoSwiper style="margin-top:30px" :swiper-data="listdata" @updateCurIndex="handleShiYanShi" :type="SwiperPropsType.ShiYanShi" />
-        <heluoSwiper style="margin-top:20px" :swiper-data="listdata2" @updateCurIndex="handleChuanGanQi" :type="SwiperPropsType.ChuanGanQi" />
+        <div class="com-swiper-wrap" style="height: 6vh;">
+          <heluoSwiper :swiper-data="listdata" @updateCurIndex="handleShiYanShi" :type="SwiperPropsType.ShiYanShi" />
+        </div>
+        <div class="com-swiper-wrap" style="height: 3vh;">
+          <heluoSwiper :swiper-data="listdata2" @updateCurIndex="handleChuanGanQi" :type="SwiperPropsType.ChuanGanQi" />
+        </div>
         <swiperEcharts :swiperdData="swiperdData" ref="myswiper" />
       </div>
 
@@ -188,7 +211,9 @@ watch(
     <floor :class="[bem('mrgl-auto'), 'animate__animated', globalVisiblePool.home_two_pannel.state ? 'animate__backInRight' : 'animate__backOutRight']" />
     <div :class="[bem('r'), 'animate__animated', globalVisiblePool.home_two_pannel.state ? 'animate__backInRight' : 'animate__backOutRight', 'card-bg-com']">
       <cardtitle name="余风量趋势" />
-      <heluoSwiper :swiper-data="listdata" style="margin-top: 15px;" />
+      <div class="com-swiper-wrap">
+        <heluoSwiper :swiper-data="listdata" :type="SwiperPropsType.ShiYanShi" />
+      </div>
       <curlyLineChartsForWind />
 
       <cardtitle name="报警记录" />
@@ -209,8 +234,7 @@ watch(
     margin-left: auto;
   }
   .warnlog-box{
-    padding-top: 1vh;
-    height: 58vh;
+    height: calc(63vh - 100px);
     overflow-y: scroll;
   }
 }

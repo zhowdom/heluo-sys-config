@@ -53,11 +53,15 @@ watch(
   () => props.swiperdData,
   (newVal) => {
     slides.value = newVal.map(v => {
+      console.log(slides, 'slides看雨哦看')
       return { attributeName: v.attributeName, attributeCode: v.attributeCode, list: v.values, unitName: v.unitName }
     })
+  },
+  {
+    deep: true
   }
 )
-console.log(slides, 'slides')
+
 
 // 注册需要的 Swiper 模块
 const modules = [Pagination, Navigation];

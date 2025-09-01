@@ -1,8 +1,8 @@
 <template>
-    <div :class="[bem(), 'flex-between']" @click="handleEachDevice">
-      <div class="l">新风机新风</div>
-      <div class="r">设备编号：FC-001</div>
-      <span class="point"></span>
+    <div :class="[bem(), 'flex-between']" @click="handleEachDevice(props?.infos?.deviceId)">
+      <div class="l">{{props?.infos?.modelName}}</div>
+      <div class="r">设备编号：{{props?.infos?.deviceCode}}</div>
+      <span :class="['point', props?.infos?.status === 'stopped' ? 'red' : '']"></span>
     </div>
 </template>
   
@@ -10,8 +10,10 @@
 import { createNamespace } from '@/utils'
 const { bem } = createNamespace('heluo-sys-newDeviceItem')
 
-const handleEachDevice = () => {
-  emit('deviceChange', 'device-id')
+const props = defineProps(['infos']) 
+
+const handleEachDevice = (deviceId) => {
+  emit('deviceChange', deviceId)
 }
 
 const emit = defineEmits(['deviceChange'])
@@ -19,13 +21,15 @@ const emit = defineEmits(['deviceChange'])
   
 <style scoped lang="less">
   .heluo-sys-newDeviceItem{
-    width: 100%;
+    width: 95%;
     height: 40px;
-    background: linear-gradient( 180deg, rgba(101,124,137,0.05) 0%, rgba(66,100,105,0.3) 100%);
+    background: #293b42;
     text-indent: 32px;
     position: relative;
-    margin-bottom: 10px;
+    margin: 0 auto 10px auto;
     cursor: pointer;
+    border-bottom: 1px solid #293b42;
+    border-radius: 3px;
     .point{
       height: 8px;
       width: 8px;
@@ -34,6 +38,9 @@ const emit = defineEmits(['deviceChange'])
       position: absolute;
       top:14px;
       left: 10px;
+      &.red{
+        background: #FF6B57FF;
+      }
     }
     .l{
       font-weight: 400;

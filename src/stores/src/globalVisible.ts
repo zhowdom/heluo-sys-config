@@ -8,6 +8,7 @@ export const useGlobalVisibleControllerStore = defineStore("globalVisibleControl
     profession: { state: true }, // 预留整个专业面板的显隐[目前没用到]
     home_two_pannel: { state: true }, // 首页、机电、环境、安防等页面左右两侧显隐状态
     manyou_two_pannel: { state: true }, // 漫游页面左右两侧显隐状态
+    office_dialog: { state: false },
     float_menu_state: { // 用来区分整个底部菜单按钮的激活选中状态
       state: 1
     }
@@ -24,7 +25,10 @@ export const useGlobalVisibleControllerStore = defineStore("globalVisibleControl
     }
   }
 
-  // 更改首页两侧数据面板的收起和展开
+  /**
+   * 
+   * @description 更改首页两侧数据面板的收起和展开--UE定义的函数名字，此处包装一下
+   */
   const SwitchFoldOnlyTwoSide = (state:boolean) => {
     globalControlVisible({name: 'home_two_pannel', state})
   }

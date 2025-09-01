@@ -1,12 +1,14 @@
 var GLOBAL = {
   /* 项目自定义配置在这里 */
-  userName: 'Appid-20025-009', // Appid-20025-009 | appid-2024-sdhk
-  password: 'Abc123@#', // Abc123@# | ukZburTc@
-  // userName: 'appid-2024-sdhk', // Appid-20025-009 | appid-2024-sdhk
-  // password: 'ukZburTc@', // Abc123@# | ukZburTc@
+  userName: 'Appid-25009-001', // [北方：Appid-25009-001|Abc123@#] | [测试（设备控制无数据, 房间有数据）：Appid-20025-009|Abc123@#] / [？（设备控制有数据）：appid-2024-sdhk|ukZburTc@]/
+  password: 'Abc123@#',
   Host: 'https://api.helotus.cn/',
   sysName: '科研建筑智慧运营平台',
   sysList: [
+    {
+      name: '智能空调',
+      code: 'AirConditioner'
+    },
     {
       name: '新⻛系统',
       code: 'CombinedAir'
@@ -19,10 +21,6 @@ var GLOBAL = {
       name: '通⻛系统',
       code: 'ExhaustFan'
     },
-    {
-      name: '智能空调',
-      code: 'AirConditioner'
-    }
   ],
   professionList: [
     {

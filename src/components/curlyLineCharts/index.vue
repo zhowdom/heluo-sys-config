@@ -42,7 +42,7 @@ const initChart = () => {
   grid: {
       left: 15,    // 左侧间隙
       right: 15,   // 右侧间隙
-      top: 80,     // 顶部间隙
+      top: 40,     // 顶部间隙
       bottom: 15,  // 底部间隙
       containLabel: true  // 确保标签不被裁剪
     },
@@ -59,7 +59,7 @@ const initChart = () => {
     legend: {
       orient: 'horizontal',
       left: 'center',
-      top: '10%',
+      top: '0%',
       textStyle: {
         color: 'white', // 核心配置：字体颜色为白色
         fontSize: 12,   // 可选：字体大小
@@ -85,7 +85,8 @@ const initChart = () => {
       type: 'value',
       // name: '温度', // Y轴顶部的小单位
       min: 0,
-      max: 25,
+      // max: 25,
+      max: props.echartdata && Math.max(...props.echartdata?.['list'].map(v => v.value)),
       interval: 5,
       splitLine: {
           show: true, // 显示网格线
@@ -164,8 +165,7 @@ onUnmounted(() => {
   
 <style scoped lang="less">
   .heluo-sys-verticalCharts{
-    /*30vh*/
-    height: 27vh;
+    height: calc(60vh - 350px);
     width:100%;
     .chart-box{
       height: 100%;

@@ -1,88 +1,51 @@
-<script setup lang="ts">
-import {ref} from 'vue'
-import { MinusCircleOutlined, PlusCircleOutlined } from '@ant-design/icons-vue'
-import settimeout from '../settimeout/index.vue'
-const btnsList = ref([
-  { name: '开机', val: 1},
-  { name: '关机', val: 2}
-])
-
-const runmodeList = ref([
-  { name: '自动', val: 1},
-  { name: '制冷', val: 2},
-  { name: '制热', val: 3},
-  { name: '送风', val: 4},
-])
-const speedList = ref([
-  { name: '自动', val: 1},
-  { name: '低速', val: 2},
-  { name: '中速', val: 3},
-  { name: '高速', val: 4},
-])
-const curIndexBtns = ref(0)
-const curIndexRunMode = ref(0)
-const curIndexSpeed = ref(0)
-
-// 温度调节
-const temperatureVal = ref(22);
-
-const handleBtns = (idx) => curIndexBtns.value = idx
-const handleRunmode = (idx) => curIndexRunMode.value = idx
-const handleSpeed = (idx) => curIndexSpeed.value = idx
-
-const visibleSettimeout = ref(false)
-const clickSetTimeout = () => {
-  visibleSettimeout.value = true
-}
-</script>
-
 <template>
-   <div class="settimeout-box">
-
-    <div class="btns flex-center">
-      <div @click="handleBtns(idx)" v-for="(item, idx) in btnsList" :key="idx" :class="[idx === curIndexBtns ? 'cur' : '', 'btncom']">{{item?.name}}</div>
-    </div>
-
-
+  <div class="settimeout-box">
+    <!--温度调节-->
     <div class="temperature-box">
-      <span style="font-size: 13px;">温度调节：</span>
-      <MinusCircleOutlined class="minus" style="cursor: pointer;" />
-      <a-input class="a-input" v-model:value="temperatureVal" placeholder="" style="background: transparent;border: 1px solid #fff;color:#fff" />
-      <span class="unit">℃</span>
-      <PlusCircleOutlined style="cursor: pointer;" />
+      <span style="font-size: 13px;">{{attributes?.attributeName}}：</span>
+      <MinusCircleOutlined class="minus" @click="minus" style="cursor: pointer;" />
+      <a-input class="a-input" v-model:value="attributes.realTimeValue.value" placeholder="" style="background: transparent;border: 1px solid #fff;color:#fff" />
+      <span class="unit">{{attributes?.unitName}}</span>
+      <PlusCircleOutlined @click="plus" style="cursor: pointer;" />
     </div>
-
-    <span class="sub-title">运行模式</span>
-    <div class="btns4 flex-center">
-      <div @click="handleRunmode(idx)" v-for="(item, idx) in runmodeList" :key="idx" :class="[idx === curIndexRunMode ? 'cur' : '', 'btncom4']">{{item?.name}}</div>
-    </div>
-
-    <span class="sub-title">风速调节</span>
-    <div class="btns4 flex-center">
-      <div @click="handleSpeed(idx)" v-for="(item, idx) in speedList" :key="idx" :class="[idx === curIndexSpeed ? 'cur' : '', 'btncom4']">{{item?.name}}</div>
-    </div>
-
-    <span class="sub-title">定时控制</span>
-    <div class="settimer" @click="clickSetTimeout">设置定时</div>
-    
   </div>
   
-
-  <a-modal v-model:visible="visibleSettimeout" title="定时控制设置"
-  :footer="null"
-  class="custom-modal"
-  >
-    <settimeout />
-  </a-modal>
-
 </template>
+  
+<script setup lang='ts'>
+import {ref, defineEmits, watch} from 'vue'
+import {useSetAttribute} from './hook/useSetAttribute'
+  const props = defineProps(['attributes', 'attributeCode', 'deviceId', 'idx'])
+  const {save} = useSetAttribute()
 
+  const emit = defineEmits(['controlMinus', 'controlPlus'])
+  const minus = () => {
+    emit('controlMinus', props?.idx)
+  }
+  const plus = () => {
+    emit('controlPlus', props?.idx)
+  }
+  watch(
+    () => props?.attributes.realTimeValue.value,
+    () => {
+      save({
+        deviceId: props?.deviceId,
+        attributeCode: props?.attributeCode,
+        value: props?.attributes?.realTimeValue['value']
+      })
+    },
+    {
+      deep: true
+    }
+  )
+</script>
+  
 <style scoped lang="less">
 .settimeout-box{
   color: #fff;
   font-size: 14px;
-  padding: 10px 13px;
-  height: 288px;
+  padding: 0 13px;
+  // height: 288px;
   box-sizing: border-box;
   .btns{
     background: #1a2c2f;
@@ -142,7 +105,7 @@ const clickSetTimeout = () => {
     line-height: 30px;
     padding: 0;
     padding-left: 10px;
-   background: rgba(29, 51, 54, .5)!important;
+    background: rgba(29, 51, 54, .5)!important;
     border: 1px solid #335057!important;
   }
   .minus{

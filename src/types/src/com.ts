@@ -155,7 +155,7 @@ export interface InfiniteScrollOptions {
    */
   immediate?: boolean;
 }
-// UE与前端交互的触发事件列别
+// UE与前端交互的触发事件类别【前端界面主动点击然后触发事件与UE交互的公共方法】
 export enum UeReportType {
   /**
    * 悬浮菜单角度
@@ -193,6 +193,26 @@ export enum UeReportType {
    * 设备定位
    */
   LOCATION = 'location',
+  /**
+   * 办公室房间详情一级弹窗中的设备列表点击
+   */
+  OFFICE_FIRST_DEVICELIST = 'office_first_device_list',
+  /**
+   * 办公室房间详情一级弹窗中的右上角关闭按钮
+   */
+  OFFICE_FIRST_CLOSE = 'office_first_close',
+  /**
+   * 办公室房间详情二级弹窗中的右上角关闭按钮
+   */
+  OFFICE_NEXT_CLOSE = 'office_next_close',
+  /**
+   * 点击底部悬浮的环境菜单-无参数
+   */
+  FLOAT_MENU_ENVIRONMENT = 'float_menu_environment',
+  /**
+   * 点击底部悬浮的环境菜单-无参数
+   */
+  FLOAT_MENU_ELECTRICITY = 'float_menu_electricity',
 }
 // UE与店端通讯传递的对应类别参数名
 export enum UeReportParams {
@@ -232,6 +252,11 @@ export enum UeReportParams {
    * 设备定位
    */
   location = '定位',
+  office_next_close = '房间设备',
+  office_first_close = '楼层房间',
+  office_first_device_list = '房间设备列表',
+  float_menu_environment = '环境',
+  float_menu_electricity = '机电',
 }
 
 export interface IProfession {
@@ -259,21 +284,19 @@ export enum EnuMenusIds {
 }
 /*通用的底座数据类型*/
 export interface IBeautyFoundation {
-  // 单一标题时候的标题
-  title?: string;
   // 数值+单位时候，数值
-  value?: number;
+  attributeValue?: number;
   // 数值+单位时候，单位
-  unit?: string;
+  unitName?: string;
   // 副描述
-  subDesc: string;
+  attributeName: string;
 }
 
 export enum  SysType {
-  FreshAirSystem = 0,  // 新风系统
-  ExhaustSystem = 1,   // 排风系统
-  SmartAirConditioner = 2,  // 智能空调
-  VentilationTerminal = 3   // 通风终端
+  SmartAirConditioner = 0,  // 智能空调
+  FreshAirSystem = 1,  // 新风系统
+  ExhaustSystem = 2,   // 排风系统
+  VentilationTerminal = 3   // 通风系统
 }
 /*系统中swiper的类型区分，主要是用来区分每个不同类型时参数props不同的*/
 export enum  SwiperPropsType {

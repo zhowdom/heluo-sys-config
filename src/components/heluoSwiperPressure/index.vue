@@ -13,37 +13,37 @@
         <!-- 轮播项 -->
         <swiper-slide class="swiper-item">
           <div class="each">
-            <beautyFoundation class="mini" :infos="{ value: 89, unit: 'Pa', subDesc: '实验室101'}" />
-            <beautyFoundation class="mini" :infos="{ value: 23, unit: 'Pa', subDesc: '实验室102'}" />
-            <beautyFoundation class="mini" :infos="{ value: 45, unit: 'Pa', subDesc: '实验室103'}" />
+            <beautyFoundation class="mini" :infos="{ attributeValue: 89, unitName: 'Pa', attributeName: '实验室101'}" />
+            <beautyFoundation class="mini" :infos="{ attributeValue: 23, unitName: 'Pa', attributeName: '实验室102'}" />
+            <beautyFoundation class="mini" :infos="{ attributeValue: 45, unitName: 'Pa', attributeName: '实验室103'}" />
 
-            <beautyFoundation class="mini" :infos="{ value: 17, unit: 'Pa', subDesc: '实验室104'}" />
-            <beautyFoundation class="mini" :infos="{ value: 19, unit: 'Pa', subDesc: '实验室105'}" />
-            <beautyFoundation class="mini" :infos="{ value: 69, unit: 'Pa', subDesc: '实验室106'}" />
+            <beautyFoundation class="mini" :infos="{ attributeValue: 17, unitName: 'Pa', attributeName: '实验室104'}" />
+            <beautyFoundation class="mini" :infos="{ attributeValue: 19, unitName: 'Pa', attributeName: '实验室105'}" />
+            <beautyFoundation class="mini" :infos="{ attributeValue: 69, unitName: 'Pa', attributeName: '实验室106'}" />
           </div>
         </swiper-slide>
 
         <swiper-slide class="swiper-item">
           <div class="each">
-            <beautyFoundation class="mini" :infos="{ value: 39, unit: 'Pa', subDesc: '实验室107'}" />
-            <beautyFoundation class="mini" :infos="{ value: 12, unit: 'Pa', subDesc: '实验室108'}" />
-            <beautyFoundation class="mini" :infos="{ value: 10, unit: 'Pa', subDesc: '实验室109'}" />
+            <beautyFoundation class="mini" :infos="{ attributeValue: 39, unitName: 'Pa', attributeName: '实验室107'}" />
+            <beautyFoundation class="mini" :infos="{ attributeValue: 12, unitName: 'Pa', attributeName: '实验室108'}" />
+            <beautyFoundation class="mini" :infos="{ attributeValue: 10, unitName: 'Pa', attributeName: '实验室109'}" />
 
-            <beautyFoundation class="mini" :infos="{ value: 21, unit: 'Pa', subDesc: '实验室110'}" />
-            <beautyFoundation class="mini" :infos="{ value: 51, unit: 'Pa', subDesc: '实验室111'}" />
-            <beautyFoundation class="mini" :infos="{ value: 90, unit: 'Pa', subDesc: '实验室112'}" />
+            <beautyFoundation class="mini" :infos="{ attributeValue: 21, unitName: 'Pa', attributeName: '实验室110'}" />
+            <beautyFoundation class="mini" :infos="{ attributeValue: 51, unitName: 'Pa', attributeName: '实验室111'}" />
+            <beautyFoundation class="mini" :infos="{ attributeValue: 90, unitName: 'Pa', attributeName: '实验室112'}" />
           </div>
         </swiper-slide>
 
         <swiper-slide class="swiper-item">
           <div class="each">
-            <beautyFoundation class="mini" :infos="{ value: 1, unit: 'Pa', subDesc: '实验室102'}" />
-            <beautyFoundation class="mini" :infos="{ value: 1, unit: 'Pa', subDesc: '实验室102'}" />
-            <beautyFoundation class="mini" :infos="{ value: 1, unit: 'Pa', subDesc: '实验室102'}" />
+            <beautyFoundation class="mini" :infos="{ attributeValue: 1, unitName: 'Pa', attributeName: '实验室102'}" />
+            <beautyFoundation class="mini" :infos="{ attributeValue: 1, unitName: 'Pa', attributeName: '实验室102'}" />
+            <beautyFoundation class="mini" :infos="{ attributeValue: 1, unitName: 'Pa', attributeName: '实验室102'}" />
 
-            <beautyFoundation class="mini" :infos="{ value: 1, unit: 'Pa', subDesc: '实验室102'}" />
-            <beautyFoundation class="mini" :infos="{ value: 1, unit: 'Pa', subDesc: '实验室102'}" />
-            <beautyFoundation class="mini" :infos="{ value: 1, unit: 'Pa', subDesc: '实验室102'}" />
+            <beautyFoundation class="mini" :infos="{ attributeValue: 1, unitName: 'Pa', attributeName: '实验室102'}" />
+            <beautyFoundation class="mini" :infos="{ attributeValue: 1, unitName: 'Pa', attributeName: '实验室102'}" />
+            <beautyFoundation class="mini" :infos="{ attributeValue: 1, unitName: 'Pa', attributeName: '实验室102'}" />
           </div>
         </swiper-slide>
       </swiper>

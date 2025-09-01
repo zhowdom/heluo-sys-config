@@ -15,7 +15,9 @@ export enum VisiblePoolEnu {
   // 记录底部菜单按钮的选中激活状态区分
   FLOAT_MENU_STATE= 'float_menu_state',
   // 漫游页面左右两side面板显隐
-  MANYOU_TWO_PANNEL = 'manyou_two_pannel'
+  MANYOU_TWO_PANNEL = 'manyou_two_pannel',
+  // 办公室详情弹窗
+  OFFICE_DIALOG= 'office_dialog',
 }
 export interface IVisibleItem {
   state: boolean|number

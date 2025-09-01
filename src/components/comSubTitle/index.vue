@@ -27,6 +27,7 @@ const props = defineProps({
     text-align: center;
     width: 110px;
     height: 23px;
+    margin-left: 15px;
     .name{
       font-family: Alibaba PuHuiTi 2.0, Alibaba PuHuiTi 20;
       font-weight: normal;

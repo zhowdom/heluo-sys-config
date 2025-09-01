@@ -6,21 +6,21 @@
         :modules="modules" 
         :slides-per-view="slidesPerView"
         :slide-to-clicked-slide="true"
-        space-between="32"
+        space-between="0"
         :navigation="true"
         class="mySwiper"
       >
         <!-- 轮播项 -->
-        <swiper-slide v-for="(item, index) in slides" :key="index" class="swiper-item">
+        <swiper-slide v-for="(item, index) in slides" :key="index" class="swiper-item dianwei-box">
           <!-- <div @click="handleClick(item.title, index)" :class="['each-item-text', index === curActivedIdx ? 'cur' : '']">{{item.title}}</div> -->
-          <beautyFoundation :infos="{ value: 1, unit: '%', subDesc: '实验室102'}" />
+          <beautyFoundation :infos="item" />
         </swiper-slide>
       </swiper>
     </div>
 </template>
   
 <script setup lang='ts'>
-  import { ref, onMounted } from 'vue';
+  import { ref, onMounted, computed } from 'vue';
   import { Swiper, SwiperSlide } from 'swiper/vue';
   import { Pagination, Navigation } from 'swiper/modules';
   import beautyFoundation from '../beautyFoundation/index.vue'
@@ -30,44 +30,20 @@
   import 'swiper/css/pagination';
   import 'swiper/css/navigation';
 
+  const props = defineProps(['controlPointList'])
+
   // 控制可见项目数量的变量
 const slidesPerView = ref(2);
 // 当前点击激活的项目高亮标记下标
 const curActivedIdx = ref(0)
 const isnavigation = ref(true)
+
   // 轮播数据
-const slides = ref([
-  {
-    title: '101室',
-    desc: '送风开启',
-    num: 2
-  },
-  {
-    title: '102室',
-    desc: '送风开启',
-    num: 2
-  },
-  {
-    title: '103室',
-    desc: '送风开启',
-    num: 2
-  },
-  {
-    title: '104室',
-    desc: '送风开启',
-    num: 2
-  },
-  {
-    title: '105室',
-    desc: '送风开启',
-    num: 2
-  },
-  {
-    title: '106室',
-    desc: '送风开启',
-    num: 2
-  }
-]);
+// const slides = ref(props?.controlPointList);
+
+
+const slides = computed(() => props?.controlPointList)
+// console.log(slides, 'hshshhsh8888888')
 
 // 注册需要的 Swiper 模块
 const modules = [Pagination, Navigation];
@@ -98,7 +74,13 @@ const handleClick = (i, idx) => {
 
 :deep(.swiper-item){
   height: 72px!important;/*swiper子项目整体高度，父级继承*/
-  width: 154px!important;/*swiper子项目整体宽度，父级继承*/
+  // width: 154px!important;/*swiper子项目整体宽度，父级继承*/
+}
+.dianwei-box{
+  position: relative;
+  :deep(.heluo-sys-beauty-foundation-wrapper){
+    margin: 0 auto;
+  }
 }
 /* 容器内边距为10px，实现箭头与内容的间距 */
 :deep(.swiper) {

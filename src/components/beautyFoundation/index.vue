@@ -1,14 +1,12 @@
 <template>
     <div :class="bem()">
-      <div v-if="props.topType === 1" :class="[bem('top')]">
-        <span :class="bem('val')">{{props.infos.value}}</span>
-        <span  :class="bem('unit')">{{props.infos.unit}}</span>
+      <div :class="[bem('top')]">
+        <span :class="bem('val')">{{props.infos.attributeValue}}</span>
+        <span  :class="bem('unit')">{{props.infos.unitName}}</span>
       </div>
-      <div v-else class="flex-center">
-        <span>{{props.infos.title}}</span>
-      </div>
+      
       <div class="flex-center">
-        <span :class="bem('subdesc')">{{props.infos.subDesc}}</span>
+        <span :class="[bem('subdesc'), 'txtellipsis']">{{props.infos.attributeName}}</span>
       </div>
     </div>
 </template>

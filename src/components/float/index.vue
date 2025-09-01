@@ -18,6 +18,8 @@ const handleToHome = () => {
     query: {},
   })
   globalVisibleControllerStore.globalControlVisible({name: 'home_two_pannel', state: true})
+  // 点击首页时候，关闭办公室详情弹窗
+  globalVisibleControllerStore.globalControlVisible({name: 'office_dialog', state: false})
   ueConnect(UeReportType.FLOAT_MENU_HOME, { opt: '首页' })
 }
 const isLayerPath = ref(false)
@@ -27,6 +29,8 @@ watchEffect(() => {
 const handleManYou = () => {
   globalVisibleControllerStore.globalControlVisible({name: 'float_menu_state', state: 3})
   globalVisibleControllerStore.globalControlVisible({name: 'manyou_two_pannel', state: false})
+  // 点击漫游时候，关闭办公室详情弹窗
+  globalVisibleControllerStore.globalControlVisible({name: 'office_dialog', state: false})
   ueConnect(UeReportType.MAN_YOU)
 }
 const handleQuWei = () => {
@@ -50,6 +54,7 @@ const handleEnvironment = () => {
     name: 'environment',
     query: {},
   })
+  ueConnect(UeReportType.FLOAT_MENU_ENVIRONMENT)
 }
 const handleElectricity = () => {
   globalVisibleControllerStore.globalControlVisible({name: 'float_menu_state', state: 7})
@@ -58,6 +63,7 @@ const handleElectricity = () => {
     name: 'electricity',
     query: {},
   })
+  ueConnect(UeReportType.FLOAT_MENU_ELECTRICITY)
 }
 
 const curMenuActivedState = computed(() => globalVisibleControllerStore.globalVisiblePool.float_menu_state.state)
@@ -73,21 +79,21 @@ const curMenuActivedState = computed(() => globalVisibleControllerStore.globalVi
     </div>
 
     <!--环境-->
-    <div class="each">
+    <div class="each" v-if="!isLayerPath">
       <img v-if="curMenuActivedState === EnuMenusIds.ENVIRONMENT" src="@assets/usedimg/hj-1.png" @click="handleEnvironment()" />
       <img v-else src="@assets/usedimg/hj-0.png" @click="handleEnvironment()" />
       <div class="txt" :class="{'cur': curMenuActivedState === EnuMenusIds.ENVIRONMENT}">环境</div>
     </div>
 
     <!--安防-->
-    <div class="each">
+    <div class="each" style="display: none;">
       <img v-if="curMenuActivedState === EnuMenusIds.SECURITY" src="@assets/usedimg/af-1.png" @click="handleSecurity()" />
       <img v-else src="@assets/usedimg/af-0.png" @click="handleSecurity()" />
       <div class="txt" :class="{'cur': curMenuActivedState === EnuMenusIds.SECURITY}">安防</div>
     </div>
 
     <!--机电-->
-    <div class="each">
+    <div class="each" v-if="!isLayerPath">
       <img v-if="curMenuActivedState === EnuMenusIds.ELECTRICITY" src="@assets/usedimg/jd-1.png" @click="handleElectricity()" />
       <img v-else src="@assets/usedimg/jd-0.png" @click="handleElectricity()" />
       <div class="txt" :class="{'cur': curMenuActivedState === EnuMenusIds.ELECTRICITY}">机电</div>

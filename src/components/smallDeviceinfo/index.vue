@@ -46,8 +46,16 @@ const props = defineProps({
 <style scoped lang="less">
   .heluo-sys-smallDeviceinfo{
     width: calc(100% - 32px);
-    background: linear-gradient( 180deg, rgba(101,124,137,0.05) 0%, rgba(66,100,105,0.3) 100%);
+    background: linear-gradient( 180deg, rgba(101,124,137,0.5) 0%, rgba(66,100,105,0.9) 100%);
     margin: 0 auto;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    &:hover{
+      background: linear-gradient( 180deg, rgba(45,240,231,0) 0%, rgba(45,240,231,0.3) 100%);
+      border-bottom: 1px solid #29E3BF;
+      box-sizing: border-box;
+    }
     .top {
       padding: 10px 10px 0 10px;
       width: 368px;

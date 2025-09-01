@@ -84,6 +84,39 @@ export function useUeConnect() {
           })
           window.ue.web.js_call_ue(UeReportParams[UeReportType.LOCATION], payload?.opt)
           break;
+        case UeReportType.OFFICE_FIRST_DEVICELIST:
+          console.log({
+            param1: UeReportParams[UeReportType.OFFICE_FIRST_DEVICELIST],
+            param2: payload?.opt
+          })
+          window.ue.web.js_call_ue(UeReportParams[UeReportType.OFFICE_FIRST_DEVICELIST], payload?.opt)
+          break;
+        case UeReportType.OFFICE_FIRST_CLOSE:
+          console.log({
+            param1: UeReportParams[UeReportType.OFFICE_FIRST_CLOSE],
+            param2: payload?.opt
+          })
+          window.ue.web.js_call_ue(UeReportParams[UeReportType.OFFICE_FIRST_CLOSE], payload?.opt)
+          break;
+        case UeReportType.OFFICE_NEXT_CLOSE:
+          console.log({
+            param1: UeReportParams[UeReportType.OFFICE_NEXT_CLOSE],
+            param2: payload?.opt
+          })
+          window.ue.web.js_call_ue(UeReportParams[UeReportType.OFFICE_NEXT_CLOSE], payload?.opt)
+          break;
+        case UeReportType.FLOAT_MENU_ENVIRONMENT:
+          console.log({
+            param1: UeReportParams[UeReportType.FLOAT_MENU_ENVIRONMENT],
+          })
+          window.ue.web.js_call_ue(UeReportParams[UeReportType.FLOAT_MENU_ENVIRONMENT])
+          break;
+        case UeReportType.FLOAT_MENU_ELECTRICITY:
+          console.log({
+            param1: UeReportParams[UeReportType.FLOAT_MENU_ELECTRICITY],
+          })
+          window.ue.web.js_call_ue(UeReportParams[UeReportType.FLOAT_MENU_ELECTRICITY])
+          break;
         default:
           console.log('No matched to event type')
       }

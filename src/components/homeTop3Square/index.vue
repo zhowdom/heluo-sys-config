@@ -47,6 +47,8 @@ const props = defineProps({
       padding-bottom: 20px;
       position: relative;
       padding: 0 10px 0 10px;
+      display: flex;
+      align-items: center;
       .l,.m,.r{
         margin-top:10px;
       }

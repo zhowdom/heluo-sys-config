@@ -89,7 +89,9 @@ onMounted(() => {
       <!-- <card name="devicelist" position="right"></card> -->
       <homeTop3Square :infos="infos" />
       <verticalCharts :chartlist="chartlist" />
-      <heluoSwiper :swiper-data="listdata" @updateCurIndex="updateCurIndex" :type="SwiperPropsType.WarnType" />
+      <div class="com-swiper-wrap">
+        <heluoSwiper :swiper-data="listdata" @updateCurIndex="updateCurIndex" :type="SwiperPropsType.WarnType" />
+      </div>
       <!--设备信息小面板-->
       <div class="small-box-deviceinfo-wrap">
         <div v-for="(item, idx) in warnList" :key="idx">
@@ -117,7 +119,6 @@ onMounted(() => {
   .small-box-deviceinfo-wrap{
     height: 28vh;
     overflow-y: scroll;
-    margin: 10px 0;
     box-sizing: border-box;
   }
 }

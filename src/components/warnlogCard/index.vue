@@ -2,7 +2,7 @@
     <!--报警记录卡片组件-->
     <div :class="bem()">
       <div class="room">
-        <p class="name">{{props?.infos?.spaceIdName}}<span class="desc">{{props.infos?.alarmDesc}}</span></p>
+        <p class="name txtellipsis">{{props?.infos?.spaceIdName}}<span class="desc">{{props.infos?.alarmDesc}}</span></p>
       </div>
       <div class="date">
         <span class="year">{{dayjs(props.infos?.alarmTime).format('YYYY/MM/DD')}}</span>
@@ -25,7 +25,7 @@ const props = defineProps(['infos'])
   .heluo-sys-warnlogcard{
     width: calc(100% - 30px);
     height: 72px;
-    background: linear-gradient( 180deg, rgba(101,124,137,0.05) 0%, rgba(66,100,105,0.3) 100%);
+    background: #203236;
     border-radius: 2px;
     color: #fff;
     font-size: 14px;
@@ -33,8 +33,12 @@ const props = defineProps(['infos'])
     box-sizing: border-box;
     position: relative;
     border-radius: 5px;
-    margin: 0 auto;
-    margin-bottom: 1vh;
+    margin: 1vh auto 1vh auto;
+    cursor: pointer;
+    &:hover{
+      background: linear-gradient( 180deg, rgba(45,240,231,0) 0%, rgba(45,240,231,0.3) 100%);
+      border-bottom: 1px solid #29E3BF;
+    }
     &::before{
       content: '';
       width: 7px;
@@ -51,9 +55,11 @@ const props = defineProps(['infos'])
       padding: 3px 5px;
       font-size: 12px;
       margin-left: 10px;
+      border-radius: 3px;
     }
     .name{
       text-indent: 20px;
+      max-width: 295px;
     }
     .status{
       position: absolute;

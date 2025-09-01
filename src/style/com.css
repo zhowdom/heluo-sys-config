@@ -23,7 +23,7 @@ body {
   display: flex;
   place-items: center;
   width: 100%;
-  background: url('@assets/usedimg/body-zz.png') no-repeat center / cover;
+  /* background: url('@assets/usedimg/body-zz.png') no-repeat center / cover; */
 
   color: #fff;
 
@@ -137,4 +137,17 @@ input:focus {
 /*系统主背景色【卡片、弹窗等背景色】*/
 .card-bg-com{
   background: rgba(9,40,46,0.7);
+}
+/*通用swiper小菜单组件的外盒包裹样式*/
+.com-swiper-wrap{
+  display: flex;
+  align-items: center;
+  height: 5vh;
+}
+.clearfix::after {
+  content: "";       /* 空内容 */
+  display: block;    /* 块级元素 */
+  clear: both;       /* 清除左右浮动 */
+  visibility: hidden; /* 隐藏伪元素 */
+  height: 0;         /* 高度为0 */
 }

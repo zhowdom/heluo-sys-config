@@ -1,8 +1,8 @@
 <template>
     <!--机电-设备详情-右边小豆腐块纯文本信息面板组件-->
-    <div :class="bem()">
-      <span class="label">设备状态</span>
-      <p class="val">施电器有限公司</p>
+    <div :class="[bem(), infos?.isAirConditioner ? 'isAirConditioner-panel' : '']">
+      <span class="label">{{ infos?.name }}</span>
+      <p class="val txtellipsis">{{ infos?.val }}</p>
     </div>
 </template>
   
@@ -10,25 +10,42 @@
 import { createNamespace } from '@/utils'
 const { bem } = createNamespace('heluo-sys-puretxt-panel')
 
+const props = defineProps(['infos'])
 </script>
   
 <style scoped lang="less">
   .heluo-sys-puretxt-panel{
     width: 176px;
-    height: 53px;
-    background: rgba(66,100,105,0.2);
-    border-radius: 2px 2px 2px 2px;
-    border-left: 1px solid rgba(255, 255, 255, .4);
+    height: 14%;
+    background: #233539;
+    border-radius: 4px;
+    border-left: 1px solid #fff;
     font-size: 14px;
     padding-left: 15px;
-    padding-top: 6px;
-
+    box-sizing: border-box;
+    margin-top: 10px;
+    align-content: center;
+    &:nth-child(odd){
+      float: left;
+    }
+    &:nth-child(even){
+      float: right;
+    }
     .label{
-      color: rgba(255,255,255,0.9);
+      color: rgba(255,255,255,0.7);
     }
     .val{
       color: #fff;
-      padding-top: 4px;
+      padding-top: 10px;
+      font-weight: 400;
+      font-size: 13px;
+    }
+  }
+  /*空调的比例高度单独调*/
+  .isAirConditioner-panel{
+    height: 13.5%;
+    .val{
+      padding-top: 1px;
     }
   }
 </style>

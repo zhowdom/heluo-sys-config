@@ -31,7 +31,7 @@ const initChart = () => {
   grid: {
       left: 15,    // 左侧间隙
       right: 15,   // 右侧间隙
-      top: 40,     // 顶部间隙
+      top: 10,     // 顶部间隙
       bottom: 15,  // 底部间隙
       containLabel: true  // 确保标签不被裁剪
     },

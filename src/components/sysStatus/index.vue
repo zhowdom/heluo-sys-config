@@ -28,6 +28,7 @@ const props = defineProps(['infos'])
   .heluo-sys-sysStatus{
     gap: 10px;
     height: 14vh;
+    margin: 0 20px;
     .each{
       height: 90px;
       width:70px;
