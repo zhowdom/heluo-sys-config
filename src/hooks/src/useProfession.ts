@@ -10,7 +10,6 @@ export function useProfession() {
   }
   // 批量更改每一项专业按钮的开启、关闭状态
   const LayerChoose = (state: LayerState) => {
-    console.log(state);
     professionList.value = professionList.value.map(item => {
       // 如果state中存在当前项的param作为key，则更新state，否则保持原state
       return {

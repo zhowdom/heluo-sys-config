@@ -1,8 +1,4 @@
 export function autoImg(cardname:string, subpath:string) {
-  console.log({
-    cardname,
-    subpath
-  })
   let imgsMap: Record<string, { default: string }> = {}
   switch(subpath) {
     case 'seat2':

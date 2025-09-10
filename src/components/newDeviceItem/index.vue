@@ -1,8 +1,8 @@
 <template>
     <div :class="[bem(), 'flex-between']" @click="handleEachDevice(props?.infos?.deviceId)">
-      <div class="l">{{props?.infos?.modelName}}</div>
-      <div class="r">设备编号：{{props?.infos?.deviceCode}}</div>
-      <span :class="['point', props?.infos?.status === 'stopped' ? 'red' : '']"></span>
+      <div class="l txtellipsis">{{props?.infos?.deviceName}}</div>
+      <div class="r txtellipsis">{{props?.infos?.spaceName}}</div>
+      <span :class="['point', props?.infos?.status === 'running' ? '' : 'red']"></span>
     </div>
 </template>
   
@@ -21,9 +21,9 @@ const emit = defineEmits(['deviceChange'])
   
 <style scoped lang="less">
   .heluo-sys-newDeviceItem{
-    width: 95%;
+    width: 90%;
     height: 40px;
-    background: #293b42;
+    background: rgba(35, 53, 57, .8);
     text-indent: 32px;
     position: relative;
     margin: 0 auto 10px auto;
@@ -47,6 +47,7 @@ const emit = defineEmits(['deviceChange'])
       font-size: 14px;
       color: #FFFFFF;
       line-height: 20px;
+      width: 158px;
     }
     .r{
       font-weight: 400;
@@ -54,6 +55,7 @@ const emit = defineEmits(['deviceChange'])
       color: #FFFFFF;
       line-height: 20px;
       padding-right: 10px;
+      max-width: calc(100% - 158px);
     }
     &:hover{
       background: linear-gradient( 180deg, rgba(45,240,231,0) 0%, rgba(45,240,231,0.3) 100%);

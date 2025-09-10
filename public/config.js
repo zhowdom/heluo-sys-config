@@ -4,6 +4,7 @@ var GLOBAL = {
   password: 'Abc123@#',
   Host: 'https://api.helotus.cn/',
   sysName: '科研建筑智慧运营平台',
+  imgURL: 'https://api.helotus.cn/api/object/getimage/?name=',
   sysList: [
     {
       name: '智能空调',
@@ -11,7 +12,7 @@ var GLOBAL = {
     },
     {
       name: '新⻛系统',
-      code: 'CombinedAir'
+      code: 'IAS'
     },
     {
       name: '排⻛系统',

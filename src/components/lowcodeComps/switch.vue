@@ -16,7 +16,6 @@ const props = defineProps(['attributes', 'attributeCode', 'deviceId', 'idx'])
 const {save} = useSetAttribute()
 
 const handleBtns = (idx, item) => {
-  console.log(item, 'heleloososo')
   curIndexBtns.value = idx
   save({
       deviceId: props?.deviceId,
@@ -36,6 +35,7 @@ const curIndexBtns = ref(props?.attributes?.options?.findIndex(v => v?.optionVal
   box-sizing: border-box;
   p.label{
     padding-bottom: 10px;
+    padding-left: 8px;
   }
   .btns{
     background: #1a2c2f;
@@ -95,7 +95,7 @@ const curIndexBtns = ref(props?.attributes?.options?.findIndex(v => v?.optionVal
   line-height: 16px;
   margin-bottom: 10px;
   display: inline-block;
-  padding-left: 0;
+  padding-left: 8px;
 }
 .settimer{
   width: 368px;

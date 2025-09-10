@@ -24,7 +24,8 @@ const spaceId = route.params.spaceId as string;
   <div :class="[bem(), 'flex-between']">
     <!-- <floor top="270px" left="0px" path="layer" ref="refFloor" /> -->
     <floor :class="['animate__animated', globalVisiblePool.manyou_two_pannel.state ? ' animate__backInLeft' : 'animate__backOutLeft']" path="layer" ref="refFloor" :spaceId="spaceId" @userChangedFloor="refProfession.LayerHide(true)" />
-    <device :class="['animate__animated', globalVisiblePool.manyou_two_pannel.state ? ' animate__backInLeft' : 'animate__backOutLeft']" :floorToDeviceList="refFloor?.floorToDeviceList || []" :loading="refFloor?.getFloorlisttodeviceLoading" />
+    <!--暂时隐藏楼层页的设备面板-->
+    <!-- <device :class="['animate__animated', globalVisiblePool.manyou_two_pannel.state ? ' animate__backInLeft' : 'animate__backOutLeft']" :floorToDeviceList="refFloor?.floorToDeviceList || []" :loading="refFloor?.getFloorlisttodeviceLoading" /> -->
     <profession  :class="[bem('mgl-auto'), 'animate__animated', globalVisiblePool.manyou_two_pannel.state ? 'animate__backInRight' : 'animate__backOutRight']" ref="refProfession" />
   </div>
 

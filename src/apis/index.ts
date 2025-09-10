@@ -40,6 +40,8 @@ enum Api {
   queryAllSelect = 'openapi/iot/QueryAllSelect', // 根据设备id及设备Code获取设备详情、设备控制点位、设备实时数据点位接口
   getSpaceNewAll = 'api/iot/space/GetSpaceNewAll', // 获取房间介绍、房间内部环境数据、设备列表（办公室详情）
   setAttributeVal = 'openapi/iot/device/setAttributeVal', // 控制接口
+
+  obtainSpacePressureDifference = 'api/iot/space/ObtainSpacePressureDifference', // 压差实时监测
   
 }
 
@@ -80,4 +82,6 @@ export const officeDeviceListApi = (data) => post(Api.officeDeviceList, data)
 export const queryAllSelectApi = (data) => post(Api.queryAllSelect, data)
 export const getSpaceNewAllApi = (data) => post(Api.getSpaceNewAll, data)
 export const setAttributeValApi = (data) => post(Api.setAttributeVal, data)
+
+export const obtainSpacePressureDifferenceApi = () => post(Api.obtainSpacePressureDifference)
 

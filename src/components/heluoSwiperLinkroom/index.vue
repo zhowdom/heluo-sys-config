@@ -83,7 +83,6 @@ const modules = [Pagination, Navigation];
 
 //点击事件
 const handleClick = (i, idx) => {
-  console.log(i, '点击项目')
   curActivedIdx.value = idx
   visible.value = true
 }

@@ -17,7 +17,7 @@ const props = defineProps(['infos'])
   .heluo-sys-puretxt-panel{
     width: 176px;
     height: 14%;
-    background: #233539;
+    background: rgba(35, 53, 57, .8);
     border-radius: 4px;
     border-left: 1px solid #fff;
     font-size: 14px;

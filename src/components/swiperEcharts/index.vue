@@ -53,7 +53,6 @@ watch(
   () => props.swiperdData,
   (newVal) => {
     slides.value = newVal.map(v => {
-      console.log(slides, 'slides看雨哦看')
       return { attributeName: v.attributeName, attributeCode: v.attributeCode, list: v.values, unitName: v.unitName }
     })
   },

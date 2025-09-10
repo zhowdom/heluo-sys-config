@@ -76,6 +76,7 @@ onMounted(() => {
   get_home_safe_situationApi()
   getDeviceUseRanking()
 })
+
 </script>
 
 <template>

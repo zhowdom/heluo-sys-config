@@ -16,7 +16,7 @@ import { createNamespace } from '@/utils'
 import {useGlobalVisibleControllerStore} from '@/stores'
 import {storeToRefs} from 'pinia'
 import {ref, onMounted, watch} from 'vue'
-import {getSpaceInfoApi_new, roomListApi, sencedeviceApi, warnlistApi, getAllEnvDataLogApi, getEnvironmentDataApi} from '@/apis'
+import {getSpaceInfoApi_new, roomListApi, sencedeviceApi, warnlistApi, getAllEnvDataLogApi, getEnvironmentDataApi, obtainSpacePressureDifferenceApi} from '@/apis'
 import {SwiperPropsType} from '@/types'
 
 const globalVisibleControllerStore = useGlobalVisibleControllerStore()
@@ -54,16 +54,15 @@ const swiperdData = ref([])
 const myswiper = ref()
 const curEnvironmentInfos = ref()
 const all_watchInfos = ref()
+const obtainSpacePressureDifferenceList = ref([])
 
 const handleShiYanShi = (payload) => {
   // 获取当前选中的实验室，拿到spaceId
-  console.log(payload, 'payload')
   cur_spaceId.value = payload?.queryCode
   cur_spaceName.value = listdata.value.find(v => {
     return v?.spaceId === payload?.queryCode
   })['spaceName']
   temperatureChartData()
-  console.log(cur_spaceName.value, '909090909')
 }
 const handleChuanGanQi = (payload) => {
   // 获取当前选中的传感器，拿到deviceId
@@ -81,7 +80,6 @@ const runRoomListApi = async () => {
   // 默认选中第一个实验室
   cur_spaceId.value = (res?.data?.data || [])?.[0]?.['spaceId']
   cur_spaceName.value = (res?.data?.data || [])?.[0]?.['spaceName']
-  console.log('实验室101、102、103', res)
 }
 // 《二》传感器1、2、3数据
 const runSencedeviceApi = async () => {
@@ -96,12 +94,10 @@ const runSencedeviceApi = async () => {
 listdata2.value = res?.data?.data || []
   // 默认选中第一个实验室对应下的第一个传感器
   cur_deviceId.value = (res?.data?.data || [])?.[0]?.['deviceId']
-  console.log('传感器1、2、3数据', res)
 }
 
 // 《三》温度、湿度曲线数据
 const temperatureChartData = async () => {
-  console.log(cur_deviceId.value, '当前的设备ID------')
   const res = await getAllEnvDataLogApi({
     deviceId: cur_deviceId.value,
     firstTime: "15:00:00",
@@ -111,7 +107,6 @@ const temperatureChartData = async () => {
     timeType: "LastTime"
   })
   swiperdData.value = res?.data?.data || []
-  console.log(res, 'loggg')
 }
 // const runGetSpaceInfoApi = async (attributeCode) => {
 //   const res = await getSpaceInfoApi_new({
@@ -137,14 +132,12 @@ const runWarnlistApi = async () => {
     }
   )
   warnlogList.value = res?.data?.data || []
-  console.log('报警记录数据', res)
 }
 
 // 查询所有环境报警指标信息
 const getEnvironmentData = async () => {
 const res = await getEnvironmentDataApi()
 all_watchInfos.value = res?.data?.data
-console.log(res, 'iiii999shhshs9')
 }
 
 // 封装组合获取曲线数据的函数
@@ -157,10 +150,17 @@ const composeQueryCharts = async () => {
   await temperatureChartData()
 }
 
+// 压差实时监测
+const runobtainSpacePressureDifferenceApi = async () => {
+  const res = await obtainSpacePressureDifferenceApi()
+  obtainSpacePressureDifferenceList.value = res?.data?.data || []
+}
+
 onMounted(async () => {
   await composeQueryCharts()
   // runGetSpaceInfoApi(swiperdData.value[0]['attributeCode'])
   runGetSpaceInfoApi()
+  runobtainSpacePressureDifferenceApi()
   runWarnlistApi()
   getEnvironmentData()
 })
@@ -202,7 +202,7 @@ watch(
       <div class="card-bg-com">
         <cardtitle name="压差实时监测" />
         <div class="main-presure flex-center">
-          <heluoSwiperPressure />
+          <heluoSwiperPressure :list="obtainSpacePressureDifferenceList" />
         </div>
         
       </div>

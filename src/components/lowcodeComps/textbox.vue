@@ -23,6 +23,7 @@ import {useSetAttribute} from './hook/useSetAttribute'
     emit('controlMinus', props?.idx)
   }
   const plus = () => {
+    // props?.idx这个参数不能错，必须和原始数组中的对应索引对应上才可以
     emit('controlPlus', props?.idx)
   }
   watch(

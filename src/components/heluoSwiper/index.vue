@@ -50,7 +50,6 @@ let swiperInstance = null;
 // 初始化完成后获取实例
 const handleSwiperInit = (swiper) => {
   swiperInstance = swiper;
-  console.log('Swiper初始化完成');
 };
 
 // 自定义导航按钮事件
@@ -74,7 +73,6 @@ const modules = [Pagination, Navigation];
 
 //点击事件
 const handleClick = (i, idx) => {
-  console.log(i, '点击项目')
   curActivedIdx.value = idx
   emit('updateCurIndex', {
     queryCode: i,
@@ -129,6 +127,8 @@ const handleClick = (i, idx) => {
   cursor: pointer;
   border-bottom: 1px solid rgba(255,255,255,.6);
   background: rgba(32,59,65,0.8) rgba(37,57,58,0.8);
+  padding-left: 3px;
+  padding-right: 3px;
   &.cur{
     background: #112024;
     border: 2px solid #1AE2BE;

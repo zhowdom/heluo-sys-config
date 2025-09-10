@@ -43,14 +43,12 @@ const isnavigation = ref(true)
 
 
 const slides = computed(() => props?.controlPointList)
-// console.log(slides, 'hshshhsh8888888')
 
 // 注册需要的 Swiper 模块
 const modules = [Pagination, Navigation];
 
 //点击事件
 const handleClick = (i, idx) => {
-  console.log(i, '点击项目')
   curActivedIdx.value = idx
 }
 </script>

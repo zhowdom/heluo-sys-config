@@ -8,9 +8,7 @@ interface SetAttributeParams {
 
 export function useSetAttribute () {
   const save = async (params: SetAttributeParams) => {
-    console.log(params, 'jsjsjjs0000')
-    const res = await setAttributeValApi(params)
-    console.log(res, 'ok')
+    await setAttributeValApi(params)
   }
   return {
     save

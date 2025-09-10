@@ -91,7 +91,7 @@ const curIndexRunMode = ref(props?.attributes?.options?.findIndex(v => v?.option
   line-height: 16px;
   margin-bottom: 10px;
   display: inline-block;
-  padding-left: 0;
+  padding-left: 8px;
 }
 .settimer{
   width: 368px;

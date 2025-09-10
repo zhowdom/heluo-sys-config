@@ -58,6 +58,7 @@ const props = defineProps({
       font-size: 14px;
       color: #FFFFFF;
       text-shadow: 0px 2px 3px rgba(0,0,0,0.5);
+      max-width: 96%;
     }
   }
 </style>

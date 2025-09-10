@@ -22,7 +22,7 @@ const cur_spaceName = ref()
 
 const deviceList = ref([])
 const briefInfos = ref()
-
+const imgurl = ref()
 
 // 新-设备列表数据
 const new_device_list = ref([])
@@ -34,6 +34,7 @@ const controlPointList = ref([])
 const controlDataList = ref([])
 // 二级办公室详情设备基础信息
 const nextDialogBaseInfos = ref({})
+const imgState = ref(false)
 
 
 const emit = defineEmits(['closeFirstOfficeDialog'])
@@ -48,18 +49,15 @@ const runRoomListApi = async () => {
   // 默认选中第一个实验室
   cur_spaceId.value = (res?.data?.data || [])?.[0]?.['spaceId']
   cur_spaceName.value = (res?.data?.data || [])?.[0]?.['spaceName']
-  console.log('实验室101、102、103', res)
 }
 
 const handleShiYanShi = (payload) => {
   // 获取当前选中的实验室，拿到spaceId
-  console.log(payload, 'payload')
   cur_spaceId.value = payload?.queryCode
   cur_spaceName.value = listdata.value.find(v => {
     return v?.spaceId === payload?.queryCode
   })['spaceName']
 
-  console.log(cur_spaceName.value, '909090909')
 }
 
 
@@ -71,7 +69,6 @@ const new_all_watchInfos = ref()
 const getEnvironmentData = async () => {
 const res = await getEnvironmentDataApi()
 all_watchInfos.value = res?.data?.data
-console.log(res, 'iiii9999')
 }
 
 // 不传系统ID，传空间ID，查询设备列表
@@ -84,13 +81,12 @@ const queryDeviceList = async () => {
     "pageLength":1000
 })
   deviceList.value = res?.data?.data || []
-  console.log(res?.data?.data.length, '?????')
 }
 
 // 查询带图片的简介
 const runofficeBriefApi = async () => {
   const res = await officeBriefApi({
-    SpaceCode: 'F0101'
+    SpaceCode: props?.SpaceCode
   })
   briefInfos.value = res?.data?.data
 }
@@ -99,20 +95,20 @@ const runofficeBriefApi = async () => {
 const rungetSpaceNewAllApi  = async () => {
   const res = await getSpaceNewAllApi(
     {
-      // SpaceCode: props?.SpaceCode // UE那边主动调这个办公室弹窗，会主动传这个SpaceCode参数给过来
-      SpaceCode: 'F0127' // UE那边主动调这个办公室弹窗，会主动传这个SpaceCode参数给过来
+      // F0128有数据
+      SpaceCode: props?.SpaceCode // UE那边主动调这个办公室弹窗，会主动传这个SpaceCode参数给过来
     }
   )
-  console.log(res, 'res111---查询办公室详情弹窗数据（新）')
 
   // 第一步拿到设备列表
   new_device_list.value = res?.data?.data?.deviceList || []
   // 拿到环境数据面板-豆腐块信息
   new_all_watchInfos.value = res?.data?.data?.environmentData || []
-  console.log(new_all_watchInfos.value, 'M88888')
   // 记录楼层中房间的编号
   curRoomCode.value = res?.data?.data?.spaceInfo?.[0]['number']
-
+  
+  imgurl.value = GLOBAL?.imgURL + res?.data?.data?.spaceInfo?.[0]['image']
+  imgState.value = res?.data?.data?.spaceInfo?.[0]['image']
 }
 
 // 关闭office弹窗-二级office弹窗关闭也用这个
@@ -126,6 +122,7 @@ onMounted(() => {
   rungetSpaceNewAllApi()
   getEnvironmentData()
   runRoomListApi()
+  runofficeBriefApi()
   // queryDeviceList()
 })
 
@@ -140,7 +137,6 @@ const queryNextOfficeDialogInofs = async (item) => {
     "DeviceId": item?.deviceId,
     "DeviceCode":item?.deviceCode
   })
-console.log('say hello', res?.data?.data)
 // 基础设备信息数据
 nextDialogBaseInfos.value = res?.data?.data?.detail
 // 只挑选可读写且是[switch|radio|textbox]3类型之一的项目
@@ -148,16 +144,9 @@ controlDataList.value = ((res?.data?.data?.['control'] || [])?.[0]?.['attributes
   return v?.attributeType === 'readwrite' && (v?.controlType === 'textbox' || v?.controlType === 'switch' || v?.controlType === 'radio')
 })
 
-
-console.log(controlDataList.value, '筛选过后的数据')
-
 // 点位数据
 controlPointList.value = res?.data?.data?.realtimedata?.attributeList || []
-console.log(controlDataList.value, '点位00099过后的数据')
 
-  console.log({
-    '设备详情、点位、控制查询': res,
-  }, '合并接口数据')
 }
 
 // 打开二级办公室详情页面弹窗
@@ -184,7 +173,7 @@ const checkOfficeDetail = (item) => {
            <div class="l">
             <cardtitle name="房间信息" />
             <div class="room-infos">
-              <img class="brief-img" :src="briefInfos?.imgUrl || 'https://gimg3.baidu.com/topone/src=https%3A%2F%2Fbkimg.cdn.bcebos.com%2Fsmart%2Fa686c9177f3e6709c93d56d9459f883df8dcd100ffc7-bkimg-process%2Cv_1%2Crw_1%2Crh_1%2Cmaxl_800%2Cpad_1%3Fx-bce-process%3Dimage%2Fresize%2Cm_pad%2Cw_348%2Ch_348%2Ccolor_ffffff&refer=http%3A%2F%2Fwww.baidu.com&app=2011&size=w931&n=0&g=0n&er=404&q=75&fmt=auto&maxorilen2heic=2000000?sec=1755795600&t=d1694394435fe82ac021f5f88807187d'" />
+              <img v-if="imgState" class="brief-img" :src="imgurl" />
               <div class="txt">{{briefInfos?.introduction}}</div>
             </div>
           </div>

@@ -24,7 +24,7 @@ doLogin()
 window.InformationOnTheRightRoom = (SpaceCode) => {
   // globalVisibleControllerStore.SwitchFoldOnlyTwoSide(state)
   curSpaceCode.value = SpaceCode
-  message.info(JSON.stringify(SpaceCode));
+  // message.info(JSON.stringify(SpaceCode));
   globalVisibleControllerStore.globalControlVisible({name: 'manyou_two_pannel', state: false})
   // visibleOffice.value = true
   globalVisibleControllerStore.globalControlVisible({name: 'office_dialog', state: true})
@@ -38,7 +38,7 @@ const closeFirstOfficeDialog = () => {
 
 // 模拟UE主动调
 // setTimeout(() => {
-//   window.InformationOnTheRightRoom('F0101')
+//   window.InformationOnTheRightRoom('F1W01')
 // }, 5000)
 
 </script>
@@ -50,7 +50,6 @@ const closeFirstOfficeDialog = () => {
     <router-view />    
     <component v-if="globalVisiblePool.warn.state" :is="Warn" />
     <officeDialog v-if="globalVisiblePool.office_dialog.state" @closeFirstOfficeDialog="closeFirstOfficeDialog" :SpaceCode="curSpaceCode" />
-    <!-- <officeDialog v-if="globalVisiblePool.office_dialog.state" @closeFirstOfficeDialog="closeFirstOfficeDialog" SpaceCode="F0101" /> -->
   </div>
 </template>
 <style scoped lang="less">

@@ -11,47 +11,21 @@
         class="mySwiper"
       >
         <!-- 轮播项 -->
-        <swiper-slide class="swiper-item">
+        <swiper-slide v-for="item in groupedLabs" :key="item.id" class="swiper-item">
           <div class="each">
-            <beautyFoundation class="mini" :infos="{ attributeValue: 89, unitName: 'Pa', attributeName: '实验室101'}" />
-            <beautyFoundation class="mini" :infos="{ attributeValue: 23, unitName: 'Pa', attributeName: '实验室102'}" />
-            <beautyFoundation class="mini" :infos="{ attributeValue: 45, unitName: 'Pa', attributeName: '实验室103'}" />
-
-            <beautyFoundation class="mini" :infos="{ attributeValue: 17, unitName: 'Pa', attributeName: '实验室104'}" />
-            <beautyFoundation class="mini" :infos="{ attributeValue: 19, unitName: 'Pa', attributeName: '实验室105'}" />
-            <beautyFoundation class="mini" :infos="{ attributeValue: 69, unitName: 'Pa', attributeName: '实验室106'}" />
+            <beautyFoundation v-for="(item, index) in list" :key="index" class="mini" :infos="{ attributeValue: item?.attributes[0]?.['values'][0]['value'], unitName: item?.attributes[0]?.['unitName'], attributeName: item?.name}" />
           </div>
         </swiper-slide>
 
-        <swiper-slide class="swiper-item">
-          <div class="each">
-            <beautyFoundation class="mini" :infos="{ attributeValue: 39, unitName: 'Pa', attributeName: '实验室107'}" />
-            <beautyFoundation class="mini" :infos="{ attributeValue: 12, unitName: 'Pa', attributeName: '实验室108'}" />
-            <beautyFoundation class="mini" :infos="{ attributeValue: 10, unitName: 'Pa', attributeName: '实验室109'}" />
+        
 
-            <beautyFoundation class="mini" :infos="{ attributeValue: 21, unitName: 'Pa', attributeName: '实验室110'}" />
-            <beautyFoundation class="mini" :infos="{ attributeValue: 51, unitName: 'Pa', attributeName: '实验室111'}" />
-            <beautyFoundation class="mini" :infos="{ attributeValue: 90, unitName: 'Pa', attributeName: '实验室112'}" />
-          </div>
-        </swiper-slide>
-
-        <swiper-slide class="swiper-item">
-          <div class="each">
-            <beautyFoundation class="mini" :infos="{ attributeValue: 1, unitName: 'Pa', attributeName: '实验室102'}" />
-            <beautyFoundation class="mini" :infos="{ attributeValue: 1, unitName: 'Pa', attributeName: '实验室102'}" />
-            <beautyFoundation class="mini" :infos="{ attributeValue: 1, unitName: 'Pa', attributeName: '实验室102'}" />
-
-            <beautyFoundation class="mini" :infos="{ attributeValue: 1, unitName: 'Pa', attributeName: '实验室102'}" />
-            <beautyFoundation class="mini" :infos="{ attributeValue: 1, unitName: 'Pa', attributeName: '实验室102'}" />
-            <beautyFoundation class="mini" :infos="{ attributeValue: 1, unitName: 'Pa', attributeName: '实验室102'}" />
-          </div>
-        </swiper-slide>
+        
       </swiper>
     </div>
 </template>
   
 <script setup lang='ts'>
-  import { ref, onMounted } from 'vue';
+  import { ref, onMounted, computed } from 'vue';
   import { Swiper, SwiperSlide } from 'swiper/vue';
   import { Pagination, Navigation } from 'swiper/modules';
   import beautyFoundation from '../beautyFoundation/index.vue'
@@ -61,12 +35,27 @@
   import 'swiper/css/pagination';
   import 'swiper/css/navigation';
 
+  const props = defineProps(['list'])
+
   // 控制可见项目数量的变量
 const slidesPerView = ref(1);
 const isnavigation = ref(true)
+// 每6子项为一组
+const group_nums = 6
 
 // 注册需要的 Swiper 模块
 const modules = [Pagination, Navigation];
+
+// 数据分组 - 计算属性，将实验室数据分成每6个一组
+  const groupedLabs = computed(() => {
+    const groups = [];
+    // 遍历所有实验室数据，每6个分为一组
+    for (let i = 0; i < props.list.length; i += group_nums) {
+      groups.push(props.list.slice(i, i + group_nums));
+    }
+    
+    return groups;
+  });
 
 </script>
   
