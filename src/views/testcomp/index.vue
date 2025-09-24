@@ -25,7 +25,8 @@
                    <!-- <horizontalCharts /> -->
                     <!-- <curlyLineCharts /> -->
                      <!-- <swiperEcharts /> -->
-                      <settimeout />
+                      <!-- <settimeout /> -->
+                       <extendAttrs />
 </template>
   
 <script setup lang='ts'>
@@ -51,6 +52,8 @@
   import curlyLineCharts from '@/components/curlyLineCharts/index.vue'
   import swiperEcharts from '@/components/swiperEcharts/index.vue'
   import settimeout from '@/components/settimeout/index.vue'
+
+  import extendAttrs from '@/components/extendAttrs/index.vue'
 
   import {ref} from 'vue'
   const testdata = ref({
