@@ -7,10 +7,6 @@ var GLOBAL = {
   imgURL: 'https://api.helotus.cn/api/object/getimage/?name=',
   sysList: [
     {
-      name: '智能空调',
-      code: 'AirConditioner'
-    },
-    {
       name: '新⻛系统',
       code: 'IAS'
     },
@@ -21,6 +17,10 @@ var GLOBAL = {
     {
       name: '通⻛系统',
       code: 'ExhaustFan'
+    },
+    {
+      name: '智能空调',
+      code: 'AirConditioner'
     },
   ],
   professionList: [

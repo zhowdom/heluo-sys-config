@@ -109,6 +109,11 @@ sysInfos.value = res?.data?.data
 const queryFloor = async () => {
   const res = await floorlistApi()
   floorData.value = res?.data?.data || []
+  const idx = floorData.value.findIndex(its => its?.spaceCode === 'F06')
+  if (idx !== -1) {
+    const [targetItem] = floorData.value.splice(idx, 1)
+    floorData.value.unshift(targetItem)
+  }
 }
 
 const queryDeviceList = async () => {

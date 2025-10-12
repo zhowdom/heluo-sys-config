@@ -101,7 +101,7 @@ onMounted(() => {
       </div>
       
       <div style="background: #313e41;width:100%;height: 22vh">
-        <cardtitle name="设备使用率排行" />
+        <cardtitle name="设备使用时长" />
         <horizontalCharts :chartData="chartData" />
       </div>
     </div>
