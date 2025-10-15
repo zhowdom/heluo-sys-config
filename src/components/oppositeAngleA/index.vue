@@ -14,7 +14,6 @@
         </div>
         <div  class="wrap-box flex-between" v-else>
           <div class="colum1">
-          <!-- <minipanel :name="props.infos?.attributeName" :val="props.infos?.value" :unit="props.infos?.attributeCode" /> -->
             <minipanel :name="eachinfos?.[0]?.name" :val="eachinfos?.[0]?.unitName" :unit="eachinfos?.[0]?.values?.[0]?.['value']" />
             <minipanel :name="eachinfos?.[1]?.name" :val="eachinfos?.[1]?.unitName" :unit="eachinfos?.[1]?.values?.[0]?.['value']" />
           </div>
@@ -31,9 +30,7 @@
             <minipanel :name="eachinfos?.[7]?.name" :val="eachinfos?.[7]?.unitName" :unit="eachinfos?.[7]?.values?.[0]?.['value']" />
           </div>
         </div>
-
       </div> 
-      
     </div>
 </template>
   

@@ -1,6 +1,5 @@
 <template>
     
-    <!-- Swiper 容器 -->
     <div class="swiper-container">
       <swiper 
         :modules="modules" 
@@ -10,7 +9,6 @@
         :navigation="true"
         class="mySwiper"
       >
-        <!-- 轮播项 -->
         <swiper-slide class="swiper-item">
           <div class="each">
             <oppositeAngleA />
@@ -38,21 +36,17 @@
   import { Pagination, Navigation } from 'swiper/modules';
   import oppositeAngleA from '../oppositeAngleA/index.vue'
   
-  // 引入 Swiper 样式
   import 'swiper/css';
   import 'swiper/css/pagination';
   import 'swiper/css/navigation';
 
-  // 控制可见项目数量的变量
 const slidesPerView = ref(1);
 
-// 注册需要的 Swiper 模块
 const modules = [Pagination, Navigation];
 
 </script>
   
 <style scoped lang="less">
-  /* 自定义 Swiper 容器样式 */
 .swiper-container {
   margin: 0 auto;
   width: 400px;
@@ -60,7 +54,6 @@ const modules = [Pagination, Navigation];
   background: pink;
 }
 
-/* 自定义轮播项样式 */
 .slide-content {
   min-height: 100px;
   display: flex;
@@ -70,8 +63,8 @@ const modules = [Pagination, Navigation];
 }
 
 :deep(.swiper-item){
-  height: 202px!important;/*swiper子项目整体高度，父级继承*/
-  width: 368px!important;/*swiper子项目整体宽度，父级继承*/
+  height: 202px!important;
+  width: 368px!important;
   .each{
     display: flex;
     flex-wrap: wrap; /* 允许换行 */
@@ -84,7 +77,6 @@ const modules = [Pagination, Navigation];
     }
   }
 }
-/* 容器内边距为10px，实现箭头与内容的间距 */
 :deep(.swiper) {
   padding-left: 32px !important;
   padding-right: 32px !important;

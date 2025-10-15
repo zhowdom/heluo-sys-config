@@ -23,7 +23,6 @@ const curIndexBtns = ref(0)
 const curIndexRunMode = ref(0)
 const curIndexSpeed = ref(0)
 
-// 温度调节
 const temperatureVal = ref(22);
 
 const handleBtns = (idx) => curIndexBtns.value = idx
@@ -42,7 +41,6 @@ const clickSetTimeout = () => {
     <div class="btns flex-center">
       <div @click="handleBtns(idx)" v-for="(item, idx) in btnsList" :key="idx" :class="[idx === curIndexBtns ? 'cur' : '', 'btncom']">{{item?.name}}</div>
     </div>
-
 
     <div class="temperature-box">
       <span style="font-size: 13px;">温度调节：</span>
@@ -67,7 +65,6 @@ const clickSetTimeout = () => {
     
   </div>
   
-
   <a-modal v-model:visible="visibleSettimeout" title="定时控制设置"
   :footer="null"
   class="custom-modal"

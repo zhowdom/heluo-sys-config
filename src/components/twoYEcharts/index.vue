@@ -1,5 +1,4 @@
 <template>
-  <!--两个Y轴的曲线案例demo-三期本来有，后来取消了-->
     <div :class="bem()">
      <div ref="chartRef" class="chart-box"></div> 
     </div>
@@ -10,27 +9,18 @@ import { createNamespace } from '@/utils'
 const { bem } = createNamespace('heluo-sys-verticalCharts')
 
 import { ref, onMounted, onUnmounted } from 'vue'
-// 引入ECharts
 import * as echarts from 'echarts'
 
-// 获取图表容器的引用
 const chartRef = ref(null)
-// 存储图表实例
 let chartInstance = null
 
-// 初始化图表
 const initChart = () => {
-  // 确保容器存在
   if (!chartRef.value) return
-  
-  // 初始化图表实例
   chartInstance = echarts.init(chartRef.value)
-  
-  // 图表配置项
   const option = {
 
     tooltip: {
-      trigger: 'axis', // item
+      trigger: 'axis',
       axisPointer: {
         type: 'cross',
         crossStyle: {
@@ -38,7 +28,6 @@ const initChart = () => {
         }
       }
     },
-    // legend每条曲线的按钮[可点击]
     legend: {
       orient: 'horizontal',
       left: 'center',
@@ -53,7 +42,6 @@ const initChart = () => {
       }
     }
   ],
-  // Y轴
   yAxis: [
     {
       type: 'value',
@@ -78,7 +66,7 @@ const initChart = () => {
   ],
     series: [
     {
-      name: '蒸发量', // 蒸发量
+      name: '蒸发量',
       type: 'line',
       tooltip: {
         valueFormatter: function (value) {
@@ -91,7 +79,7 @@ const initChart = () => {
       ]
     },
     {
-      name: '降雨量', // 降雨量
+      name: '降雨量', 
       type: 'line',
       tooltip: {
         valueFormatter: function (value) {
@@ -104,7 +92,7 @@ const initChart = () => {
       ]
     },
     {
-      name: '温度', // 温度
+      name: '温度', 
       type: 'line',
       yAxisIndex: 1,
       tooltip: {
@@ -118,24 +106,20 @@ const initChart = () => {
   ]
   }
   
-  // 设置图表配置项
   chartInstance.setOption(option)
 }
 
-// 监听窗口大小变化，重绘图表
 const handleResize = () => {
   if (chartInstance) {
     chartInstance.resize()
   }
 }
 
-// 组件挂载时初始化图表
 onMounted(() => {
   initChart()
   window.addEventListener('resize', handleResize)
 })
 
-// 组件卸载时销毁图表
 onUnmounted(() => {
   if (chartInstance) {
     chartInstance.dispose()

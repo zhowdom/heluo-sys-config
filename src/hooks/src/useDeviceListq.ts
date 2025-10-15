@@ -24,16 +24,13 @@ export function useDeviceListInfos() {
         typeId: '',
       })
       allDeviceList.value = _tem_allDeviceList
-      // 再默认查询全部空间
       getAllSpaceListData()
-      // 再自动默认查询分页数据
       queryResultListData('', '')
     } catch(e) {
       console.log(e)
     }
   }
 
-  // 空间数据集合查询
   const getAllSpaceListData = async () => {
     const res = await getSpaceListApi(Object.assign({}, {typeId: curTypeId.value}, comParams))
     const _tem_allSpaceList = (res?.data?.data || [])
@@ -44,7 +41,6 @@ export function useDeviceListInfos() {
     allSpaceList.value = _tem_allSpaceList
   }
 
-  // 分页数据查询
   const queryResultListData = async (curTypeId, curSpaceId) => {
     const _params = {
       pageIndex: 0,

@@ -9,7 +9,6 @@ import "./style/media.css";
 
 const pinia = createPinia();
 const app = createApp(App);
-// 将md5方法挂载到全局
 app.config.globalProperties.$md5 = md5
 
 pinia.use(piniaPluginPersistedstate) 

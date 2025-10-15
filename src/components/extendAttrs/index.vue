@@ -1,6 +1,5 @@
 <template>
   <div class="attribute-page">
-    <!-- 页面标题和添加按钮 -->
     <div class="page-header">
       <h2>属性管理</h2>
       <a-button type="primary" @click="handleOpenDialog">
@@ -8,10 +7,7 @@
         添加属性
       </a-button>
     </div>
-
-    <!-- 加载状态 -->
     
-      <!-- 现有属性列表 -->
       <div class="attribute-list">
         <a-list bordered :data-source="listA">
           <template #renderItem="{item}">
@@ -38,7 +34,6 @@
         </a-list>
       </div>
 
-    <!-- 添加属性的弹窗 -->
     <a-modal
       title="添加属性"
       v-model:visible="dialogVisible"
@@ -75,7 +70,6 @@
 import { useAttributeManager } from './useAttrs';
 import { computed } from 'vue';
 
-// 使用属性管理hook
 const {
   listA,
   dialogVisible,
@@ -87,18 +81,12 @@ const {
   handleDelete
 } = useAttributeManager();
 
-
-
-
-
-// 计算当前勾选的属性code列表
 const checkedCodes = computed(() => {
   return dialogAttributes.value
     .filter(attr => attr.checked)
     .map(attr => attr.code);
 });
 
-// 处理checkbox组的变化
 const handleGroupChange = (checkedValues: string[]) => {
   dialogAttributes.value.forEach(attr => {
     if (!attr.disabled) {

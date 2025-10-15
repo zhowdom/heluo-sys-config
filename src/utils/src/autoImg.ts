@@ -22,7 +22,6 @@ export function autoImg(cardname:string, subpath:string) {
   const _path = `/src/assets/usedimg/${subpath}/`
   if (subpath === 'device') {
     if (!imgsMap[_path + cardname + '.svg']?.['default']) {
-      // 如果没有匹配
       cardname = 'notMatched'
     }
     return imgsMap[_path + cardname + '.svg']['default']

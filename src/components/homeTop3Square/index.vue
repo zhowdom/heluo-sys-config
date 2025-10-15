@@ -41,7 +41,6 @@ const props = defineProps({
   
 <style scoped lang="less">
   .heluo-sys-hometop3square{
-    /*标题50,组件主体120， 占（170/980）*100 = 17vh*/
     height: 15vh;
     .main{
       padding-bottom: 20px;

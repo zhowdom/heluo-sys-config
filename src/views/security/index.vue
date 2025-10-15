@@ -1,5 +1,4 @@
 <script setup lang="ts">
-// import logoUrl from '@/assets/usedimg/mask@2x.png'
 import card from '@/components/card/index.vue'
 import floor from '@/components/floor/index.vue'
 import heluoSwiper from '@/components/heluoSwiper/index.vue'
@@ -22,18 +21,15 @@ import {ref} from 'vue'
 const globalVisibleControllerStore = useGlobalVisibleControllerStore()
 const {globalVisiblePool} = storeToRefs(globalVisibleControllerStore)
 const { bem } = createNamespace('heluo-sys-electricity-wrap')
-// 包装供UE调用全局方法
 function SwitchFoldOnlyTwoSide (state:boolean) {
   globalVisibleControllerStore.SwitchFoldOnlyTwoSide(state)
 }
 
-// 控制抽屉显示/隐藏
 const drawerOpen = ref(false)
 const openDrawer = () => { drawerOpen.value = true }
 const closeDrawer = () => { drawerOpen.value = false }
 
 const handleDeviceChange = (s) => {
-  // 根据设备ID来动态展示右侧的设备详情信息弹窗
   openDrawer()
 }
 
@@ -53,17 +49,10 @@ const listdata = ref([
 <template>
   <div :class="[bem(), 'flex-between']">
     <div :class="[bem('l'), 'animate__animated', globalVisiblePool.home_two_pannel.state ? ' animate__backInLeft' : 'animate__backOutLeft']">
-      
-
- 
       <div class="card-bg-com">
         <cardtitle name="系统状态" />
         <sysStatus />
       </div>
-      <!-- <comSubTitle /> -->
-      <!-- <heluoSwiperDevice /> -->
-
-      <!--设备列表-->
       <div class="card-bg-com">
         <cardtitle name="设备列表" />
 
@@ -71,7 +60,6 @@ const listdata = ref([
           <comSubTitle title-name="楼层选择" style="margin-bottom: 20px;" />
           <heluoSwiper :swiper-data="listdata" />
         </div>
-        
         <newDeviceItem @deviceChange="handleDeviceChange" />
         <newDeviceItem @deviceChange="handleDeviceChange" />
         <newDeviceItem @deviceChange="handleDeviceChange" />
@@ -79,38 +67,9 @@ const listdata = ref([
         <newDeviceItem @deviceChange="handleDeviceChange" />
         <newDeviceItem @deviceChange="handleDeviceChange" />
         <newDeviceItem @deviceChange="handleDeviceChange" />
-
       </div>
 
     </div>
-
-    <!-- <floor :class="[bem('mrgl-auto'), 'animate__animated', globalVisiblePool.home_two_pannel.state ? 'animate__backInRight' : 'animate__backOutRight']" />
-    <div :class="[bem('r'), 'animate__animated', globalVisiblePool.home_two_pannel.state ? 'animate__backInRight' : 'animate__backOutRight', 'card-bg-com']">
-      <cardtitle name="设备详情" />
-      <comSubTitle />
-      <deviceDetailsPanel />
-      <div class="device-infos-box">
-        <devicePureTxtpanel />
-        <devicePureTxtpanel />
-        <devicePureTxtpanel />
-        <devicePureTxtpanel />
-
-        <devicePureTxtpanel />
-        <devicePureTxtpanel />
-        <devicePureTxtpanel />
-        <devicePureTxtpanel />
-
-        <devicePureTxtpanel />
-        <devicePureTxtpanel />
-        <devicePureTxtpanel />
-        <devicePureTxtpanel />
-      </div>
-      <comSubTitle />
-      <div style="height: 140px;width: 100%;"></div>
-      
-    </div> -->
-
-
     <a-drawer
       :title="null"
       :closable="false"

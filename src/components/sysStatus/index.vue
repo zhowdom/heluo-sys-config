@@ -21,7 +21,6 @@ import {defineProps} from 'vue'
 const { bem } = createNamespace('heluo-sys-sysStatus')
 
 const props = defineProps(['infos'])
-
 </script>
   
 <style scoped lang="less">

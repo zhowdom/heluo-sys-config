@@ -35,7 +35,6 @@ export const useUserStore = defineStore("user", () => {
   }
 }, {
   persist: {
-    // paths: ['userInfo'] // will build error
     pick: ['userInfo']
   }
 }

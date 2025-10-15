@@ -2,9 +2,6 @@
 import {useUserStore} from '@/stores'
 import axios from 'axios';
 
-
-// const baseURL = 'https://api.helotus.cn/'
-// const baseURL = import.meta.env.VITE_API_BASE_URL
 // @ts-ignore
 const baseURL = GLOBAL.Host
 export const service = axios.create({
@@ -17,16 +14,13 @@ export const service = axios.create({
 
 service.interceptors.request.use(
   (config) => {
-    const {userInfo} = useUserStore() // can not put [use fn] outter
+    const {userInfo} = useUserStore()
     const token = userInfo.accesstoken
     if (token) {
-      // set in body
       config.params = {
         ...config.params,
-        // token // or named `access_token`
       }
       
-      // set in headers
       config.headers.Authorization = `Bearer ${token.trim()}`
     }
     return config

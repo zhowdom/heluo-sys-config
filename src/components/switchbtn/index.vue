@@ -16,11 +16,6 @@ defineProps({
    <main>
     <input type="checkbox" :id="`switch${idx}`" :checked="checked" hidden>
     <label :for="`switch${idx}`"></label>
-
-    <!-- <input type="checkbox" id="switch-disabled" disabled hidden>
-    <label for="switch-disabled" disabled></label>
-    <input type="checkbox" id="switch-checked-disabled" checked disabled hidden>
-    <label for="switch-checked-disabled" disabled></label> -->
   </main>
 </template>
 

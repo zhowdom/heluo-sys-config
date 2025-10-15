@@ -1,5 +1,4 @@
 <script setup lang="ts">
-// import logoUrl from '@/assets/usedimg/mask@2x.png'
 import card from '@/components/card/index.vue'
 import floor from '@/components/floor/index.vue'
 import homeTop3Square from '@/components/homeTop3Square/index.vue'
@@ -22,7 +21,6 @@ const globalVisibleControllerStore = useGlobalVisibleControllerStore()
 const {globalVisiblePool} = storeToRefs(globalVisibleControllerStore)
 
 const { bem } = createNamespace('heluo-sys-home-wrap')
-// 包装供UE调用全局方法
 function SwitchFoldOnlyTwoSide (state:boolean) {
   globalVisibleControllerStore.SwitchFoldOnlyTwoSide(state)
 }
@@ -41,7 +39,6 @@ const get_home_safe_situationApi = async () => {
   const res = await home_safe_situationApi({
     cardCode: 'security_situation'
   })
-  // swiper的数据
   listdata.value = (res?.data?.data?.typeDetial || []).map((item, idx) => {
     let {typeCode, typeName, ...a} = item
     if (typeCode !== 'all') {
@@ -53,18 +50,13 @@ const get_home_safe_situationApi = async () => {
     }
     return item
   })
-  // 接口返回的下面报警列表数据-预先存一份整体
   res_warnList.value = res?.data?.data?.typeDetial || []
-  // 下面报警列表数据
   warnList.value = (res?.data?.data?.typeDetial || [])[0]['details'] || []
-  // 顶部3大块统计
   infos.value = res?.data?.data?.processSummary
-  // 柱状图数据
   chartlist.value = res?.data?.data?.typeSummary || []
 }
 
 
-// 设备使用排行榜
 const getDeviceUseRanking = async () => {
   const res = await home_safe_situationApi({
     cardCode: 'device_ranking'
@@ -87,13 +79,11 @@ onMounted(() => {
     </div>
     <floor :class="[bem('mrgl-auto'), 'animate__animated', globalVisiblePool.home_two_pannel.state ? 'animate__backInRight' : 'animate__backOutRight']" />
     <div :class="[bem('r'), 'animate__animated', globalVisiblePool.home_two_pannel.state ? 'animate__backInRight' : 'animate__backOutRight', 'card-bg-com']">
-      <!-- <card name="devicelist" position="right"></card> -->
       <homeTop3Square :infos="infos" />
       <verticalCharts :chartlist="chartlist" />
       <div class="com-swiper-wrap">
         <heluoSwiper :swiper-data="listdata" @updateCurIndex="updateCurIndex" :type="SwiperPropsType.WarnType" />
       </div>
-      <!--设备信息小面板-->
       <div class="small-box-deviceinfo-wrap">
         <div v-for="(item, idx) in warnList" :key="idx">
           <smallDeviceinfo :infos="item" />

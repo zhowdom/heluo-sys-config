@@ -20,26 +20,16 @@ doLogin()
 
 
 
-// 在楼层页面，全局显示办公室详情窗口方法，供给UE调用
 window.InformationOnTheRightRoom = (SpaceCode) => {
-  // globalVisibleControllerStore.SwitchFoldOnlyTwoSide(state)
   curSpaceCode.value = SpaceCode
-  // message.info(JSON.stringify(SpaceCode));
   globalVisibleControllerStore.globalControlVisible({name: 'manyou_two_pannel', state: false})
-  // visibleOffice.value = true
   globalVisibleControllerStore.globalControlVisible({name: 'office_dialog', state: true})
 }
 
-// const visibleOffice = ref(false)
 const closeFirstOfficeDialog = () => {
   globalVisibleControllerStore.globalControlVisible({name: 'manyou_two_pannel', state: true})
   globalVisibleControllerStore.globalControlVisible({name: 'office_dialog', state: false})
 }
-
-// 模拟UE主动调
-// setTimeout(() => {
-//   window.InformationOnTheRightRoom('F1W01')
-// }, 5000)
 
 </script>
 

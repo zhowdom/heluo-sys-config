@@ -1,4 +1,3 @@
-// useInfiniteScroll.ts
 import { onMounted, onUnmounted, ref, Ref } from 'vue';
 import {InfiniteScrollOptions} from '@/types'
 
@@ -7,9 +6,7 @@ export function useInfiniteScroll(
   options: InfiniteScrollOptions = {}
 ) {
   const { threshold = 50, immediate = false } = options;
-  // 当滚动到底部时触发loading
   const isLoadingIfReachedBottom: Ref<boolean> = ref(false);
-  // 是否加载完全部数据
   const isLoadedAllData: Ref<boolean> = ref(false);
   const containerRef: Ref<HTMLElement | null> = ref(null);
 

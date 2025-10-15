@@ -1,5 +1,4 @@
 <template>
-  <!--两个Y轴的曲线案例demo-三期本来有，后来取消了-->
     <div :class="bem()">
      <div ref="chartRef" class="chart-box"></div> 
     </div>
@@ -10,33 +9,26 @@ import { createNamespace } from '@/utils'
 const { bem } = createNamespace('heluo-sys-verticalCharts')
 
 import { ref, onMounted, onUnmounted } from 'vue'
-// 引入ECharts
 import * as echarts from 'echarts'
 
-// 获取图表容器的引用
 const chartRef = ref(null)
-// 存储图表实例
 let chartInstance = null
 
-// 初始化图表
 const initChart = () => {
-  // 确保容器存在
   if (!chartRef.value) return
   
-  // 初始化图表实例
   chartInstance = echarts.init(chartRef.value)
   
-  // 图表配置项
   const option = {
   grid: {
-      left: 15,    // 左侧间隙
-      right: 15,   // 右侧间隙
-      top: 10,     // 顶部间隙
-      bottom: 15,  // 底部间隙
-      containLabel: true  // 确保标签不被裁剪
+      left: 15,    
+      right: 15,  
+      top: 10,     
+      bottom: 15,  
+      containLabel: true  
     },
     tooltip: {
-      trigger: 'axis', // item
+      trigger: 'axis',
       axisPointer: {
         type: 'cross',
         crossStyle: {
@@ -44,48 +36,41 @@ const initChart = () => {
         }
       }
     },
-    // legend每条曲线的按钮[可点击]
-    // legend: {
-    //   orient: 'horizontal',
-    //   left: 'center',
-    //   top: '10%',
-    // },
+    
     xAxis: [
     {
       type: 'category',
       data: ['00:00', '06:00', '12:00', '18:00', '19:00', '21:00', '23:00'],
       axisLabel: {
-          color: 'white', // 刻度文字颜色
-          fontSize: 11 // 可选：调整文字大小
+          color: 'white',
+          fontSize: 11 
       },
       axisPointer: {
         type: 'shadow'
       }
     }
   ],
-  // Y轴
   yAxis: [
     {
       type: 'value',
-      // name: '³/h',
       min: 0,
       max: 25,
       interval: 5,
       nameTextStyle: {
-          color: 'white', // 核心配置：名称文字颜色为白色
-          fontSize: 11,   // 可选：文字大小
-          fontWeight: 'bold' // 可选：文字粗细
+          color: 'white', 
+          fontSize: 11, 
+          fontWeight: 'bold'
       },
       splitLine: {
-          show: true, // 显示网格线
+          show: true,
           lineStyle: {
               type: 'dashed',
-              color: '#b9c2c6' // 网格线颜色设为红色
+              color: '#b9c2c6'
           }
       },
       axisLabel: {
         formatter: '{value} ³/h',
-        color: 'white', // 刻度文字颜色
+        color: 'white',
         fontSize: 11
       }
     }
@@ -101,18 +86,14 @@ const initChart = () => {
       },
       lineStyle: {
         width: 2,
-        color: '#5eb5ce' // 设置线条颜色为橙色
+        color: '#5eb5ce' 
       },
       itemStyle: {
-          color: '#5eb5ce', // 橙色数据点
-          borderColor: 'white', // 白色边框（可选，增强视觉效果）
-          borderWidth: 2, // 边框宽度
+          color: '#5eb5ce', 
+          borderColor: 'white', 
+          borderWidth: 2, 
       },
-      showSymbol: false,  // 不显示数据点标记
-      // 可选：鼠标 hover 时也不显示拐点
-      // emphasis: {
-      //     showSymbol: false
-      // },
+      showSymbol: false,  
       smooth: true,
       data: [
         2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3
@@ -121,24 +102,20 @@ const initChart = () => {
   ]
   }
   
-  // 设置图表配置项
   chartInstance.setOption(option)
 }
 
-// 监听窗口大小变化，重绘图表
 const handleResize = () => {
   if (chartInstance) {
     chartInstance.resize()
   }
 }
 
-// 组件挂载时初始化图表
 onMounted(() => {
   initChart()
   window.addEventListener('resize', handleResize)
 })
 
-// 组件卸载时销毁图表
 onUnmounted(() => {
   if (chartInstance) {
     chartInstance.dispose()

@@ -1,5 +1,4 @@
 <template>
-  <!--两个Y轴的曲线案例demo-三期本来有，后来取消了-->
     <div :class="bem()">
      <div ref="chartRef" class="chart-box"></div> 
     </div>
@@ -10,7 +9,6 @@ import { createNamespace } from '@/utils'
 const { bem } = createNamespace('heluo-sys-verticalCharts')
 
 import { ref, onMounted, onUnmounted, defineProps, watch } from 'vue'
-// 引入ECharts
 import * as echarts from 'echarts'
 import dayjs from 'dayjs';
 
@@ -23,31 +21,24 @@ watch(
   }
 )
 
-
-// 获取图表容器的引用
 const chartRef = ref(null)
-// 存储图表实例
 let chartInstance = null
 
-// 初始化图表
 const initChart = () => {
-  // 确保容器存在
   if (!chartRef.value) return
   
-  // 初始化图表实例
   chartInstance = echarts.init(chartRef.value)
   
-  // 图表配置项
   const option = {
   grid: {
-      left: 15,    // 左侧间隙
-      right: 15,   // 右侧间隙
-      top: 40,     // 顶部间隙
-      bottom: 15,  // 底部间隙
-      containLabel: true  // 确保标签不被裁剪
+      left: 15,   
+      right: 15,   
+      top: 40,     
+      bottom: 15, 
+      containLabel: true
     },
     tooltip: {
-      trigger: 'axis', // item
+      trigger: 'axis', 
       axisPointer: {
         type: 'cross',
         crossStyle: {
@@ -55,15 +46,14 @@ const initChart = () => {
         }
       }
     },
-    // legend每条曲线的按钮[可点击]
     legend: {
       orient: 'horizontal',
       left: 'center',
       top: '0%',
       textStyle: {
-        color: 'white', // 核心配置：字体颜色为白色
-        fontSize: 12,   // 可选：字体大小
-        fontWeight: 'normal' // 可选：字体粗细
+        color: 'white', 
+        fontSize: 12,   
+        fontWeight: 'normal' 
     },
     },
     xAxis: [
@@ -74,35 +64,32 @@ const initChart = () => {
         type: 'shadow'
       },
       axisLabel: {
-        color: 'white', // 刻度文字颜色
-        fontSize: 11 // 可选：调整文字大小
+        color: 'white', 
+        fontSize: 11 
     },
     }
   ],
-  // Y轴
   yAxis: [
     {
       type: 'value',
-      // name: '温度', // Y轴顶部的小单位
       min: 0,
-      // max: 25,
       max: props.echartdata && Math.max(...props.echartdata?.['list'].map(v => v.value)),
       interval: 5,
       splitLine: {
-          show: true, // 显示网格线
+          show: true,
           lineStyle: {
               type: 'dashed',
-              color: '#b9c2c6' // 网格线颜色设为红色
+              color: '#b9c2c6' 
           }
       },
       nameTextStyle: {
-          color: 'white', // 核心配置：名称文字颜色为白色
-          fontSize: 11,   // 可选：文字大小
-          fontWeight: 'bold' // 可选：文字粗细
+          color: 'white', 
+          fontSize: 11,   
+          fontWeight: 'bold'
       },
       axisLabel: {
         formatter: `{value} ${props.echartdata && props.echartdata['unitName']}`,
-        color: 'white', // 刻度文字颜色
+        color: 'white',
         fontSize: 11
       },
     }
@@ -117,43 +104,35 @@ const initChart = () => {
         }
       },
       lineStyle: {
-          color: 'orange', // 橙色线条
-          width: 2 // 线条粗细
+          color: 'orange',
+          width: 2
       },
       itemStyle: {
-          color: 'orange', // 橙色数据点
-          borderColor: 'white', // 白色边框（可选，增强视觉效果）
-          borderWidth: 2 // 边框宽度
+          color: 'orange',
+          borderColor: 'white',
+          borderWidth: 2
       },
-      showSymbol: false,  // 不显示数据点标记
-      // 可选：鼠标 hover 时也不显示拐点
-      // emphasis: {
-      //     showSymbol: false
-      // },
+      showSymbol: false, 
       smooth: true,
       data: props.echartdata && props.echartdata['list'].map(v => v.value),
     }
   ]
   }
   
-  // 设置图表配置项
   chartInstance.setOption(option)
 }
 
-// 监听窗口大小变化，重绘图表
 const handleResize = () => {
   if (chartInstance) {
     chartInstance.resize()
   }
 }
 
-// 组件挂载时初始化图表
 onMounted(() => {
   initChart()
   window.addEventListener('resize', handleResize)
 })
 
-// 组件卸载时销毁图表
 onUnmounted(() => {
   if (chartInstance) {
     chartInstance.dispose()

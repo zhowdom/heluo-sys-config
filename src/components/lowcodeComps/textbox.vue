@@ -1,6 +1,5 @@
 <template>
   <div class="settimeout-box">
-    <!--温度调节-->
     <div class="temperature-box">
       <span style="font-size: 13px;">{{attributes?.attributeName}}：</span>
       <MinusCircleOutlined class="minus" @click="minus" style="cursor: pointer;" />
@@ -23,7 +22,6 @@ import {useSetAttribute} from './hook/useSetAttribute'
     emit('controlMinus', props?.idx)
   }
   const plus = () => {
-    // props?.idx这个参数不能错，必须和原始数组中的对应索引对应上才可以
     emit('controlPlus', props?.idx)
   }
   watch(

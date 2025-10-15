@@ -10,10 +10,7 @@ import {useUeConnect} from '@/hooks'
 const props = defineProps(['SpaceCode'])
 const {ueConnect} = useUeConnect()
 
-
-// 办公室一级弹窗
 const visible = ref(true)
-// 是否显示二级详情
 const showNext = ref(false)
 
 const listdata = ref([])
@@ -24,35 +21,28 @@ const deviceList = ref([])
 const briefInfos = ref()
 const imgurl = ref()
 
-// 新-设备列表数据
 const new_device_list = ref([])
 const curRoomCode = ref()
 
-// 控制点位数据
 const controlPointList = ref([])
-// 设备控制所需的数据
 const controlDataList = ref([])
-// 二级办公室详情设备基础信息
 const nextDialogBaseInfos = ref({})
 const imgState = ref(false)
 
 
 const emit = defineEmits(['closeFirstOfficeDialog'])
 
-// 《一》先查询实验室101、102、103swiper列表数据
 const runRoomListApi = async () => {
   const res = await roomListApi({
     floorId: '',
     systemCode: 'ENVM'
   })
   listdata.value = res?.data?.data || []
-  // 默认选中第一个实验室
   cur_spaceId.value = (res?.data?.data || [])?.[0]?.['spaceId']
   cur_spaceName.value = (res?.data?.data || [])?.[0]?.['spaceName']
 }
 
 const handleShiYanShi = (payload) => {
-  // 获取当前选中的实验室，拿到spaceId
   cur_spaceId.value = payload?.queryCode
   cur_spaceName.value = listdata.value.find(v => {
     return v?.spaceId === payload?.queryCode
@@ -60,21 +50,17 @@ const handleShiYanShi = (payload) => {
 
 }
 
-
-// swiper环境数据
 const all_watchInfos = ref()
 const new_all_watchInfos = ref()
 
-// 查询所有环境报警指标信息
 const getEnvironmentData = async () => {
 const res = await getEnvironmentDataApi()
 all_watchInfos.value = res?.data?.data
 }
 
-// 不传系统ID，传空间ID，查询设备列表
 const queryDeviceList = async () => {
   const res = await officeDeviceListApi({
-    "spaceId":"3a0bc05da3a865db21d7a733f13278a6", // UE传递空间ID
+    "spaceId":"3a0bc05da3a865db21d7a733f13278a6", 
     "pageType":"EVN,ELE,SAF",
     "searchKey":"",
     "pageIndex":0,
@@ -83,7 +69,6 @@ const queryDeviceList = async () => {
   deviceList.value = res?.data?.data || []
 }
 
-// 查询带图片的简介
 const runofficeBriefApi = async () => {
   const res = await officeBriefApi({
     SpaceCode: props?.SpaceCode
@@ -91,31 +76,23 @@ const runofficeBriefApi = async () => {
   briefInfos.value = res?.data?.data
 }
 
-// 查询办公室一级详情弹窗数据（新）--必须要调
 const rungetSpaceNewAllApi  = async () => {
   const res = await getSpaceNewAllApi(
     {
-      // F0128有数据
-      SpaceCode: props?.SpaceCode // UE那边主动调这个办公室弹窗，会主动传这个SpaceCode参数给过来
+      SpaceCode: props?.SpaceCode
     }
   )
 
-  // 第一步拿到设备列表
   new_device_list.value = res?.data?.data?.deviceList || []
-  // 拿到环境数据面板-豆腐块信息
   new_all_watchInfos.value = res?.data?.data?.environmentData || []
-  // 记录楼层中房间的编号
   curRoomCode.value = res?.data?.data?.spaceInfo?.[0]['number']
-  
   imgurl.value = GLOBAL?.imgURL + res?.data?.data?.spaceInfo?.[0]['image']
   imgState.value = res?.data?.data?.spaceInfo?.[0]['image']
 }
 
-// 关闭office弹窗-二级office弹窗关闭也用这个
 const closeOffice = () => {
   visible.value = false
   emit('closeFirstOfficeDialog')
-  // 楼层编号就是UE主动调window.InformationOnTheRightRoom('SpaceCode')传进来，这里直接拿的，一模一样
   ueConnect(UeReportType.OFFICE_FIRST_CLOSE, {opt: props?.SpaceCode})
 }
 onMounted(() => {
@@ -123,45 +100,34 @@ onMounted(() => {
   getEnvironmentData()
   runRoomListApi()
   runofficeBriefApi()
-  // queryDeviceList()
 })
 
-// 监听二级办公室详情页面关闭时候
 const goback = () => {
   showNext.value = false
 }
 
 const queryNextOfficeDialogInofs = async (item) => {
-  // 查询右侧设备详情、控制区域、点位信息等综合信息区域接口
   const res = await queryAllSelectApi({
     "DeviceId": item?.deviceId,
     "DeviceCode":item?.deviceCode
   })
-// 基础设备信息数据
 nextDialogBaseInfos.value = res?.data?.data?.detail
-// 只挑选可读写且是[switch|radio|textbox]3类型之一的项目
 controlDataList.value = ((res?.data?.data?.['control'] || [])?.[0]?.['attributes'] || []).filter(v => {
   return v?.attributeType === 'readwrite' && (v?.controlType === 'textbox' || v?.controlType === 'switch' || v?.controlType === 'radio')
 })
 
-// 点位数据
 controlPointList.value = res?.data?.data?.realtimedata?.attributeList || []
 
 }
 
-// 打开二级办公室详情页面弹窗
 const checkOfficeDetail = (item) => {
-  // 查询二级办公室室设备详情信息
   showNext.value = true
-  // getGetDeviceDetails(item.deviceId)
   queryNextOfficeDialogInofs(item)
   ueConnect(UeReportType.OFFICE_FIRST_DEVICELIST, {opt: item.deviceCode})
 }
-
 </script>
 
 <template>
-
     <div :class="['office-dialog-wrap', 'card-bg-com', showNext ? 'visible0' : '']" v-if="visible"> 
       <div class="main">
         <div class="header">
@@ -181,11 +147,6 @@ const checkOfficeDetail = (item) => {
             <cardtitle name="环境数据" />
             <composeSwiper type="specialType" :all_watchInfos="new_all_watchInfos" />
             <cardtitle name="房间设备列表" />
-
-            <!-- <div class="com-swiper-wrap" style="height: 6vh;">
-              <heluoSwiper :swiper-data="listdata" @updateCurIndex="handleShiYanShi" :type="SwiperPropsType.ShiYanShi" />
-            </div> -->
-
             <div class="device-list">
               <div v-for="(item, idx) in new_device_list" :key="idx" class="each flex-between" @click="checkOfficeDetail(item)">
                 <p class="name">{{item?.deviceName}}</p><span class="status">{{item?.statusName}}</span>
@@ -193,11 +154,8 @@ const checkOfficeDetail = (item) => {
             </div>
           </div>
         </div>
-      
       </div>
-        
       </div>
-
       <officeNext v-if="showNext" @goback="goback" :controlDataList="controlDataList" :controlPointList="controlPointList" :nextDialogBaseInfos="nextDialogBaseInfos" :curRoomCode="curRoomCode"/>
 </template>
 

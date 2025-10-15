@@ -58,12 +58,10 @@ export function useFloor(path:string, spaceId:string) {
     const nextBtn = document.querySelector('.next')
     const floorList = document.querySelector('.scroll ul') as any
     const floorItems = floorList.querySelectorAll('.scroll li')
-    // const itemHeight = 70 // 60px高度 + 10px间距
-    const itemHeight = 50 // 40px高度 + 10px间距
+    const itemHeight = 50
     let currentIndex = 0
-    const maxVisibleItems = Math.floor(340 / itemHeight) // 340px是滚动区域高度
+    const maxVisibleItems = Math.floor(340 / itemHeight)
     const maxIndex = floorItems.length - maxVisibleItems
-
     // choosed auto-matched item while init
     const floorActivatedIdx = floorData.value.findIndex(v => v.spaceId === spaceId)
     floorItems[floorActivatedIdx === -1 ? 0 : floorActivatedIdx].classList.add('cur');
@@ -71,7 +69,6 @@ export function useFloor(path:string, spaceId:string) {
       scrollToIndex(1)
     }
 
-    // update the btn state
     function updateButtonState() {
         prevBtn.classList.toggle('disabled', currentIndex <= 0);
         nextBtn.classList.toggle('disabled', currentIndex >= maxIndex);

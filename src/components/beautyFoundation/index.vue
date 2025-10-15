@@ -19,7 +19,7 @@ const { bem } = createNamespace('heluo-sys-beauty-foundation-wrapper')
 
 const props = defineProps({
   topType: {
-    type: Number, // 1 是数字+单位；2是纯文本
+    type: Number,
     default: 1
   },
   infos: {

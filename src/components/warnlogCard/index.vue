@@ -1,5 +1,4 @@
 <template>
-    <!--报警记录卡片组件-->
     <div :class="bem()">
       <div class="room">
         <p class="name txtellipsis">{{props?.infos?.spaceIdName}}<span class="desc">{{props.infos?.alarmDesc}}</span></p>

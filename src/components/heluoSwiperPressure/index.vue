@@ -1,6 +1,5 @@
 <template>
     
-    <!-- Swiper 容器 -->
     <div class="swiper-container flex-center">
       <swiper 
         :modules="modules" 
@@ -10,15 +9,11 @@
         :navigation="true"
         class="mySwiper"
       >
-        <!-- 轮播项 -->
         <swiper-slide v-for="item in groupedLabs" :key="item.id" class="swiper-item">
           <div class="each">
             <beautyFoundation v-for="(item, index) in list" :key="index" class="mini" :infos="{ attributeValue: item?.attributes[0]?.['values'][0]['value'], unitName: item?.attributes[0]?.['unitName'], attributeName: item?.name}" />
           </div>
         </swiper-slide>
-
-        
-
         
       </swiper>
     </div>
@@ -30,26 +25,20 @@
   import { Pagination, Navigation } from 'swiper/modules';
   import beautyFoundation from '../beautyFoundation/index.vue'
   
-  // 引入 Swiper 样式
   import 'swiper/css';
   import 'swiper/css/pagination';
   import 'swiper/css/navigation';
 
   const props = defineProps(['list'])
 
-  // 控制可见项目数量的变量
 const slidesPerView = ref(1);
 const isnavigation = ref(true)
-// 每6子项为一组
 const group_nums = 6
 
-// 注册需要的 Swiper 模块
 const modules = [Pagination, Navigation];
 
-// 数据分组 - 计算属性，将实验室数据分成每6个一组
   const groupedLabs = computed(() => {
     const groups = [];
-    // 遍历所有实验室数据，每6个分为一组
     for (let i = 0; i < props.list.length; i += group_nums) {
       groups.push(props.list.slice(i, i + group_nums));
     }
@@ -60,14 +49,12 @@ const modules = [Pagination, Navigation];
 </script>
   
 <style scoped lang="less">
-  /* 自定义 Swiper 容器样式 */
 .swiper-container {
   margin: 0 auto;
   width: 400px!important;
   height: 200px;
 }
 
-/* 自定义轮播项样式 */
 .slide-content {
   min-height: 100px;
   display: flex;
@@ -91,7 +78,6 @@ const modules = [Pagination, Navigation];
     }
   }
 }
-/* 容器内边距为10px，实现箭头与内容的间距 */
 :deep(.swiper) {
   padding-left: 0 !important;
   padding-right: 0 !important;

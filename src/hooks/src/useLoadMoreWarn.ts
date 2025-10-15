@@ -30,7 +30,7 @@ export function useLoadMoreWarn() {
     try {
       let res = await warnlistApi(param);
       warnListArr.value = res.data.data || []
-      // currentPage.value = res.data.currentPage // 接口currentPage返回错误，此处没有用这个做分页逻辑
+      // currentPage.value = res.data.currentPage
       totalPage.value = res.data.totalPage
       rowCount.value = res.data.rowCount
       currentPage.value++
@@ -49,7 +49,6 @@ export function useLoadMoreWarn() {
   const clickWraper = (typeCode:string, loadMore:boolean, idx:number) => {
     currenntChoosedWarnCode.value = typeCode
     curWarnMenuActivedIdx.value = idx
-    // loadMore是否刷新操作[当前页重置为1]
     loadMoreWarn(loadMore)
   }
   

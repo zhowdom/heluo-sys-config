@@ -12,9 +12,7 @@ export function initClickOutsideToClose(
     return () => {};
   }
   const handleClickOutside = (event: MouseEvent) => {
-    // 检查点击是否在弹窗内部
     const isClickInside = dialogElement.contains(event.target as Node);
-    // 如果点击在弹窗外部且弹窗是可见的
     if (!isClickInside && (dialogElement.style.display === '' || dialogElement.style.display === 'block')) {
       dialogElement.style.display = 'none';
       if (typeof onClose === 'function') {
@@ -23,7 +21,6 @@ export function initClickOutsideToClose(
     }
   };
   document.addEventListener('click', handleClickOutside);
-
   return () => {
     document.removeEventListener('click', handleClickOutside);
   };

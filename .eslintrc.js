@@ -8,13 +8,13 @@ module.exports = {
     ecmaVersion: "latest",
     sourceType: "module",
     ecmaFeatures: {
-      jsx: true, // 启用JSX支持
+      jsx: true,
     },
   },
   extends: [
-    "eslint:recommended", // 基本ESLint推荐配置
+    "eslint:recommended",
   ],
   rules: {
-    'vue/no-multiple-template-root': 'off' // 关闭单根检测
+    'vue/no-multiple-template-root': 'off'
   }
 };

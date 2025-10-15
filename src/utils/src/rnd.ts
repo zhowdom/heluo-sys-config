@@ -1,4 +1,1 @@
-export const rnd = (n:number, m:number) => {
-  // random number for: [n, m)
-  return Math.floor(Math.random() * (m - n) + n)
-}
+export const rnd = (n:number, m:number) => Math.floor(Math.random() * (m - n) + n)

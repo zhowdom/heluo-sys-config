@@ -12,24 +12,19 @@ import textboxComp from '@/components/lowcodeComps/textbox.vue'
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Pagination, Navigation } from 'swiper/modules';
 
-// 引入 Swiper 样式
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
-// 注册需要的 Swiper 模块
 const modules = [Pagination, Navigation];
 let swiperInstance0 = null;
 let swiperInstance = null;
-// 初始化完成后获取实例
 const handleSwiperInit = (swiper) => {
   swiperInstance = swiper;
 };
 const handleSwiperInit0 = (swiper) => {
   swiperInstance0 = swiper;
 };
-
-
   const props = defineProps(['controlDataList', 'curRoomCode', 'controlPointList', 'nextDialogBaseInfos'])
 
   const emit = defineEmits(['goback'])
@@ -52,20 +47,16 @@ const handleSwiperInit0 = (swiper) => {
       break;
   }
 }
-// handleControlMinus|handleControlPlus
 const handleControlMinus = (idx) => {
   props.controlDataList[idx]['realTimeValue']['value']--
 }
 const handleControlPlus = (idx) => {
-  // attributes.realTimeValue.value
   props.controlDataList[idx]['realTimeValue']['value']++
 }
 
 const groupedSwiperData = computed(() => {
   const groups = [];
-  // 循环切割数组，每次取3个元素
   for (let i = 0; i < props?.controlDataList.length; i += 2) {
-    // 从索引i开始，截取3个元素作为一组
     groups.push(props?.controlDataList.slice(i, i + 2));
   }
   return groups;
@@ -73,36 +64,33 @@ const groupedSwiperData = computed(() => {
 
 const groupedData = computed(() => {
   const groups = [];
-  const groupSize = 5; // 每组5个元素
-  // 循环切割数组，每次取5个元素
+  const groupSize = 5;
   for (let i = 0; i < props?.controlPointList.length; i += groupSize) {
     groups.push(props?.controlPointList.slice(i, i + groupSize));
   }
   return groups;
 });
 
-
-// 自定义导航按钮事件
 const handlePrev0 = () => {
   if (swiperInstance0) {
-    swiperInstance0.slidePrev(); // 切换到上一组
+    swiperInstance0.slidePrev(); 
   }
 };
 
 const handleNext0 = () => {
   if (swiperInstance0) {
-    swiperInstance0.slideNext(); // 切换到下一组
+    swiperInstance0.slideNext(); 
   }
 };
 const handlePrev = () => {
   if (swiperInstance) {
-    swiperInstance.slidePrev(); // 切换到上一组
+    swiperInstance.slidePrev(); 
   }
 };
 
 const handleNext = () => {
   if (swiperInstance) {
-    swiperInstance.slideNext(); // 切换到下一组
+    swiperInstance.slideNext(); 
   }
 };
 
@@ -139,9 +127,6 @@ const handleNext = () => {
       <comSubTitle title-name="设备参数" v-if="controlPointList.length" style="margin-bottom: 20px;" />
 
       <div class="attribute-box clearfix" style="overflow-x: scroll;height: 100px;">
-        <!-- <div class="mi-box" :style="{width: `${controlPointList.length * 123}px`}">
-          <beautyFoundation v-for="(item, idx) in controlPointList" :key="idx" :infos="item" class="each" />
-        </div> -->
 
         <div class="mi-box" style="position: relative;">
 
@@ -151,7 +136,6 @@ const handleNext = () => {
           <div class="custom-nav next-btn" @click="handleNext0" style="top:40px">
             <i class="icon-right"></i>
           </div>
-
           <swiper
             :modules="modules" 
             slides-per-view="1"
@@ -160,10 +144,8 @@ const handleNext = () => {
             space-between="10"
             class="mySwiper"
           >
-            <!-- 轮播项 -->
             <swiper-slide v-for="(slide, idx) in groupedData"  :key="idx" class="swiper-item">
-              <!-- <beautyFoundation :infos="slide" class="each" /> -->
-               <!-- 组内5个元素 -->
+              
                 <div class="item-container">
                   <div 
                     v-for="(item, itemIndex) in slide" 
@@ -176,26 +158,12 @@ const handleNext = () => {
 
             </swiper-slide>
           </swiper>
-
         </div>
-
       </div>
 
       <comSubTitle title-name="设备控制" v-if="controlDataList.length" style="margin-bottom: 20px;" />
 
       <div class="control-box" style="max-height: 145px;overflow-y: scroll;position: relative;">
-        <!-- <component
-            v-for="(item, idx) in controlDataList"
-            :key="idx"
-            :attributeCode="item?.attributeCode"
-            :deviceId="item?.deviceId"
-            :idx="idx"
-            :is="autoMatchComp(item)"
-            :attributes="item"
-            @controlMinus="handleControlMinus"
-            @controlPlus="handleControlPlus"
-          ></component> -->
-
           <div class="custom-nav prev-btn" @click="handlePrev">
             <i class="icon-left"></i>
           </div>
@@ -211,9 +179,7 @@ const handleNext = () => {
             space-between="10"
             class="mySwiper"
           >
-            <!-- 轮播项 -->
             <swiper-slide v-for="(group, groupIndex) in groupedSwiperData"  :key="groupIndex" class="swiper-item">
-              <!-- 组内元素：每行显示2个 -->
               <div class="group-items">
                 <div 
                   v-for="(item, itemIndex) in group"
@@ -229,13 +195,11 @@ const handleNext = () => {
                     @controlMinus="handleControlMinus"
                     @controlPlus="handleControlPlus">
                     </component>
-
                 </div>
               </div>
 
             </swiper-slide>
           </swiper>
-
 
       </div>
     </div>

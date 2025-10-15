@@ -23,98 +23,58 @@ export function useUeConnect() {
     try {
       switch(type) {
         case UeReportType.FLOAT_DIRECTION:
-          console.log({
-            param1: UeReportParams[UeReportType.FLOAT_DIRECTION],
-            param2: payload?.opt
-          })
           window.ue.web.js_call_ue(UeReportParams[UeReportType.FLOAT_DIRECTION], payload?.opt)
           break;
         case UeReportType.FLOAT_MENU_HOME:
-          console.log({
-            param1: UeReportParams[UeReportType.FLOAT_MENU_HOME],
-            param2: payload?.opt
-          })
+          
           window.ue.web.js_call_ue(UeReportParams[UeReportType.FLOAT_MENU_HOME], payload?.opt)
           break;
         case UeReportType.WEATHER:
-          console.log({
-            param1: UeReportParams[UeReportType.WEATHER]
-          })
+          
           window.ue.web.js_call_ue(UeReportParams[UeReportType.WEATHER])
           break;
         case UeReportType.WARN_ITEM:
-          console.log({
-            param1: UeReportParams[UeReportType.WARN_ITEM],
-            param2: payload?.opt
-          })
+          
           window.ue.web.js_call_ue(UeReportParams[UeReportType.WARN_ITEM], payload?.opt)
           break;
         case UeReportType.PROFESSION:
-          console.log({
-            param1: UeReportParams[UeReportType.PROFESSION],
-            param2: payload?.opt
-          })
+          
           window.ue.web.js_call_ue(UeReportParams[UeReportType.PROFESSION], payload?.opt)
           break;
         case UeReportType.FLOOR:
-          console.log({
-            param1: UeReportParams[UeReportType.FLOOR],
-            param2: payload?.opt
-          })
+          
           window.ue.web.js_call_ue(UeReportParams[UeReportType.FLOOR], payload?.opt)
           break;
         case UeReportType.DEVICE_TYPE:
-          console.log({
-            param1: UeReportParams[UeReportType.DEVICE_TYPE],
-            param2: payload?.opt
-          })
+          
           window.ue.web.js_call_ue(UeReportParams[UeReportType.DEVICE_TYPE], payload?.opt)
           break;
         case UeReportType.MAN_YOU:
-          console.log({
-            param1: UeReportParams[UeReportType.MAN_YOU],
-            param2: payload?.opt
-          })
+          
           window.ue.web.js_call_ue(UeReportParams[UeReportType.MAN_YOU], payload?.opt)
           break;
         case UeReportType.LOCATION:
-          console.log({
-            param1: UeReportParams[UeReportType.LOCATION],
-            param2: payload?.opt
-          })
+          
           window.ue.web.js_call_ue(UeReportParams[UeReportType.LOCATION], payload?.opt)
           break;
         case UeReportType.OFFICE_FIRST_DEVICELIST:
-          console.log({
-            param1: UeReportParams[UeReportType.OFFICE_FIRST_DEVICELIST],
-            param2: payload?.opt
-          })
+          
           window.ue.web.js_call_ue(UeReportParams[UeReportType.OFFICE_FIRST_DEVICELIST], payload?.opt)
           break;
         case UeReportType.OFFICE_FIRST_CLOSE:
-          console.log({
-            param1: UeReportParams[UeReportType.OFFICE_FIRST_CLOSE],
-            param2: payload?.opt
-          })
+          
           window.ue.web.js_call_ue(UeReportParams[UeReportType.OFFICE_FIRST_CLOSE], payload?.opt)
           break;
         case UeReportType.OFFICE_NEXT_CLOSE:
-          console.log({
-            param1: UeReportParams[UeReportType.OFFICE_NEXT_CLOSE],
-            param2: payload?.opt
-          })
+          
           window.ue.web.js_call_ue(UeReportParams[UeReportType.OFFICE_NEXT_CLOSE], payload?.opt)
           break;
         case UeReportType.FLOAT_MENU_ENVIRONMENT:
-          console.log({
-            param1: UeReportParams[UeReportType.FLOAT_MENU_ENVIRONMENT],
-          })
+          
           window.ue.web.js_call_ue(UeReportParams[UeReportType.FLOAT_MENU_ENVIRONMENT])
           break;
         case UeReportType.FLOAT_MENU_ELECTRICITY:
-          console.log({
-            param1: UeReportParams[UeReportType.FLOAT_MENU_ELECTRICITY],
-          })
+          
           window.ue.web.js_call_ue(UeReportParams[UeReportType.FLOAT_MENU_ELECTRICITY])
           break;
         default:

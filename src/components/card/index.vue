@@ -24,18 +24,16 @@ const props = defineProps({
   }
 })
 const {getCardData, cardInfos} = useCard(props.name)
-// getCardData() // 二期没有普通类型的卡片展示
 const computedH = computed(() => {
-  // 一整屏高度980px是按照设计稿来的
   switch(props.name) {
     case 'introduction':
-     return '56vh' // [项目介绍卡片]高度占整屏高度58%（572/980=0.58）
+     return '56vh'
     case 'devicetotal':
-     return '32vh' // [设备总数卡片]高度占整屏高度30%（288/980=0.3）
+     return '32vh'
     case 'devicelist':
-     return '88vh' // [设备列表卡片]高度占整屏高度88%（860/980=0.88）
+     return '88vh'
     default: 
-     return '29vh' // [普通常规通用卡片]高度占整屏高度29% (286px/980px=0.29)
+     return '29vh'
   }
 })
 </script>
@@ -44,23 +42,18 @@ const computedH = computed(() => {
    <div :class="[bem(), 'card-bg-com']" :style="{height: computedH}">
     <cardtitle :name="CardTypeNames[name]" />
     <div :class="[bem('device-card-inner'), 'flex-between']" :data-set="name">
-      <!--项目介绍卡片-->
       <template v-if="name === 'introduction'">
         <cardItemIntro />
       </template>
-      <!--设备总数卡片-->
       <template v-else-if="name === 'devicetotal'">
         <cardItemTotal />
       </template>
-      <!--设备列表（2期改版）卡片-->
       <template v-else-if="name === 'devicelist'">
         <cardItemDeviceList :cardInfos="cardInfos" />
       </template>
-      <!--设备态势卡片-->
       <template v-else-if="name === 'devicesituation'">
         <cardItemb :cardInfos="cardInfos" />
       </template>
-      <!--智能空调、新风系统等通用样式类卡片-->
       <template v-else>
         <seat :name="name" />
         <cardItem :cardInfos="cardInfos" />

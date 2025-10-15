@@ -1,5 +1,4 @@
 <template>
-    <!--机电-设备详情-右边小豆腐块纯文本信息面板组件-->
     <div :class="[bem(), infos?.isAirConditioner ? 'isAirConditioner-panel' : '']">
       <span class="label">{{ infos?.name }}</span>
       <p class="val txtellipsis">{{ infos?.val }}</p>
@@ -41,7 +40,6 @@ const props = defineProps(['infos'])
       font-size: 13px;
     }
   }
-  /*空调的比例高度单独调*/
   .isAirConditioner-panel{
     height: 13.5%;
     .val{

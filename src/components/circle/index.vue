@@ -26,8 +26,6 @@ defineProps({
             a 15.9155 15.9155 0 0 1 0 -31.831"
         />
         <text x="18" y="20.35" class="percentage">{{percent}}%</text>
-
-
         <defs>
             <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
               <stop offset="0%" stop-color="#6dcfe9"/>
@@ -36,8 +34,6 @@ defineProps({
         </defs>
       </svg>
     </div>
-  
-
   
 </div>
   </div>

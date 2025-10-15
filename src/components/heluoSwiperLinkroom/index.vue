@@ -1,6 +1,4 @@
 <template>
-    
-    <!-- Swiper 容器 -->
     <div class="swiper-container">
       <swiper 
         :modules="modules" 
@@ -10,14 +8,11 @@
         :navigation="true"
         class="mySwiper"
       >
-        <!-- 轮播项 -->
         <swiper-slide v-for="(item, index) in slides" :key="index" class="swiper-item">
           <div @click="handleClick(item.title, index)" :class="['each-item-text', index === curActivedIdx ? 'cur' : '']">{{item.title}}</div>
         </swiper-slide>
       </swiper>
     </div>
-
-
      <a-modal v-model:visible="visible" title="新风机组-001室 详情"
       :footer="null"
       class="custom-modal"
@@ -33,18 +28,14 @@
   import { Pagination, Navigation } from 'swiper/modules';
   import miniRoom from '@/components/miniRoom/index.vue'
   
-  // 引入 Swiper 样式
   import 'swiper/css';
   import 'swiper/css/pagination';
   import 'swiper/css/navigation';
 
-  // 控制可见项目数量的变量
 const slidesPerView = ref(2);
-// 当前点击激活的项目高亮标记下标
 const curActivedIdx = ref(0)
 const isnavigation = ref(true)
 
-  // 轮播数据
 const slides = ref([
   {
     title: '101室',
@@ -78,10 +69,8 @@ const slides = ref([
   }
 ]);
 
-// 注册需要的 Swiper 模块
 const modules = [Pagination, Navigation];
 
-//点击事件
 const handleClick = (i, idx) => {
   curActivedIdx.value = idx
   visible.value = true
@@ -91,13 +80,11 @@ const visible = ref(false)
 </script>
   
 <style scoped lang="less">
-  /* 自定义 Swiper 容器样式 */
 .swiper-container {
   margin: 0 auto;
   width: 400px;
 }
 
-/* 自定义轮播项样式 */
 .slide-content {
   min-height: 100px;
   display: flex;
@@ -110,12 +97,10 @@ const visible = ref(false)
   height: 72px!important;/*swiper子项目整体高度，父级继承*/
   width: 154px!important;/*swiper子项目整体宽度，父级继承*/
 }
-/* 容器内边距为10px，实现箭头与内容的间距 */
 :deep(.swiper) {
   padding-left: 32px !important;
   padding-right: 32px !important;
 }
-/* 每一项文字 */
 .each-item-text{
   font-family: Alibaba PuHuiTi 2.0, Alibaba PuHuiTi 20;
   font-weight: normal;

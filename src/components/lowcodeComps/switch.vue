@@ -1,6 +1,5 @@
 <template>
   <div class="settimeout-box">
-<!--开机、关机-->
     <p class="label">{{attributes?.attributeName}}</p>
      <div class="btns flex-center">
       <div @click="handleBtns(idx, item)" v-for="(item, idx) in attributes?.options" :key="idx" :class="[idx === curIndexBtns ? 'cur' : '', 'btncom']">{{item?.optionName}}</div>

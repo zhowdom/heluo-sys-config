@@ -17,7 +17,6 @@ onMounted(() => {
       <div class="top">
         <div class="circle">
           <img src="@assets/usedimg/percent.png" />
-          <!-- <div class="percent"></div> -->
           <percentcircle :percent="deviceTotalInfos.runningRate" />
           <img class="arrow" src="@assets/usedimg/percent-arrow.png" />
         </div>

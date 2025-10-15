@@ -1,5 +1,4 @@
 <template>
-    <!--通用的副标题组件[带背景]-->
     <div :class="bem()">
       <span class="name">{{props?.titleName}}</span>
       <div class="bg">
